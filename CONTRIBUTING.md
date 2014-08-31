@@ -58,17 +58,15 @@ of things.
 
 ## Branching, and Where Changes Go
 
-Until a stable version of Hanlon is shipped, there is only one branch:
-`master`.  All changes target that branch.
+Until a stable version of OSSRank is shipped, there is only one branch:
+`master`. All changes target that branch.
 
 ### Branch and Version Compatibility
 
-Any change to Hanlon branch should strive as much as possible to be compatible
-with all released versions of Hanlon.  We want to avoid multiple incompatible
-versions existing as much as possible.
+We want to avoid multiple incompatible versions existing as much as possible.
 
 Until 1.0.0 we are willing to accept backward-incompatible changes if there is
-no possible way around it.  Those changes MUST provide a migration strategy
+no possible way around it. Those changes MUST provide a migration strategy
 and, if possible, deprecation warnings about the older functionality.
 
 Right now any change committed to `master` must be considered "live".
@@ -145,8 +143,8 @@ Votes are expressed as a number between -1 and +1, with '-1' meaning 'no', and
 and '-0' means "I think we shouldn't, but won't argue".  Values in between sit
 somewhere between the two extremes.
 
-These numbers are guidelines.  If you want to understand what someone means by
-their vote, ask them.  In general, as a voter, you should prefer an integer
+These numbers are guidelines. If you want to understand what someone means by
+their vote, ask them. In general, as a voter, you should prefer an integer
 vote to a fractional vote, for the sake of simplicity and sanity everywhere.
 
 ## Consensus
@@ -157,14 +155,14 @@ this."  On the same side, a vote is never "silence is consent."
 
 ## Becoming a Committer
 
-Hanlon is an open project: any contributor can become a committer.  Being a
+OSSRank is an open project: any contributor can become a committer. Being a
 committer comes with great responsibility: your decisions directly shape the
-community, and the effectiveness, of the Hanlon project.  You will probably
+community, and the effectiveness, of the Hanlon project. You will probably
 invest more, and produce less, as a committer than a regular developer
 submitting pull requests.
 
 As a committer your code is subject to the same review and commit restrictions
-as regular committers.  You must exercise greater caution that most people in
+as regular committers. You must exercise greater caution that most people in
 what you submit and include in the project.
 
 On the other hand you have several additional responsibilities over and above
@@ -202,8 +200,8 @@ project leader.
 ### Removing Committers
 
 Removing a committer happens if they don't live up to their responsibilities,
-or if they violate the community standards.  This is done by the project
-leader.  The details of why are private, and will not be shared.
+or if they violate the community standards. This is done by the project
+leader. The details of why are private, and will not be shared.
 
 [bugs]:            https://github.com/csc/OSSRank/issues
 [best-practice]:   http://sethrobertson.github.com/GitBestPractices/
