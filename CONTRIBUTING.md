@@ -9,7 +9,7 @@ of things.
 
 * Make sure you have a [GitHub account](https://github.com/signup/free).
 * Submit a ticket for your issue, assuming one does not already exist.
-  * Hanlon tickets are filed on the GitHub project:
+  * OSSRank tickets are filed on the GitHub project:
     https://github.com/csc/OSSRank/issues
   * Please try to clearly describe the issue, including the steps to reproduce
     any bug.
@@ -157,7 +157,7 @@ this."  On the same side, a vote is never "silence is consent."
 
 OSSRank is an open project: any contributor can become a committer. Being a
 committer comes with great responsibility: your decisions directly shape the
-community, and the effectiveness, of the Hanlon project. You will probably
+community, and the effectiveness, of the OSSRank project. You will probably
 invest more, and produce less, as a committer than a regular developer
 submitting pull requests.
 
