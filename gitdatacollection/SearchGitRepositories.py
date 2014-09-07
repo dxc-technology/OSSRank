@@ -22,8 +22,8 @@ def getRepoNames(jsonContent):
 
 def main():
     ##get github auth token
-    #git_auth_token = getGithubOauthtoken()
-    git_auth_token='cd4bef7f31ccd9096368cdf2a197998e829c6509'
+    git_auth_token = getGithubOauthtoken()
+    #git_auth_token='cd4bef7f31ccd9096368cdf2a197998e829c6509'
     
     ## start point to get data dump
     per_page_result_size=100
