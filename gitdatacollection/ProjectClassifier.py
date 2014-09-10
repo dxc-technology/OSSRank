@@ -32,7 +32,7 @@ if none return category others
 '''
 def get_category_best_keyword_match(desc_key_set):
     data =''
-    current_match='others'
+    current_match=''
     with open('./'+SOFTWARE_CATEGORY_FILE_NAME) as f:
         json_data= json.load(f)
         best_feature_match=0
@@ -42,9 +42,11 @@ def get_category_best_keyword_match(desc_key_set):
             keyword_set= set(categories['keyWords']) 
             matched_feature=keyword_set.intersection(desc_key_set)
             current_feature_match=len(matched_feature)
-            if(current_feature_match>best_feature_match):
+            if((current_feature_match>best_feature_match) and (current_feature_match>0) ):
                 best_feature_match=current_feature_match
-                current_match=category_name
+                current_match=category_name if (current_match == '') else (current_match + ' , '+category_name )
+    if (current_match == ''):
+        current_match= 'undefined category'
     return current_match
 
 
@@ -156,7 +158,7 @@ def classify_project(git_project_name, project_description):
        category=''
        #word tokenize using nltk and match against keywords from softwarecategory
        current_desc_words=get_desc_words(project_description)
-       category= category+ ','+get_category_best_keyword_match(current_desc_words)
+       category= get_category_best_keyword_match(current_desc_words)
        print ' best category match as per git desc ->' + category
     
        #now we get keyword from openhub if exists
@@ -164,7 +166,10 @@ def classify_project(git_project_name, project_description):
        if(len(test_project_dict) != 1 and len(test_project_dict) != 0 ):
            project_tags=test_project_dict.get('tag')
            current_tag_words=get_desc_words(project_tags)
-           category= category+ ','+ get_category_best_keyword_match(current_tag_words)
+           category_openhub_tag= get_category_best_keyword_match(current_tag_words)
+           print ' best category match as per openhub tag ->' + category_openhub_tag
+           if(category_openhub_tag != category):
+            category=category+ ','+ category_openhub_tag 
            
        
        #naive base classifier to be improved before it can be used -algo to be correcetd

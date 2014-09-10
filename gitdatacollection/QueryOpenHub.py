@@ -44,9 +44,11 @@ def queryOpenhubDetails(gitProjectName):
     #check for error first
     error=elem.find('error')
     
+    projectDataDictionary= {}
+    
     if error != None:
         print 'openhub api returned an error while searching for project '+ gitProjectName + ElementTree.tostring(error)
-        sys.exit()
+        return projectDataDictionary 
     
     result_num=elem.find('items_available')
     print 'search for '+  gitProjectName +' returned '  + result_num.text + 'results'
@@ -61,7 +63,7 @@ def queryOpenhubDetails(gitProjectName):
     #        print node.text
     #     if node.tag == 'homepage_url':
     #         print node.text
-    projectDataDictionary= {}
+    
     prj_found=False
     for Element in tree.findall('.//project'):
         

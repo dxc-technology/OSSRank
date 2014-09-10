@@ -23,9 +23,8 @@ def get_projects_metadata(jsonContent):
         projDictionary['metadata_url']=GITHUB_REPO_URL_PREFIX +item ['full_name']
         projDictionary['category'] = classify_project(item ['name'], item ['description'])
         all_proj.append(projDictionary)
-        i= i+1
-        if(i==6):
-            break
+        
+        
     return all_proj
 
 def main():

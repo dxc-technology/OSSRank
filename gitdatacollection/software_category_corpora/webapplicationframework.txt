@@ -1,0 +1,53 @@
+A web application framework (WAF) is a software framework that is designed to support the development of dynamic websites, web applications, web services and web resources. The framework aims to alleviate the overhead associated with common activities performed in web development. For example, many frameworks provide libraries for database access, templating frameworks and session management, and they often promote code reuse.[1] For a comparison of concrete web application frameworks, see Comparison of web application frameworks.
+
+Contents
+
+    1 History
+    2 Types of framework architectures
+        2.1 Model–view–controller (MVC)
+            2.1.1 Push-based vs. pull-based
+        2.2 Three-tier organization
+    3 Framework applications
+        3.1 General-purpose website frameworks
+        3.2 Discussion forums, wikis and weblogs
+        3.3 Organizational portals
+        3.4 Content management systems (CMS)
+    4 Features
+        4.1 Web template system
+        4.2 Caching
+        4.3 Security
+        4.4 Database access, mapping and configuration
+        4.5 Scaffolding
+        4.6 URL mapping
+        4.7 Ajax
+        4.8 Web services
+        4.9 Web resources
+    5 See also
+    6 References
+
+History
+	This article lacks historical information on the subject. Specifically: sources and the dates some of the ideas arose should be added. Please help to add historical material to help counter systemic bias towards recent information. (June 2013)
+
+As the design of the World Wide Web was not inherently dynamic, early hypertext consisted of hand-coded HTML that was published on web servers. Any modifications to published pages needed to be performed by the pages' author. To provide a dynamic web page that reflected user inputs, the Common Gateway Interface (CGI) standard was introduced for interfacing external applications with web servers.[2] CGI could adversely affect server load, though, since each request had to start a separate process.
+
+Programmers wanted tighter integration with the web server to enable high-traffic web applications. The Apache HTTP Server, for example, supports modules that can extend the web server with arbitrary code executions (such as mod perl) or forward specific requests to a web server that can handle dynamic content (such as mod jk). Some web servers (such as Apache Tomcat) were specifically designed to handle dynamic content by executing code written in some languages, such as Java.
+
+Around the same time, full integrated server/language development environments first emerged, such as WebBase and new languages specifically for use in the web started to emerge, such as ColdFusion, PHP and Active Server Pages.
+
+While the vast majority of languages available to programmers to use in creating dynamic web pages have libraries to help with common tasks, web applications often require specific libraries that are useful in web applications, such as creating HTML (for example, JavaServer Faces). Eventually, mature, "full stack" frameworks appeared, that often gathered multiple libraries useful for web development into a single cohesive software stack for web developers to use. Examples of this include ASP.NET, JavaEE (Servlets), WebObjects, web2py, OpenACS, Catalyst, Mojolicious, Ruby on Rails, Grails, Django, Zend Framework, Yii,[3] CakePHP[4] and Symfony.
+Types of framework architectures
+
+Most web application frameworks are based on the model–view–controller (MVC) pattern.
+Model–view–controller (MVC)
+Main article: Model–view–controller
+
+Many frameworks follow the MVC architectural pattern to separate the data model with business rules from the user interface. This is generally considered a good practice as it modularizes code, promotes code reuse, and allows multiple interfaces to be applied. In web applications, this permits different views to be presented, such as web pages for humans, and web service interfaces for remote applications.
+Push-based vs. pull-based
+
+Most MVC frameworks follow a push-based architecture also called "action-based". These frameworks use actions that do the required processing, and then "push" the data to the view layer to render the results.[5] Struts, Django, Ruby on Rails, Symfony, Yii, Spring MVC, Stripes, Play, CodeIgniter and Struts2[6] are good examples of this architecture. An alternative to this is pull-based architecture, sometimes also called "component-based". These frameworks start with the view layer, which can then "pull" results from multiple controllers as needed. In this architecture, multiple controllers can be involved with a single view. Lift, Tapestry, JBoss Seam, JavaServer Faces, (µ)Micro, and Wicket are examples of pull-based architectures.
+Three-tier organization
+
+In three-tier organization, applications are structured around three physical tiers: client, application, and database.[7][8][9][10] The database is normally an RDBMS. The application contains the business logic, running on a server and communicates with the client using HTTP.[11] The client, on web applications is a web browser that runs HTML generated by the application layer.[12][13] The term should not be confused with MVC, where, unlike in three-tier architecture, it is considered a good practice to keep business logic away from the controller, the "middle layer".[14][15]
+Framework applications
+
+Frameworks are built to support the construction of internet applications based on a single programming language, ranging in focus from general purpose tools such as Zend Framework and Ruby on Rails, which augment the capabilities of a specific language, to native-language programmable packages built around a specific user application, such as Content Management systems, some mobile development tools and some portal tools.
