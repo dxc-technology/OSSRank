@@ -28,7 +28,7 @@
         "http",
         "httpd",
         "Web Server",
-        "Web proxy",
+        "Web proxy"
       ]
     },
     {
@@ -90,8 +90,7 @@
         "mvc",
         "db"
       ]
-    }
-    ,
+    },
     {
       "name": "Application Security & Utilities",
       "keyWords": [
@@ -100,11 +99,31 @@
         "security manager",
         "authentication",
         "jaas",
-        "secrity framework",
+        "security framework",
         "cryptography",
         "SSO",
         "single sign on"
       ]
+    },
+    {
+      "name": "Operating Systems",
+      "keyWords": [
+        "os",
+        "operating_system",
+        "kernel",
+        "operating system"
+      ]
+    },
+    {
+      "name": "JavaScript Libraries",
+      "keyWords": [
+        "javascript",
+        "client side scripting",
+        "java_script",
+        "javascript api"
+      ]
     }
+
+
   ]
 }

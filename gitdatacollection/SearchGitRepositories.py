@@ -5,20 +5,27 @@ from urlparse import urljoin
 from GitHubLogin import getGithubOauthtoken
 import time
 import simplejson
+from ProjectClassifier import classify_project
 #todo make the query manipulative by taking an user entry
 GITHUB_REPO_SEARCH_URL = 'https://api.github.com/search/repositories?q=stars:">100"'
-
+GITHUB_REPO_URL_PREFIX='https://api.github.com/repos/'
 
 ##################################
 # methods returns a mapping of reponame->fullename
 # this reuslt is used to search and categorize the repo
 ##################################
-def getRepoNames(jsonContent):
-    nameDictionary= {}
+def get_projects_metadata(jsonContent):
+    all_proj=[]
+    i= 0
     for item in jsonContent['items']:
-         nameDictionary[item ['name']]= item ['full_name']
-         return nameDictionary
-
+        projDictionary= {}
+        projDictionary['project_name']=item ['name']
+        projDictionary['metadata_url']=GITHUB_REPO_URL_PREFIX +item ['full_name']
+        projDictionary['category'] = classify_project(item ['name'], item ['description'])
+        all_proj.append(projDictionary)
+        
+        
+    return all_proj
 
 def main():
     ##get github auth token
@@ -48,12 +55,10 @@ def main():
         
         ## dump the data in a file/not in mongo
         
-         
-        for item in jsonRespData['items']:
-             print item ['name'], '=>', item['full_name']
-              
-        ##with open(fileName, 'w') as outfile:
-         ##   json.dump(jsonRespData, outfile)
+        filtered_proj_data=get_projects_metadata(jsonRespData)
+            
+        with open(fileName, 'w') as outfile:
+            json.dump(filtered_proj_data, outfile)
          
         break;
         ##time.sleep(5)
