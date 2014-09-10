@@ -9,6 +9,7 @@ import requests
 from urlparse import urljoin
 import nltk.classify
 from nltk.tokenize  import wordpunct_tokenize
+from nltk.tokenize import sent_tokenize
 from nltk.corpus  import stopwords
 from nltk import NaiveBayesClassifier
 from QueryOpenHub import queryOpenhubDetails
@@ -21,6 +22,8 @@ from collections import defaultdict
 
 
 SOFTWARE_CATEGORY_FILE_NAME='SoftwareCategory.json'
+
+OPEN_SOURCE_CORPORA_DIR='software_category_corpora'
 
 '''
 Read our category definition json file and 
@@ -50,6 +53,7 @@ def get_desc_words(software_desc, stopwords=[]):
     #we  have some keyword or tags that contains with underscore
     #however we want to remove \n if newline exists
     desc_words=set(wordpunct_tokenize(software_desc.replace('\n', '').lower()))
+    
     #get rid of stopwords if there is any
     desc_words = desc_words.difference(stopwords)
     #we need to get rid punctuation token , numbers and single letters
@@ -92,9 +96,38 @@ def get_corpora(path):
     '''
     with open(path, 'rU') as con:
         desc = con.readlines()
-        first_blank_index = msg.index('\n')
+        first_blank_index = desc.index('\n')
         desc = desc[(first_blank_index + 1): ]
         return ''.join(desc) 
+    
+
+
+def get_naive_base_classified_result(evalutaing_desc):
+    
+    #define stopwords to use
+    swords=stopwords.words('english')
+    swords.extend(['last', 'first'])
+    
+    test_desc= features_from_desc(evalutaing_desc, 'testset', word_indicator, stopwords = swords)
+    
+    #get corpora and train
+    corpora_data_path=os.path.abspath(os.path.join('.', OPEN_SOURCE_CORPORA_DIR))
+    
+    #build automation
+    build_automation_corpora_path=os.path.join(corpora_data_path, 'buildautomation.txt')
+    train_build_automation_txt=get_corpora(build_automation_corpora_path)
+    train_build_automation = features_from_desc(train_build_automation_txt, 'build_automation', word_indicator, stopwords = swords)
+    
+    #train webapp corpora
+    webapp_corpora_path=os.path.join(corpora_data_path, 'webapplicationframework.txt')
+    train_webapp_txt=get_corpora(webapp_corpora_path)
+    train_webapp = features_from_desc(train_webapp_txt, 'webapp', word_indicator, stopwords = swords)
+    
+    train_set= train_build_automation+train_webapp
+    classifier = NaiveBayesClassifier.train(train_set)
+    #print 'Test accuracy for '  
+    print  nltk.classify.accuracy(classifier,test_desc)
+ 
     
     
 
@@ -118,19 +151,30 @@ do a supervsed classification of description against our own corpora out of wiki
 ProjectCategory = (finding keywords in desc) + (matching keywords in found tags) + (naive bayes classification using trained defintion out of wikipedia)
 what weight each one carry :: to be decided
 '''
-def classifyProject(git_project_name, project_description):
-       print 'categorizing'+ git_project_name
-       
-       #define stopwords to use
-       swords=stopwords.words('english')
+def classify_project(git_project_name, project_description):
+       print ' classifying '+ git_project_name
+       category=''
        #word tokenize using nltk and match against keywords from softwarecategory
        current_desc_words=get_desc_words(project_description)
-       print 'best category match as per git desc ->' + get_category_best_keyword_match(current_desc_words)
-       #now we get keyword from openhub if exists
+       category= category+ ','+get_category_best_keyword_match(current_desc_words)
+       print ' best category match as per git desc ->' + category
     
+       #now we get keyword from openhub if exists
+       test_project_dict= queryOpenhubDetails(git_project_name)
+       if(len(test_project_dict) != 1 and len(test_project_dict) != 0 ):
+           project_tags=test_project_dict.get('tag')
+           current_tag_words=get_desc_words(project_tags)
+           category= category+ ','+ get_category_best_keyword_match(current_tag_words)
+           
+       
+       #naive base classifier to be improved before it can be used -algo to be correcetd
+       #get_naive_base_classified_result(current_desc_words)
+         
+       return category
+       
 def main():
-    print 'in main'
-    classifyProject('bootstrap', 'The most popular front-end framework for developing responsive, mobile first projects on the web.')
+    print 'test in main'
+    classify_project('bootstrap', 'The most popular front-end framework for developing responsive, mobile first projects on the web.')
     
     
 if  __name__=='__main__':

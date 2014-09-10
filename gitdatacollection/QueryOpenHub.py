@@ -49,7 +49,7 @@ def queryOpenhubDetails(gitProjectName):
         sys.exit()
     
     result_num=elem.find('items_available')
-    print 'search for'+  gitProjectName +' returned' + result_num.text + 'results'
+    print 'search for '+  gitProjectName +' returned '  + result_num.text + 'results'
     
     #the strategy the query is always against name and desc, so we make sure name contains what we search
     #if found collect the tags and then break the loop
@@ -67,21 +67,23 @@ def queryOpenhubDetails(gitProjectName):
         
         project_name= Element.find('.//name').text
         download_url= Element.find('.//download_url').text
+        #print download_url
         if(gitProjectName.lower() in project_name.lower() ):
             #check if the download  url contains both github.com and ends with gitprojectname
-            if(('github.com' in download_url) and (gitProjectName.lower() in download_url) ):
+            if( (download_url is not None) and('github.com' in download_url) and (gitProjectName.lower() in download_url) ):
                 project_desc= Element.find('.//description').text
-                print "matching projects" + project_name +'->'+ project_desc
+                print "matching projects " + project_name 
                 projectDataDictionary['desc']= project_desc
-                
+ 
                 tags=''
                 for Element in Element.findall('.//tag'):
-                    tags=tags +','+ Element.text
-                print 'project specific tags are' + tags
+                    tags=tags +'  '+ Element.text
+                #print 'project specific tags are' + tags
+                
                 if(tags != ''):
                     projectDataDictionary['tag']= tags
                 prj_found=True
-        
+            #print projectDataDictionary.get('tag')
         if(prj_found): break
          
     return projectDataDictionary
@@ -93,7 +95,7 @@ def queryOpenhubDetails(gitProjectName):
     
     
 def main():
-    queryOpenhubDetails('bootstrap')
+    queryOpenhubDetails('free-programming-books')
     
 if  __name__=='__main__':
     main()
