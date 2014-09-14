@@ -72,7 +72,9 @@ def word_indicator(desc, **kwargs):
     features =defaultdict(list)
     desc_words=get_desc_words(desc, **kwargs)
     for w in desc_words:
+        #print w
         features[w]=True
+    #print features
     return features
 
 
@@ -84,7 +86,9 @@ def features_from_desc(descs, label, feature_extractor, **kwargs):
     
     '''
     features_labels = []
+    #features_labels = set()
     for desc in descs:
+        
         features = feature_extractor(desc, **kwargs)
         features_labels.append((features, label))
     return features_labels
@@ -96,11 +100,11 @@ def get_corpora(path):
 
     Returns a string.
     '''
+    desc = ''
     with open(path, 'rU') as con:
-        desc = con.readlines()
-        first_blank_index = desc.index('\n')
-        desc = desc[(first_blank_index + 1): ]
-        return ''.join(desc) 
+        desc = con.read().replace('\n', '')
+        
+    return desc 
     
 
 
@@ -108,28 +112,56 @@ def get_naive_base_classified_result(evalutaing_desc):
     
     #define stopwords to use
     swords=stopwords.words('english')
-    swords.extend(['last', 'first'])
-    
-    test_desc= features_from_desc(evalutaing_desc, 'testset', word_indicator, stopwords = swords)
+    swords.extend(['last', 'first', 'different', 'new', 'include', 'use', 'full'])
     
     #get corpora and train
     corpora_data_path=os.path.abspath(os.path.join('.', OPEN_SOURCE_CORPORA_DIR))
     
     #build automation
     build_automation_corpora_path=os.path.join(corpora_data_path, 'buildautomation.txt')
-    train_build_automation_txt=get_corpora(build_automation_corpora_path)
+    train_build_automation_txt=get_desc_words(get_corpora(build_automation_corpora_path))
     train_build_automation = features_from_desc(train_build_automation_txt, 'build_automation', word_indicator, stopwords = swords)
     
     #train webapp corpora
     webapp_corpora_path=os.path.join(corpora_data_path, 'webapplicationframework.txt')
-    train_webapp_txt=get_corpora(webapp_corpora_path)
+    train_webapp_txt=get_desc_words(get_corpora(webapp_corpora_path))
     train_webapp = features_from_desc(train_webapp_txt, 'webapp', word_indicator, stopwords = swords)
     
-    train_set= train_build_automation+train_webapp
+    #train content management corpora
+    cms_corpora_path=os.path.join(corpora_data_path, 'contentmanagementsystem.txt')
+    train_cms_txt=get_desc_words(get_corpora(webapp_corpora_path))
+    train_cms = features_from_desc(train_webapp_txt, 'cms', word_indicator, stopwords = swords)
+
+    #train db corpora
+    db_corpora_path=os.path.join(corpora_data_path, 'database.txt')
+    train_db_txt=get_desc_words(get_corpora(webapp_corpora_path))
+    train_db = features_from_desc(train_webapp_txt, 'db', word_indicator, stopwords = swords)
+
+    #train httpmodule corpora
+    http_corpora_path=os.path.join(corpora_data_path, 'httpmodule_apache.txt')
+    train_http_txt=get_desc_words(get_corpora(webapp_corpora_path))
+    train_http = features_from_desc(train_webapp_txt, 'httpmodule', word_indicator, stopwords = swords)
+    
+    #train mobile api corpora
+    mobile_corpora_path=os.path.join(corpora_data_path, 'mobileapi_java.txt')
+    train_mobile_txt=get_desc_words(get_corpora(webapp_corpora_path))
+    train_mobile = features_from_desc(train_webapp_txt, 'mobile', word_indicator, stopwords = swords)
+    
+    #train ide corpora
+    ide_corpora_path=os.path.join(corpora_data_path, 'ide.txt')
+    train_ide_txt=get_desc_words(get_corpora(webapp_corpora_path))
+    train_ide = features_from_desc(train_webapp_txt, 'ide', word_indicator, stopwords = swords)
+
+    ##collect all trained set
+    train_set=  train_build_automation + train_webapp + train_cms + train_db + train_http + train_mobile + train_ide
     classifier = NaiveBayesClassifier.train(train_set)
-    #print 'Test accuracy for '  
-    print  nltk.classify.accuracy(classifier,test_desc)
- 
+    
+    
+    eval_words=dict([(word, True)for word in evalutaing_desc])
+    
+    #get classification
+    category_naive_classification= classifier.classify(eval_words)
+    print 'category as per naive bayes classification ->'+ category_naive_classification
     
     
 
@@ -162,6 +194,7 @@ def classify_project(git_project_name, project_description):
        print ' best category match as per git desc ->' + category
     
        #now we get keyword from openhub if exists
+       
        test_project_dict= queryOpenhubDetails(git_project_name)
        if(len(test_project_dict) != 1 and len(test_project_dict) != 0 ):
            project_tags=test_project_dict.get('tag')
@@ -172,8 +205,8 @@ def classify_project(git_project_name, project_description):
             category=category+ ','+ category_openhub_tag 
            
        
-       #naive base classifier to be improved before it can be used -algo to be correcetd
-       #get_naive_base_classified_result(current_desc_words)
+       #naive base classifier to be improved further
+       get_naive_base_classified_result(current_desc_words)
          
        return category
        
