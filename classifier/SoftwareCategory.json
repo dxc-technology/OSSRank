@@ -1,0 +1,129 @@
+{
+  "softwareCategories": [
+    {
+      "name": "Mobile API",
+      "keyWords": [
+        "mobile api",
+        "android",
+        "mobile media api",
+        "ios",
+        "windows mobile",
+        "mobile app framework",
+        "phone api"
+      ]
+    },
+    {
+      "name": "Application Development -IDE",
+      "keyWords": [
+        "development platform",
+        "editor",
+        "ide",
+        "plugin development"
+      ]
+    },
+    {
+      "name": "HTTP Modules",
+      "keyWords": [
+        "proxy",
+        "http",
+        "httpd",
+        "Web Server",
+        "Web proxy"
+      ]
+    },
+    {
+      "name": "Build Management tools",
+      "keyWords": [
+        "build automation",
+        "automated build",
+        "distributed build",
+        "incremental build",
+        "build",
+        "build compile",
+        "build system"
+      ]
+    },
+    {
+      "name": "Content Management Systems",
+      "keyWords": [
+        "cms",
+        "publish content",
+        "web based publishing",
+        "web content management",
+        "jsr-170",
+        "ocm",
+        "webdav",
+        "java_content_repository",
+        "jsr-283",
+        "Content Repository",
+        "document_management",
+        "document management",
+        "content_management",
+        "integrated web publishing",
+        "ECM",
+        "enterprise content management"
+      ]
+    },
+    {
+      "name": "Web Application Framework",
+      "keyWords": [
+        "web application",
+        "web_application",
+        "responsive_web_design",
+        "css_framework",
+        "mvc",
+        "web development",
+        "web framework",
+        "web application fraemwork",
+        "web",
+        "web-apps",
+        "html"
+      ]
+    },
+    {
+      "name": "Database",
+      "keyWords": [
+        "dbms",
+        "relational",
+        "sql",
+        "rdbms",
+        "mvc",
+        "db"
+      ]
+    },
+    {
+      "name": "Application Security & Utilities",
+      "keyWords": [
+        "authorization",
+        "ssl",
+        "security manager",
+        "authentication",
+        "jaas",
+        "security framework",
+        "cryptography",
+        "SSO",
+        "single sign on"
+      ]
+    },
+    {
+      "name": "Operating Systems",
+      "keyWords": [
+        "os",
+        "operating_system",
+        "kernel",
+        "operating system"
+      ]
+    },
+    {
+      "name": "JavaScript Libraries",
+      "keyWords": [
+        "javascript",
+        "client side scripting",
+        "java_script",
+        "javascript api"
+      ]
+    }
+
+
+  ]
+}
