@@ -9,8 +9,8 @@ of things.
 
 * Make sure you have a [GitHub account](https://github.com/signup/free).
 * Submit a ticket for your issue, assuming one does not already exist.
-  * Hanlon tickets are filed on the GitHub project:
-    https://github.com/csc/hanlon/issues
+  * OSSRank tickets are filed on the GitHub project:
+    https://github.com/csc/OSSRank/issues
   * Please try to clearly describe the issue, including the steps to reproduce
     any bug.
   * Please include the story of "why" you want to do something.
@@ -58,13 +58,13 @@ of things.
 
 ## Branching, and Where Changes Go
 
-Until a stable version of Hanlon is shipped, there is only one branch:
+Until a stable version of OSSRank is shipped, there is only one branch:
 `master`.  All changes target that branch.
 
 ### Branch and Version Compatibility
 
-Any change to Hanlon branch should strive as much as possible to be compatible
-with all released versions of Hanlon.  We want to avoid multiple incompatible
+Any change to OSSRank branch should strive as much as possible to be compatible
+with all released versions of OSSRank.  We want to avoid multiple incompatible
 versions existing as much as possible.
 
 Until 1.0.0 we are willing to accept backward-incompatible changes if there is
@@ -157,14 +157,14 @@ this."  On the same side, a vote is never "silence is consent."
 
 ## Becoming a Committer
 
-Hanlon is an open project: any contributor can become a committer.  Being a
+OSSRank is an open project: any contributor can become a committer.  Being a
 committer comes with great responsibility: your decisions directly shape the
-community, and the effectiveness, of the Hanlon project.  You will probably
+community, and the effectiveness, of the OSSRank project.  You will probably
 invest more, and produce less, as a committer than a regular developer
 submitting pull requests.
 
 As a committer your code is subject to the same review and commit restrictions
-as regular committers.  You must exercise greater caution that most people in
+as regular committers. You must exercise greater caution that most people in
 what you submit and include in the project.
 
 On the other hand you have several additional responsibilities over and above

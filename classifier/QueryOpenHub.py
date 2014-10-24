@@ -17,7 +17,8 @@ from lxml import etree as ElementTree
 OPENHUB_SEARCH_URL = 'https://www.openhub.net/projects.xml'
 
 #please use your own api key by registerring yourself at openhub.net
-OPENHUB_API_KEY = '7u9sgYGrr6nv2snYk8o7w'
+#OPENHUB_API_KEY = '7u9sgYGrr6nv2snYk8o7w'
+OPENHUB_API_KEY = '40fcNIhGvhr3kPfRpH0IkQ'
 
 ######################
 #method returns the openhubquery
