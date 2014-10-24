@@ -51,7 +51,7 @@ class MainHandler(webapp2.RequestHandler):
         r = requests.get(url)
         projects = r.json()
 
-        # Search twitter fgor project keywords
+        # Search twitter for project keywords
         kwset = set()
         for project in projects['items']:
             kwset.add(project['name'])
