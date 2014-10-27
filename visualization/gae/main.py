@@ -9,7 +9,7 @@ app = Flask(__name__, static_url_path = "")
 # Configuration
 config = {
     'apiURL' : "https://api.mongolab.com/api/1/databases/",
-    'apiKey' : "HNkm0J4u8WLmYlAJvqetUmMcumzel9vO",
+    'apiKey' : "",
     'database' : "ossrank"
 }
 
