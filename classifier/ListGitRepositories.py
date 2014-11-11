@@ -6,20 +6,17 @@ import requests
 from urlparse import urljoin
 from GitHubLogin import getGithubOauthtoken
 import time
-
-GITHUB_REPO_URL = 'https://api.github.com/repositories'
+from util.configuration import getGitHubRepoUrl
 
 def main():
     ##get github auth token
     git_auth_token = getGithubOauthtoken()
     
-    
     ## start point to get data dump
     current_start=1
     incr_count=365
     
-    ##create header for request containing auth token
-    
+    ##create header for request containing auth token 
     headers= {
               'Authorization':'token %s'% git_auth_token
               }
@@ -28,7 +25,7 @@ def main():
     ## while loop to fetch data
     print "Starting Github data dump in paginated format with each page ,365 repositories"
     while fetch_github_data :
-        current_fetch_url=urljoin(GITHUB_REPO_URL , '?since='+str(current_start))
+        current_fetch_url=urljoin(getGitHubRepoUrl() , '?since='+str(current_start))
         current_fetch_res=requests.get(current_fetch_url, headers=headers)
         ##print current_fetch_res.status_code
         contentLen = len(current_fetch_res.text)

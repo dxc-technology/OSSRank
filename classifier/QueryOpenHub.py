@@ -1,46 +1,21 @@
-#!/usr/bin/env python
-# encoding: utf-8
-
-
-#purpose is to query openhub ..check tag and description
-#openhub api used from https://github.com/blackducksw/ohloh_api
+#Purpose is to query OpenHub ..check tag and description
+#OpenHub API used from https://github.com/blackducksw/ohloh_api
 #using lxml api for xml parsing doc: lxml.de
-import json
-import requests
-from urlparse import urljoin
-import sys, urllib
-import time
-from lxml import etree
+import urllib
 from lxml.etree import  Element
 from lxml import etree as ElementTree
-#todo make the query manipulative by taking an user entry
-OPENHUB_SEARCH_URL = 'https://www.openhub.net/projects.xml'
+from util.configuration import getOpenHubAPIKey, getOpenHubSearchUrl
 
-#please use your own api key by registerring yourself at openhub.net
-#OPENHUB_API_KEY = '7u9sgYGrr6nv2snYk8o7w'
-OPENHUB_API_KEY = '40fcNIhGvhr3kPfRpH0IkQ'
-
-######################
-#method returns the openhubquery
-######################
+#Method returns the OpenHub query
 def getOpenHubQuery(gitProjectName):
-     params = urllib.urlencode({'api_key':OPENHUB_API_KEY, 'v':1})
-     queryUrl = OPENHUB_SEARCH_URL+'?query='+ gitProjectName+'&'+params
-     return queryUrl
+    params = urllib.urlencode({'api_key': getOpenHubAPIKey(), 'v':1})
+    queryUrl = getOpenHubSearchUrl() + '?query=' + gitProjectName + '&' + params
+    return queryUrl
 
-
-
-def queryOpenhubDetails(gitProjectName):
-    ##uncomment below for debug only
-    #print getOpenHubQuery('bootstrap')
-    
-    f=urllib.urlopen(getOpenHubQuery(gitProjectName))
-    
-    
+def queryOpenhubDetails(gitProjectName): 
+    f = urllib.urlopen(getOpenHubQuery(gitProjectName))
     tree = ElementTree.parse(f)
     elem = tree.getroot()
-    
-        
     
     #check for error first
     error=elem.find('error')
@@ -66,6 +41,7 @@ def queryOpenhubDetails(gitProjectName):
     #         print node.text
     
     prj_found=False
+    
     for Element in tree.findall('.//project'):
         
         project_name= Element.find('.//name').text
@@ -90,16 +66,4 @@ def queryOpenhubDetails(gitProjectName):
         if(prj_found): break
          
     return projectDataDictionary
-    
-    ##test code -- to be deleted
-    #for node in tree.iterfind('.//name'):
-    #    print node.text
-         
-    
-    
-def main():
-    queryOpenhubDetails('free-programming-books')
-    
-if  __name__=='__main__':
-    main()
     
