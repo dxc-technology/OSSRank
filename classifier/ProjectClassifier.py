@@ -33,7 +33,8 @@ if none return category others
 def get_category_best_keyword_match(desc_key_set):
     data =''
     current_match=''
-    with open('./'+SOFTWARE_CATEGORY_FILE_NAME) as f:
+    
+    with open('./../classifier/'+SOFTWARE_CATEGORY_FILE_NAME) as f:
         json_data= json.load(f)
         best_feature_match=0
         
@@ -119,7 +120,7 @@ def get_naive_base_classified_result(evalutaing_desc):
     swords.extend(['last', 'first', 'different', 'new', 'include', 'use', 'full'])
     
     #get corpora and train
-    corpora_data_path=os.path.abspath(os.path.join('.', OPEN_SOURCE_CORPORA_DIR))
+    corpora_data_path=os.path.abspath(os.path.join('./../classifier/', OPEN_SOURCE_CORPORA_DIR))
     
     #build automation
     build_automation_corpora_path=os.path.join(corpora_data_path, 'buildautomation.txt')
