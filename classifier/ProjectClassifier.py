@@ -54,6 +54,10 @@ def get_desc_words(software_desc, stopwords=[]):
     #use wordpunct_tokenize not to split on underscores
     #we  have some keyword or tags that contains with underscore
     #however we want to remove \n if newline exists
+    
+    if (software_desc is None):
+        return 'undefined'
+
     desc_words=set(wordpunct_tokenize(software_desc.replace('\n', '').lower()))
     
     #get rid of stopwords if there is any
