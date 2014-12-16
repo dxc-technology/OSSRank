@@ -87,7 +87,6 @@
         "relational",
         "sql",
         "rdbms",
-        "mvc",
         "db"
       ]
     },
@@ -122,8 +121,20 @@
         "java_script",
         "javascript api"
       ]
+    },
+    {
+      "name": "DevOps tools",
+      "keyWords": [
+        "infrastructure",
+        "auto provisioning",
+        "configuration management",
+        "system-management",
+        "deployment",
+        "itsm",
+        "infrastructure automation",
+        "server automation framework"
+      ]
     }
-
 
   ]
 }
