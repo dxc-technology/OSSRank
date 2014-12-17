@@ -7,6 +7,10 @@ var app = angular.module('ossrank', ['ngRoute', 'ngResource'])
                 templateUrl: 'views/main.html',
                 controller: 'HomeCtrl'
             })
+            .when('/h2', {
+                templateUrl: 'views/main2.html',
+                controller: 'HomeCtrl'
+            })
             .when('/project/:projectId', {
                 templateUrl: 'views/project.html',
                 controller: 'ProjectCtrl'
