@@ -3,14 +3,17 @@
 # Import the Flask Framework
 from flask import Flask, jsonify, abort, request, make_response, url_for
 import requests
+import ConfigParser
 
 app = Flask(__name__, static_url_path = "")
 
 # Configuration
+configF = ConfigParser.RawConfigParser()
+configF.read('settings.cfg')
 config = {
-    'apiURL' : "https://api.mongolab.com/api/1/databases/",
-    'apiKey' : "",
-    'database' : "ossrank"
+    'apiURL' : configF.get('Mongolab', 'apiURL'),
+    'apiKey' : configF.get('Mongolab', 'apiKey'),
+    'database' : configF.get('Mongolab', 'database')
 }
 
 @app.route('/api/projects', methods=['GET'])
