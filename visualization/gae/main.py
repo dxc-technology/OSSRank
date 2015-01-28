@@ -3,20 +3,28 @@
 # Import the Flask Framework
 from flask import Flask, jsonify, abort, request, make_response, url_for
 import requests
+import ConfigParser
+import json
 
 app = Flask(__name__, static_url_path = "")
 
 # Configuration
+configF = ConfigParser.RawConfigParser()
+configF.read('settings.cfg')
 config = {
-    'apiURL' : "https://api.mongolab.com/api/1/databases/",
-    'apiKey' : "",
-    'database' : "ossrank"
+    'apiURL' : configF.get('Mongolab', 'apiURL'),
+    'apiKey' : configF.get('Mongolab', 'apiKey'),
+    'database' : configF.get('Mongolab', 'database')
 }
 
 @app.route('/api/projects', methods=['GET'])
 def getProjects():
+    tags = request.args.get('tags')
+    query = ""
+    if tags:
+        query = "&q={'_category': '"+ tags +"'}"
     url = config['apiURL'] + config['database'] \
-        +"/collections/projects?apiKey=" + config['apiKey']
+        +"/collections/projects?apiKey=" + config['apiKey'] + query +'&s={"_category": 1, "_rank": -1}'
     headers = {'content-type': 'application/json'}
     r = requests.get(url)
     return jsonify(projects = r.json())
@@ -46,3 +54,20 @@ def getCategory(category_id):
     headers = {'content-type': 'application/json'}
     r = requests.get(url)
     return jsonify(categories = r.json())
+
+@app.route('/api/search', methods=['GET'])
+def getKeywords():
+    # Get list of categories 
+    url = config['apiURL'] + config['database'] \
+        +"/collections/categories?apiKey=" + config['apiKey']
+    headers = {'content-type': 'application/json'}
+    r = requests.get(url)
+    cats1 = r.json()
+    
+    # extract category names 
+    cats = []
+    for catDict in cats1:
+        cats.append(catDict['name'])
+    term = request.args.get('term')
+    matching = [s for s in cats if term in s]
+    return json.dumps(matching)
