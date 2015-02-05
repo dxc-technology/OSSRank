@@ -34,15 +34,15 @@ mongo.get.database.collections(mongo, db)
 mongo.count(mongo, namespace, mongo.bson.empty())
 
 #get the count
-count <- mongo.count(mongo, namespace, query)
+#count <- mongo.count(mongo, namespace, query)
 
 #and bring them back into a list
-numbers <- list()
-cursor <- mongo.find(mongo, namespace, query)
-while (mongo.cursor.next(cursor)) {
-        val <- mongo.cursor.value(cursor)
-        numbers[[length(numbers)+1]] <- mongo.bson.value(val, "number")
-}
+#numbers <- list()
+#cursor <- mongo.find(mongo, namespace, query)
+#while (mongo.cursor.next(cursor)) {
+        #val <- mongo.cursor.value(cursor)
+        #numbers[[length(numbers)+1]] <- mongo.bson.value(val, "number")
+#}
 
 #read ossrank.projects collection from MongoDB
 export = data.frame(stringAsFactors = FALSE)
@@ -69,9 +69,9 @@ str(export)
 #removing the rownames, and creating a ProjectNames object to be attached after normalizing
 keeps <- c("stargazers_count", "forks", "watchers")
 ProjectDF <- export[keeps]
-ProjectDF <- ProjectDF[2:209,]
+ProjectDF <- ProjectDF[2:301,]
 rownames(ProjectDF) <- NULL
-ProjectNames <- export$name[2:209] 
+ProjectNames <- export$name[2:301] 
 
 #coercing the metrics from factor to numeric
 ProjectDF$stargazers_count <- as.numeric(levels(ProjectDF$stargazers_count))[ProjectDF$stargazers_count]
@@ -108,10 +108,25 @@ ProjectDFnorm$Score <- ProjectDFnorm$stargazers_count + ProjectDFnorm$forks + Pr
 #low to high
 ProjectDFnorm$CategoryRank <- ave(-ProjectDFnorm$Score, ProjectDFnorm$ProjectNames, FUN=rank)
 
-#coerce data frame to mongo.bson so it can be written to MongoDB--may not be necessary
-ProjectDFnormMONGO <- mongo.bson.from.df(ProjectDFnorm)
+#coerce ProjectDFnorm$ProjectNames to character from factor. This is done so the names 
+#dont appear as numbers when written to MongoDB.
+ProjectDFnorm$ProjectNames <- as.character(ProjectDFnorm$ProjectNames)
 
-#Write data to MongoDB. This is currently incomplete. It seemed as though the mongo.insert
-#function would be of use here, but I didn't have the time to investigate further. This 
-#function may or may not also coerce ProjectDFnorm to a mongo.bson object, rendering the 
-#coercion performed above unnecessary.
+#subset to only scores and ranks. We will also remove the first row and col from 'export', 
+#remove rownames, and append the scores and ranks to "export2" 
+#facilitate the mongo.update function below
+ProjectDFnorm.ScoresRanks <- ProjectDFnorm[,5:6]
+export2 <- export[2:301, 2:87]
+rownames(export2) <- NULL
+export3 <- cbind(export2, ProjectDFnorm.ScoresRanks)
+
+#coerce data frames to mongo.bson so we can write to MongoDB--not necessary for lists
+export2 <- mongo.bson.from.df(export2)
+export3 <- mongo.bson.from.df(export3)
+
+#append scores and ranks to each document in mongodb
+mongo.update(mongo, namespace, criteria=export2, objNew=export3, 
+             flags=mongo.update.multi)
+
+#Write data to MongoDB
+#mongo.insert(mongo, namespace, ProjectDFnormMONGO)
