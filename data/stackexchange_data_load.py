@@ -71,9 +71,7 @@ def get_projects_mongolab():
         
         count = count +1
         print stack_exchange_todays_dict
-        #update_projects(project, document_id)
-        if(count==10): 
-            break
+        update_projects(project, document_id)
         
 
 #removes special character to do a similarity search
