@@ -68,3 +68,13 @@
 .suggestions-list:focus{
     outline:none;
 }
+
+.landscape {
+    height: 30px;
+    width: 80px;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}

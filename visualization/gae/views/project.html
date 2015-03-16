@@ -1,16 +1,74 @@
 <div class="container-fluid">
     <div class="row">
-
-        <div class="col-lg-6">
-
-            <h1>{{project.name}}</h1>
-            <div>{{project.description}}
+         <div class="col-sm-5 ">
+           <div class="landscape">
+                     <img src="{{project.owner.avatar_url}}" />
+           </div>
+           <h3>{{project.name}}    <small>Rank :  {{project._rank}}</small> </h3>
+          <div class="row">
+            <div class="col-xs-8 col-sm-6 "> <p class="bg-primary">Rank Under</p>   </ins> </div>
+            <div class="col-xs-4 col-sm-6 ">
+              <mark>{{project._category}} </mark>
             </div>
-
-            <div>
-                <img src="{{project.owner.avatar_url}}" />
-            </div>
-
+          </div>
         </div>
+      </div>
+      <br> 
+      <div class="row">
+         <div class="col-sm-9 ">
+           <span class="badge">About This Project</span>
+          <div class="row">
+            <div class="col-xs-8 col-sm-6 "> <ins> {{project.description}} </ins> </div>
+          </div>
+        </div>
+      </div>
+      <!-- about rating methodology-->
+      <div class="row">
+         <div class="col-sm-3 ">
+            <table class="table table-responsive">
+              <thead>
+              <tr>
+                <th>How was it Rated</th>
+              </tr>
+            </thead>
+             <tbody>
+            <tr class="success">
+                <td>Put rating algorithm to let the people know about our methodology</td>
+            </tr>
+          </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+         <!-- social media  -->
+      <br> 
+      <div class="row">
+         <div class="col-sm-5 ">
+           <strong>Social Media</strong>
+          <div class="row">
+               <div class="col-xs-8 col-sm-6 "> 
+                     <table class="table table-responsive">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>StackOverflow</th>
+              </tr>
+            </thead>
+             <tbody>
+               <tr>
+                <td class="active">Questions  </td>
+                <td class="success" >{{project._stackoverflow.questions}}</td>
+               </tr>
+               <tr>
+                <td class="active">Tagged  </td>
+                <td class="info" >{{project._stackoverflow.tagged_dicsussion}}</td>
+               </tr>
+          </tbody>
+            </table>
+                </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 

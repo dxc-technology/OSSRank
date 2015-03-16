@@ -5,6 +5,9 @@ from flask import Flask, jsonify, abort, request, make_response, url_for
 import requests
 import ConfigParser
 import json
+from google.appengine.api import urlfetch
+
+urlfetch.set_default_fetch_deadline(260)
 
 app = Flask(__name__, static_url_path = "")
 
@@ -26,7 +29,7 @@ def getProjects():
     url = config['apiURL'] + config['database'] \
         +"/collections/projects?apiKey=" + config['apiKey'] + query +'&s={"_category": 1, "_rank": -1}'
     headers = {'content-type': 'application/json'}
-    r = requests.get(url)
+    r = requests.get(url,timeout=200)
     return jsonify(projects = r.json())
 
 @app.route('/api/projects/<string:project_id>', methods=['GET'])
@@ -35,7 +38,7 @@ def getProject(project_id):
         +"/collections/projects/" + project_id \
         + "?apiKey=" + config['apiKey']
     headers = {'content-type': 'application/json'}
-    r = requests.get(url)
+    r = requests.get(url,timeout=200)
     return jsonify(project = r.json())
 
 @app.route('/api/categories', methods=['GET'])
@@ -43,7 +46,7 @@ def getCategories():
     url = config['apiURL'] + config['database'] \
         +"/collections/categories?apiKey=" + config['apiKey']
     headers = {'content-type': 'application/json'}
-    r = requests.get(url)
+    r = requests.get(url,timeout=200)
     return jsonify(categories = r.json())
 
 @app.route('/api/categories/<string:category_id>', methods=['GET'])
@@ -52,7 +55,7 @@ def getCategory(category_id):
         +"/collections/categories/" + category_id \
         + "?apiKey=" + config['apiKey']
     headers = {'content-type': 'application/json'}
-    r = requests.get(url)
+    r = requests.get(url,timeout=200)
     return jsonify(categories = r.json())
 
 @app.route('/api/search', methods=['GET'])
@@ -61,7 +64,7 @@ def getKeywords():
     url = config['apiURL'] + config['database'] \
         +"/collections/categories?apiKey=" + config['apiKey']
     headers = {'content-type': 'application/json'}
-    r = requests.get(url)
+    r = requests.get(url,timeout=200)
     cats1 = r.json()
     
     # extract category names 
