@@ -1,0 +1,4 @@
+cron:
+- description: twitter loader
+  url: /twitterload
+  schedule: every 15 mins
