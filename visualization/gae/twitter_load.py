@@ -47,7 +47,7 @@ class TwitterHandler(webapp2.RequestHandler):
         headers = {'content-type': 'application/json'}
         
         # Set start date for stats
-        startDate = getStartDate()
+        startDate = getStartDate(config)
 
         # Set number of projects per run
         projectsPerRun = config.get('OSSRank', 'PROJECTS_PER_RUN')
@@ -71,7 +71,7 @@ class TwitterHandler(webapp2.RequestHandler):
             
             # Update project entry in mongolab with PUT
             stats = {startDate : projectTweets} # stats for period
-            p.update({'_twitter': stats})
+            p['_twitter'].update(stats)
             url = apiURL + database +"/collections/projects/"+ theID +"?apiKey=" + apiKey 
             #print url
             r = requests.put(url, data=json.dumps(p), headers=headers)
@@ -95,7 +95,7 @@ def getProjects(config):
     apiKey = config.get('Mongolab', 'apiKey')
     database = config.get('Mongolab', 'database')
     # Get start date for stats
-    startDate = getStartDate()
+    startDate = getStartDate(config)
 
     # Get twitter stats from start date
     url = apiURL + database +"/collections/projects?apiKey=" + apiKey + '&sk=0' + \
@@ -105,9 +105,10 @@ def getProjects(config):
     r = requests.get(url,timeout=200)
     return r.json()
 
-def getStartDate():
-    numDays = 1
-    startDate = datetime.date.fromordinal(datetime.date.today().toordinal()-numDays) 
+def getStartDate(config):
+    # Set number of projects per run
+    searchDays = int(config.get('OSSRank', 'SEARCH_DAYS'))
+    startDate = datetime.date.fromordinal(datetime.date.today().toordinal()-searchDays) 
     startDate = str(startDate)
     return startDate
 
