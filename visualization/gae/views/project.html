@@ -6,7 +6,7 @@
            </div>
            <h3>{{project.name}}    <small>Score :  {{project._rank}}</small> </h3>
           <div class="row">
-            <div class="col-xs-8 col-sm-6 "> <p class="bg-primary">Rank Under</p>   </ins> </div>
+            <div class="col-xs-8 col-sm-6 "> <p class="bg-primary">Rank Under</p>    </div>
             <div class="col-xs-4 col-sm-6 ">
               <mark>{{project._category}} </mark>
             </div>
@@ -88,15 +88,21 @@
              <tbody>
                <tr>
                 <td class="active">Mentions </td>
-                <td class="success" >{{alltweets}}</td>
+                <td class="success" >{{today_tweets}}</td>
                </tr>
                
           </tbody>
             </table>
+                
+                </div>
+                <div class="col-xs-8 col-sm-6 ">
+                   <p class="bg-primary">Last 7 days in Twitter</p>
+                   <canvas id="bar" class="chart chart-bar" data="data" labels="labels"></canvas>
                 </div>
           </div>
         </div>
-      </div>
 
+      </div>
+       
     </div>
 
