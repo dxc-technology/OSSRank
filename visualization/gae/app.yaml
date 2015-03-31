@@ -12,6 +12,11 @@ handlers:
 - url: /
   static_files: index.html
   upload: index.html
+
+- url: /category_map
+  static_files: category_map.html
+  upload: category_map.html
+
   
 - url: /scripts
   static_dir: scripts
@@ -27,6 +32,12 @@ handlers:
 
 - url: /bootstrap
   static_dir: bootstrap
+
+- url: /d3
+  static_dir: d3
+
+- url: /angular-chart
+  static_dir: angular-chart
 
 - url: /twitterload
   script: twitter_load.app
