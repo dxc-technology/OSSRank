@@ -2,8 +2,6 @@
 <head><meta charset='UTF-8'>
  <meta name="robots" content="noindex">
   <link rel="canonical" href="http://ossrank.appspot.com/category_map" />
-
-
   <style class="cp-pen-styles">
     text{
     font: bold 9px Verdana, Helvetica, Arial, sans-serif;
@@ -16,113 +14,7 @@
 <section id="graph"></section>
 
 <script src='d3/3.4.11/d3.min.js'></script>
-<script>
-(function () {
-    
-     function get(name){
-        if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
-        return decodeURIComponent(name[1]);
-      }
-     function httpGet()
-      {
-        var xmlHttp = null;
-        var fetchType= get('type');
-        
-        var url= null;
-        //todo--create the url properly without hardcoding the query  -task for 30/03
-        if(fetchType == "JavaScript Libraries"){
-            url ="https://api.mongolab.com/api/1/databases/ossrank/collections/projects?apiKey=HNkm0J4u8WLmYlAJvqetUmMcumzel9vO&q={%27_category%27:%27JavaScript%20Libraries%27}&f=%20{%22name%22:1,%22_rank%22:1}&s=%20{%22_rank%22:-1}";
-           }
-        if(fetchType == "Web Application Framework") {
-           url ="https://api.mongolab.com/api/1/databases/ossrank/collections/projects?apiKey=HNkm0J4u8WLmYlAJvqetUmMcumzel9vO&q={%27_category%27:%27Web%20Application%20Framework%27}&f=%20{%22name%22:1,%22_rank%22:1}&s=%20{%22_rank%22:-1}"; 
-         }
-
-        if(fetchType == "Mobile API") {
-           url ="https://api.mongolab.com/api/1/databases/ossrank/collections/projects?apiKey=HNkm0J4u8WLmYlAJvqetUmMcumzel9vO&q={%27_category%27:%27Mobile%20API%27}&f=%20{%22name%22:1,%22_rank%22:1}&s=%20{%22_rank%22:-1}"; 
-         }
-        if(fetchType == "HTTP Modules") {
-           url ="https://api.mongolab.com/api/1/databases/ossrank/collections/projects?apiKey=HNkm0J4u8WLmYlAJvqetUmMcumzel9vO&q={%27_category%27:%27HTTP%20Modules%27}&f=%20{%22name%22:1,%22_rank%22:1}&s=%20{%22_rank%22:-1}"; 
-         } 
-        
-        if(fetchType == "Build Management tools") {
-           url ="https://api.mongolab.com/api/1/databases/ossrank/collections/projects?apiKey=HNkm0J4u8WLmYlAJvqetUmMcumzel9vO&q={%27_category%27:%27Build%20Management%20tools%27}&f=%20{%22name%22:1,%22_rank%22:1}&s=%20{%22_rank%22:-1}"; 
-         }
-        
-         if(fetchType == "Application Development -IDE") {
-           url ="https://api.mongolab.com/api/1/databases/ossrank/collections/projects?apiKey=HNkm0J4u8WLmYlAJvqetUmMcumzel9vO&q={%27_category%27:%27Application%20Development%20-IDE%27}&f=%20{%22name%22:1,%22_rank%22:1}&s=%20{%22_rank%22:-1}"; 
-         } 
-        
-         if(fetchType == "Operating Systems") {
-           url ="https://api.mongolab.com/api/1/databases/ossrank/collections/projects?apiKey=HNkm0J4u8WLmYlAJvqetUmMcumzel9vO&q={%27_category%27:%27Operating%20Systems%27}&f=%20{%22name%22:1,%22_rank%22:1}&s=%20{%22_rank%22:-1}"; 
-         }
-         //Operating Systems
-           
-         
-        
-        xmlHttp = new XMLHttpRequest();
-        xmlHttp.open( "GET", url, false );
-        xmlHttp.send( null );
-        return xmlHttp.responseText;
-      }
-    
-    var diameter = 600;
-    var svg = d3.select('#graph').append('svg').attr('width', diameter).attr('height', diameter).attr('class','bubble');
-    var bubble = d3.layout.pack().size([
-        diameter,
-        diameter
-    ]).value(function (d) {
-        return d.size;
-    }).padding(3);
-    
-    var nodes = bubble.nodes(processData()).filter(function (d) {
-        return !d.children;
-    });
-    var vis = svg.selectAll('g.node').data(nodes);
-    vis.enter().append("g").attr("class", "node");
-    vis.append("title").text(function(d) { return d.className; }); 
-    vis.append('circle').attr('transform', function (d) {
-        return 'translate(' + d.x + ',' + d.y + ')';
-    }).attr('r', function (d) {
-        return d.r;
-    }).attr('class', function (d) {
-        return d.className;
-    }).attr('style',function(){
-
-     var myColors = ['fill:green', 'fill:aquamarine', 'fill:purple','fill:red','fill:lime','fill:pink'];    
-     var rand = myColors[Math.floor(Math.random() * myColors.length)];
-
-     return rand;
-     
-     });
-
-     
-     
-     
-   vis.append("text").attr("text-anchor", "middle").attr("dx", function (d) { return d.x;}).attr("dy", function (d) { return d.y;}).text(function(d) { return d.className; });
-    
-    function processData() {
-         json = httpGet();
-         obj = json;
-         var newDataSet = [];
-         p = JSON.parse(json);
-         for (var key in p) {
-        if (p.hasOwnProperty(key)) {
-           var name = p[key]['name'] + "/" + p[key]['_rank'] ;
-           var rank = p[key]['_rank']/1000 ;
-           newDataSet.push({
-                name: p[key]['name'],
-                className: name.toLowerCase(),
-                size: rank
-            });
-        }
-       }
-        
-        
-        return { children: newDataSet };
-    }
-}());
-//@ sourceURL=pen.js
-</script>
+<script src="scripts/bubble_chart.js"></script>
 <script src="scripts/css_reload.js"></script>
 </body>
 </html>
