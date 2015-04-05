@@ -19,5 +19,17 @@
 </div>
 
 <div class=".col-xs-offset-4 top-buffer" style="clear:both;">
-    <h4>Matching Projects</h4>
+   <br>
+    <span ng-if="projects.length > 0" class="bg-primary" >Matching Projects</span>
+    <span ng-if="projects.length < 1" class="bg-primary" > No Matching Projects</span>
+    <ul class="list-unstyled" >
+      <li ng-repeat="project in projects">
+        <span class="text-primary"><a href="/#/project/{{project._id.$oid}}">{{project.name}}</a></span><mark>{{project._category}}</mark>
+        <p><small>{{project.description}}</small></p>
+      </li>
+    </ul>
+    <!--div data-pagination="" data-num-pages="numPages()" 
+      data-current-page="currentPage" data-max-size="maxSize"  
+      data-boundary-links="true"></div-->
+     
 </div>

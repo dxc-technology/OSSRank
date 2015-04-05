@@ -2,23 +2,5 @@
     <div class="row">
         <div auto-complete url="/api/search" model="data.tags"></div>
     </div>
-    <div class="row" style="margin-top: 200px">
-
-        <div class="col-lg-12">
-
-            <div class="panel panel-default">
-                <div class="panel-heading">Projects {{tags2}}</div>
-                <div class="panel-body">
-                    <div class="list-group">
-                        <a href="/#/project/{{project._id.$oid}}" class="list-group-item" ng-repeat="project in projects"><span class="badge">{{project._rank}}</span><h4 class="list-group-item-heading">{{project.name}}</h4><p class="list-group-item-text">{{project._category}}</p></a>
-                    </div>
-                    
-                </div>
-            </div>
-
-        </div>
-
-
-    </div>
 </div>
 
