@@ -2,8 +2,8 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
     return {
         restrict:'AE',
         scope:{
-            selectedTags:'=model',
-            tags2: '='
+            selectedTags:'=model'
+            
         },
         templateUrl:'views/autocomplete-template.html',
         link:function(scope,elem,attrs){
@@ -14,15 +14,36 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
 
             scope.selectedIndex=-1;
 
+            scope.projects = {};
+
+            scope.filteredProjects = {};
+
+            scope.numPages= 0;
+
+            scope.projectPerPage = 10;
+
+            scope.currentPage = 1;
+            
             scope.removeTag=function(index){
                 scope.selectedTags.splice(index,1);
             }
             
             scope.getProjects=function() {
                 tags = scope.selectedTags.join();
-                console.log(tags)
-                scope.tags2 = tags
+                console.log(tags) ;
+                //alert(attrs.url);
+                //scope.tags2 = tags ;
+
+                $http.get('/api/projects'+'?tags='+tags).success(function(response){
+                    scope.projects=response.projects;
+                    console.log(scope.projects.length);
+                    scope.numPages= Math.ceil(scope.projects.length / scope.numPerPage);
+                    
+                });
+                
             }
+
+            
 
             scope.search=function(){
                 $http.get(attrs.url+'?term='+scope.searchText).success(function(data){
@@ -67,6 +88,11 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
                     scope.searchText = scope.suggestions[scope.selectedIndex];
                 }
             });
+           /**scope.$watch('currentPage + numPerPage', function() {
+             var begin = ((scope.currentPage - 1) * scope.numPerPage)
+            , end = begin + scope.numPerPage;
+            scope.filteredProjects = scope.projects.slice(begin, end);
+            });**/
         }
     }
 }]);
