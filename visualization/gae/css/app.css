@@ -47,6 +47,7 @@
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
     font-size: 14px;
+    z-index: 10;
 }
 .suggestions-list li {
     color: #333333;

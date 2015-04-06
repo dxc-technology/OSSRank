@@ -21,10 +21,20 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
             scope.getProjects=function() {
                 tags = scope.selectedTags.join();
                 console.log(tags)
-                scope.tags2 = tags
+                scope.tags2 = tags;
+                $http.get('/api/projects'+'?tags='+tags).success(function(response){
+                scope.projects=response.projects;
+                console.log(scope.projects.length);
+                scope.numPages= Math.ceil(scope.projects.length / scope.numPerPage);
+                    
+                });
             }
 
-            scope.search=function(){
+            scope.search=function() {
+                // search only for 3 or more characters
+                if (scope.searchText.length < 3)
+                    return;
+                
                 $http.get(attrs.url+'?term='+scope.searchText).success(function(data){
                     if(data.indexOf(scope.searchText)===-1){
                         data.unshift(scope.searchText);
