@@ -19,7 +19,7 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
             }
             
             scope.getProjects=function() {
-                tags = scope.selectedTags.join();
+                tags = scope.selectedTags.join('|');
                 console.log(tags)
                 scope.tags2 = tags;
                 $http.get('/api/projects'+'?tags='+tags).success(function(response){

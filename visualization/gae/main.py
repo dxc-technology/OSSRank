@@ -25,8 +25,10 @@ def getProjects():
     tags = request.args.get('tags')
     query = ""
     if tags:
+        query = "{'_category': {'$regex':'"+ tags +"','$options':'i'}},"
+        query += "{'name': {'$regex':'"+ tags +"','$options':'i'}}"
+        query = "&q={$or: ["+ query +"]}"
         
-        query = "&q={'_category': {'$regex':'"+ tags +"','$options':'i'}}"
     url = config['apiURL'] + config['database'] \
         +"/collections/projects?apiKey=" + config['apiKey'] + query +'&s={"_category": 1, "_rank": -1}'
     print "AAA:: " + url
