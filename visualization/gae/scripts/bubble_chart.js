@@ -15,9 +15,9 @@
         //-- start prepare query url---
         //todo ::below values to be loaded from config
          var apiURL = "https://api.mongolab.com/api/1/databases/";
-         var databaseName="ossrank";
+         var databaseName="";
          var collectionName="projects";
-         var apiKeyVal="HNkm0J4u8WLmYlAJvqetUmMcumzel9vO";
+         var apiKeyVal="";
          //to be loaded from config
 
          query_str="&q={'_category':'"+fetchType+"'}";
