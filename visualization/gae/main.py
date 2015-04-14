@@ -25,7 +25,10 @@ def getProjects():
     tags = request.args.get('tags')
     query = ""
     if tags:
-        query = "&q={'_category': '"+ tags +"'}"
+        query = "{'_category': {'$regex':'"+ tags +"','$options':'i'}},"
+        query += "{'name': {'$regex':'"+ tags +"','$options':'i'}}"
+        query = "&q={$or: ["+ query +"]}"
+        
     url = config['apiURL'] + config['database'] \
         +"/collections/projects?apiKey=" + config['apiKey'] + query +'&s={"_category": 1, "_rank": -1}'
     headers = {'content-type': 'application/json'}
@@ -71,6 +74,6 @@ def getKeywords():
     cats = []
     for catDict in cats1:
         cats.append(catDict['name'])
-    term = request.args.get('term')
-    matching = [s for s in cats if term in s]
+    term = request.args.get('term').lower()
+    matching = [s for s in cats if term in s.lower()]
     return json.dumps(matching)
