@@ -13,7 +13,7 @@
       ]
     },
     {
-      "name": "Application Development -IDE",
+      "name": "IDE",
       "keyWords": [
         "development platform",
         "editor",
@@ -123,6 +123,17 @@
       ]
     },
     {
+      "name": "SCM",
+      "keyWords": [
+        "scm",
+        "source_control",
+        "revision_control",
+        "revision control",
+        "vcs",
+        "repository"
+      ]
+    },
+    {
       "name": "DevOps tools",
       "keyWords": [
         "infrastructure",
@@ -132,7 +143,10 @@
         "deployment",
         "itsm",
         "infrastructure automation",
-        "server automation framework"
+        "server automation framework",
+        "provisioning",
+        "devops",
+        "configuration_management"
       ]
     }
 
