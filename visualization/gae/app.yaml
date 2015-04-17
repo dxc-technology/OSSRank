@@ -9,6 +9,40 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
+- url: /
+  static_files: index.html
+  upload: index.html
+
+- url: /category_map
+  static_files: category_map.html
+  upload: category_map.html
+
+  
+- url: /scripts
+  static_dir: scripts
+
+- url: /views
+  static_dir: views
+
+- url: /css
+  static_dir: css
+
+- url: /images
+  static_dir: images
+
+- url: /bootstrap
+  static_dir: bootstrap
+
+- url: /d3
+  static_dir: d3
+
+- url: /angular-chart
+  static_dir: angular-chart
+
+- url: /twitterload
+  script: twitter_load.app
+  login: admin
+
 - url: .*
   script: main.app
 
@@ -16,4 +50,6 @@ libraries:
 - name: webapp2
   version: latest
 - name: jinja2
+  version: latest
+- name: ssl
   version: latest
