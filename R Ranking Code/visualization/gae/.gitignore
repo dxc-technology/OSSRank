@@ -1,8 +1,0 @@
-#appengine compiled files
-*.pyc
-
-# app settings file
-settings.cfg
-
-# Dependencies
-lib

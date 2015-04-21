@@ -1,1 +1,0 @@
-OSSRankSandbox.R is a first attempt at creating a ranking algorithm using R's RankAggreg package. The code is commneted to explain what is going on. The ranking algorithm itself is explained at the bottom of the script.
