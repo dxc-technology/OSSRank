@@ -133,6 +133,14 @@
         "repository"
       ]
     },
+   {
+      "name": "CSS",
+      "keyWords": [
+        "css",
+        "stylesheet",
+        "css_framework"
+         ]
+    },
     {
       "name": "DevOps tools",
       "keyWords": [
