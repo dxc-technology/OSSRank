@@ -47,7 +47,7 @@ def get_category_best_keyword_match(desc_key_set):
                 best_feature_match=current_feature_match
                 current_match=category_name if (current_match == '') else (current_match + ' , '+category_name )
     if (current_match == ''):
-        current_match= 'undefined category'
+        current_match= 'unknown category'
     return current_match
 
 
@@ -156,7 +156,13 @@ def get_naive_base_classified_result(evalutaing_desc):
     ide_corpora_path=os.path.join(corpora_data_path, 'ide.txt')
     train_ide_txt=get_desc_words(get_corpora(webapp_corpora_path))
     train_ide = features_from_desc(train_webapp_txt, 'ide', word_indicator, stopwords = swords)
+    
+    #train ide corpora
+    scm_corpora_path=os.path.join(corpora_data_path, 'scm.txt')
+    train_scm_txt=get_desc_words(get_corpora(webapp_corpora_path))
+    train_scm = features_from_desc(train_webapp_txt, 'scm', word_indicator, stopwords = swords)
 
+    
     ##collect all trained set
     train_set=  train_build_automation + train_webapp + train_cms + train_db + train_http + train_mobile + train_ide
     classifier = NaiveBayesClassifier.train(train_set)
