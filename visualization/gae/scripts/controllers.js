@@ -19,7 +19,7 @@ app.controller("AbouCtrl", function ($scope) {
 
 
 
-app.controller("ProjectCtrl", function ($scope, $routeParams, Project) {
+app.controller("ProjectCtrl", function ($scope,$http,$routeParams, Project) {
     $scope.proj = "Project";
 
     $scope.projectId = $routeParams.projectId;
@@ -30,6 +30,32 @@ app.controller("ProjectCtrl", function ($scope, $routeParams, Project) {
     }, function () {
         //console.log(project);
         $scope.project = project.project;
+        //get relative rank
+        var projCategory= $scope.project._category ;
+        
+         var projectName = $scope.project.name ;
+        
+        $http.get('/api/category_map'+'?category='+projCategory).success(function(response){
+                var ranked_projects=response.projects;
+                //all_proj = JSON.parse(ranked_projects);
+                 var rank=1;
+                 var after = "";
+                 var before = "";
+                for (var key in ranked_projects) {
+                   if (ranked_projects.hasOwnProperty(key)) {
+                         var name= ranked_projects[key]['name'];
+                         //console.log(name);
+                         if(projectName == name){
+                              $scope.projectRank=rank;
+                              break;
+                            }
+                        after = name ;
+                        rank++;
+                     }
+                }
+                $scope.after_project = (after == "")?"" : " In ranking After " + after ; 
+                //console.log(ranked_projects);
+                });
         //get tweets
         var tweets = $scope.project._twitter ;
         tweets_length = Object.keys(tweets).length;
