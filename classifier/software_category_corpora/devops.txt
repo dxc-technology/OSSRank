@@ -3,3 +3,8 @@ DevOps (a portmanteau of "development" and "operations") is a concept dealing, a
 Simple processes become clearly articulated using a DevOps approach,[citation needed] which aims to maximize the predictability, efficiency, security and maintainability of operational processes. Very often, automation supports this objective.
 
 DevOps integration targets product delivery, quality testing, feature development and maintenance releases in order to improve reliability and security and faster development and deployment cycles. Many of the ideas (and people) involved in DevOps came from the Enterprise Systems Management and Agile software development movements.[8]
+
+Vagrant, Packer , VeeWee ,Ansible, Chef , Puppet  are examples.
+key words:  bare metal provisioning , auto provisioning , deployment .
+
+

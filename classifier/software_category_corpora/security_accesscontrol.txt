@@ -1,14 +1,7 @@
- 	
-[hide]This article has multiple issues. Please help improve it or discuss these issues on the talk page.
-This article includes a list of references, but its sources remain unclear because it has insufficient inline citations. (February 2012)
-This article is written like a personal reflection or opinion essay that states the Wikipedia editor's particular feelings about a topic, rather than the opinions of experts. (June 2014)
-A soldier allows a driver to enter a military base.
 
 In the fields of physical security and information security, access control is the selective restriction of access to a place or other resource.[1] The act of accessing may mean consuming, entering, or using. Permission to access a resource is called authorization.
 
 Locks and login credentials are two analogous mechanisms of access control.
-
-Contents
 
     1 Physical security
         1.1 Access control system operation
@@ -44,7 +37,6 @@ Access control system operation
 
 When a credential is presented to a reader, the reader sends the credential’s information, usually a number, to a control panel, a highly reliable processor. The control panel compares the credential's number to an access control list, grants or denies the presented request, and sends a transaction log to a database. When access is denied based on the access control list, the door remains locked. If there is a match between the credential and the access control list, the control panel operates a relay that in turn unlocks the door. The control panel also ignores a door open signal to prevent an alarm. Often the reader provides feedback, such as a flashing red LED for an access denied and a flashing green LED for an access granted.[citation needed]
 
-The above description illustrates a single factor transaction. Credentials can be passed around, thus subverting the access control list. For example, Alice has access rights to the server room, but Bob does not. Alice either gives Bob her credential, or Bob takes it; he now has access to the server room. To prevent this, two-factor authentication can be used. In a two factor transaction, the presented credential and a second factor are needed for access to be granted; another factor can be a PIN, a second credential, operator intervention, or a biometric input.[citation needed]
 
 There are three types (factors) of authenticating information:[2]
 
@@ -190,10 +182,6 @@ Spoofing locking hardware is fairly simple and more elegant than levering. A str
 
 Access cards themselves have proven vulnerable to sophisticated attacks. Enterprising hackers have built portable readers that capture the card number from a user’s proximity card. The hacker simply walks by the user, reads the card, and then presents the number to a reader securing the door. This is possible because card numbers are sent in the clear, no encryption being used.[citation needed]
 
-Finally, most electric locking hardware still have mechanical keys as a fail-over. Mechanical key locks are vulnerable to bumping.[citation needed]
-The need-to-know principle
-
-The need to know principle can be enforced with user access controls and authorization procedures and its objective is to ensure that only authorized individuals gain access to information or systems necessary to undertake their duties. See Principle of least privilege.[citation needed]
 Computer security
 Further information: Computer access control
 
@@ -234,4 +222,4 @@ Access to accounts can be enforced through many types of controls.[9]
     Organization-Based Access control (OrBAC)
     OrBAC model allows the policy designer to define a security policy independently of the implementation[10]
     Responsibility Based Access control
-    Information is accessed based on the responsibilities assigned to an actor or a business role
+    Information is accessed based on the responsibilities assigned to 

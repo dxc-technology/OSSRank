@@ -8,10 +8,6 @@ Configuration auditing - Ensuring that configurations contain all their intended
 Build management - Managing the process and tools used for builds.
 Process management - Ensuring adherence to the organization's development process.
 Environment management - Managing the software and hardware that host the system.
-Teamwork - Facilitate team interactions related to the process.
-Defect tracking - Making sure every defect has traceability back to the source.
-With the introduction of cloud computing the purposes of SCM tools have become merged in some cases. The SCM tools themselves have become virtual appliances that can be instantiated as virtual machines and saved with state and version. The tools can model and manage cloud-based virtual resources, including virtual appliances, storage units, and software bundles. The roles and responsibilities of the actors have become merged as well with developers now being able to dynamically instantiate virtual servers and related resources.[
-Examples
 AccuRev – source configuration management tool with integrated issue tracking based on "Streams" that efficiently manages parallel and global development; replication server is also available
 CA Software Change Manager (originally Harvest/CCC) – change and configuration management tool byComputer Associates
 Autodesk Vault – Version control tool specifically designed for Autodesk applications managing the complex relationships between design files such as AutoCAD and Autodesk Inventor.
