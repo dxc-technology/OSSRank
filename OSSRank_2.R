@@ -65,7 +65,7 @@ ProjectDFnorm$ID <- as.character(ProjectDFnorm$ID)
 ProjectDFnorm$Category <- as.character(ProjectDFnorm$Category)
 
 #score projects by adding values from normalized metrics
-ProjectDFnorm$ProjectScore <- ProjectDFnorm$watchers_count + ProjectDFnorm$forks + 
+ProjectDFnorm$ProjectScore <- ProjectDFnorm$watchers + ProjectDFnorm$forks + 
         ProjectDFnorm$open_issues + ProjectDFnorm$StackOverflow + ProjectDFnorm$Twitter
 
 #coerce Category to factor to facilitate ranking. must coerce to character first
