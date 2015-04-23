@@ -47,7 +47,7 @@ def get_category_best_keyword_match(desc_key_set):
                 best_feature_match=current_feature_match
                 current_match=category_name if (current_match == '') else (current_match + ' , '+category_name )
     if (current_match == ''):
-        current_match= 'undefined category'
+        current_match= 'unknown category'
     return current_match
 
 
@@ -125,40 +125,46 @@ def get_naive_base_classified_result(evalutaing_desc):
     #build automation
     build_automation_corpora_path=os.path.join(corpora_data_path, 'buildautomation.txt')
     train_build_automation_txt=get_desc_words(get_corpora(build_automation_corpora_path))
-    train_build_automation = features_from_desc(train_build_automation_txt, 'build_automation', word_indicator, stopwords = swords)
+    train_build_automation = features_from_desc(train_build_automation_txt, 'Build Management tools', word_indicator, stopwords = swords)
     
     #train webapp corpora
     webapp_corpora_path=os.path.join(corpora_data_path, 'webapplicationframework.txt')
     train_webapp_txt=get_desc_words(get_corpora(webapp_corpora_path))
-    train_webapp = features_from_desc(train_webapp_txt, 'webapp', word_indicator, stopwords = swords)
+    train_webapp = features_from_desc(train_webapp_txt, 'Web Application Framework', word_indicator, stopwords = swords)
     
     #train content management corpora
     cms_corpora_path=os.path.join(corpora_data_path, 'contentmanagementsystem.txt')
-    train_cms_txt=get_desc_words(get_corpora(webapp_corpora_path))
-    train_cms = features_from_desc(train_webapp_txt, 'cms', word_indicator, stopwords = swords)
+    train_cms_txt=get_desc_words(get_corpora(cms_corpora_path))
+    train_cms = features_from_desc(train_cms_txt, 'Content Management Systems', word_indicator, stopwords = swords)
 
     #train db corpora
     db_corpora_path=os.path.join(corpora_data_path, 'database.txt')
     train_db_txt=get_desc_words(get_corpora(webapp_corpora_path))
-    train_db = features_from_desc(train_webapp_txt, 'db', word_indicator, stopwords = swords)
+    train_db = features_from_desc(train_db_txt, 'Database', word_indicator, stopwords = swords)
 
     #train httpmodule corpora
     http_corpora_path=os.path.join(corpora_data_path, 'httpmodule_apache.txt')
-    train_http_txt=get_desc_words(get_corpora(webapp_corpora_path))
-    train_http = features_from_desc(train_webapp_txt, 'httpmodule', word_indicator, stopwords = swords)
+    train_http_txt=get_desc_words(get_corpora(http_corpora_path))
+    train_http = features_from_desc(train_http_txt, 'HTTP Modules', word_indicator, stopwords = swords)
     
     #train mobile api corpora
     mobile_corpora_path=os.path.join(corpora_data_path, 'mobileapi_java.txt')
-    train_mobile_txt=get_desc_words(get_corpora(webapp_corpora_path))
-    train_mobile = features_from_desc(train_webapp_txt, 'mobile', word_indicator, stopwords = swords)
+    train_mobile_txt=get_desc_words(get_corpora(mobile_corpora_path))
+    train_mobile = features_from_desc(train_mobile_txt, 'Mobile API', word_indicator, stopwords = swords)
     
     #train ide corpora
     ide_corpora_path=os.path.join(corpora_data_path, 'ide.txt')
-    train_ide_txt=get_desc_words(get_corpora(webapp_corpora_path))
-    train_ide = features_from_desc(train_webapp_txt, 'ide', word_indicator, stopwords = swords)
+    train_ide_txt=get_desc_words(get_corpora(ide_corpora_path))
+    train_ide = features_from_desc(train_webapp_txt, 'IDE', word_indicator, stopwords = swords)
+    
+    #train scm corpora
+    scm_corpora_path=os.path.join(corpora_data_path, 'scm.txt')
+    train_scm_txt=get_desc_words(get_corpora(scm_corpora_path))
+    train_scm = features_from_desc(train_webapp_txt, 'SCM', word_indicator, stopwords = swords)
 
+    
     ##collect all trained set
-    train_set=  train_build_automation + train_webapp + train_cms + train_db + train_http + train_mobile + train_ide
+    train_set=  train_build_automation + train_webapp + train_cms + train_db + train_http + train_mobile + train_ide+ train_scm
     classifier = NaiveBayesClassifier.train(train_set)
     
     

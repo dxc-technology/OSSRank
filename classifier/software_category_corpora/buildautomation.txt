@@ -5,67 +5,7 @@ Build automation is the act of scripting or automating a wide variety of tasks t
     running automated tests
     deploying to production systems
     creating documentation and/or release notes
-Historically, developers used build automation to call compilers and linkers from inside a build script versus attempting to make the compiler calls from the command line. It is simple to use the command line to pass a single source module to a compiler and then to a linker to create the final deployable object. However, when attempting to compile and link many source code modules, in a particular order, using the command line process is not a reasonable solution. The make scripting language offered a better alternative. It allowed a build script to be written to call, in a series, the needed compile and link steps to build a software application. GNU Make also offered additional features such as "makedepend" which allowed some source code dependency management as well as incremental build processing. This was the beginning of Build Automation. Its primary focus was on automating the calls to the compilers and linkers. As the build process grew more complex, developers began adding pre and post actions around the calls to the compilers such as a check-out from version control to the copying of deployable objects to a test location. The term "build automation" now includes managing the pre and post compile and link activities as well as the compile and link activities.
-New breed of tools
-
-In recent years, build management tools have provided even more relief when it comes to automating the build process. Both commercial and open source tools are available to perform more automated build and workflow processing. Some tools focus on automating the pre and post steps around the calling of the build scripts, while others go beyond the pre and post build script processing and also streamline the actual compile and linker calls without much manual scripting. These tools are particularly useful for continuous integration builds where frequent calls to the compile process are required and incremental build processing is needed.
-Advanced build automation
-
-Advanced build automation offers remote agent processing for distributed builds and/or distributed processing. The term "distributed builds" means that the actual calls to the compiler and linkers can be served out to multiple locations for improving the speed of the build. This term is often confused with "distributed processing".
-
-Distributed processing means that each step in a process or workflow can be sent to a different machine for execution. For example, a post step to the build may require the execution of multiple test scripts on multiple machines. Distributed processing can send the different test scripts to different machines. Distributed processing is not distributed builds. Distributed processing cannot take a make, ant or maven script, break it up and send it to different machines for compiling and linking.
-
-The distributed build process must have the machine intelligence to understand the source code dependencies in order to send the different compile and link steps to different machines. A build automation tool must be able to manage these dependencies in order to perform distributed builds. Some build tools can discover these relationships programmatically (Rational ClearMake distributed,[1] Electric Cloud ElectricAccelerator[2]), while others depend on user-configured dependencies (Platform LSF lsmake[3])
-
-Build automation that can sort out source code dependency relationships can also be configured to run the compile and link activities in a parallelized mode. This means that the compiler and linkers can be called in multi-threaded mode using a machine that is configured with more than one core.
-
-Not all build automation tools can perform distributed builds. Most only provide distributed processing support. In addition, most products that do support distributed builds can only handle C or C++. Build automation products that support distributed processing are often based on make and many do not support Maven or Ant.
-
-The deployment task may require configuration of external systems, including middleware. In cloud computing environments the deployment step may even involve creation of virtual servers to deploy build artifacts into.[4]
-Advantages
-
-The advantages of build automation to software development projects include
-
-    Improve product quality
-    Accelerate the compile and link processing
-    Eliminate redundant tasks
-    Minimize "bad builds"
-    Eliminate dependencies on key personnel
-    Have history of builds and releases in order to investigate issues
-    Save time and money - because of the reasons listed above.[5]
-
-Types
-
-    On-Demand automation such as a user running a script at the command line
-    Scheduled automation such as a continuous integration server running a nightly build
-    Triggered automation such as a continuous integration server running a build on every commit to a version control system.
-
-Makefile
-
-One specific form of build automation is the automatic generation of Makefiles. See List of build automation software.
-Requirements of a build system
-
-Basic requirements:
-
-    Frequent or overnight builds to catch problems early.[6][7][8]
-    Support for Source Code Dependency Management
-    Incremental build processing
-    Reporting that traces source to binary matching
-    Build acceleration
-    Extraction and reporting on build compile and link usage
-
-Optional requirements:[9]
-
-    Generate release notes and other documentation such as help pages
-    Build status reporting
-    Test pass or fail reporting
-    Summary of the features added/modified/deleted with each new build
-
-
-toolset
-Make-based tools
-
-    distcc
+build management tools have provided even more relief when it comes to automating the build process. Both commercial and open source tools are available to perform more automated build and workflow processing. Some tools focus on automating the pre and post steps around the calling of the build scripts, while others go beyond the pre and post build script processing and also streamline the actual compile and linker calls without much manual scripting. These tools are particularly useful for continuous integration builds where frequent calls to the compile process are required and incremental build processing is needed.
     GNU make, a widely used make implementation with a large set of extensions
     make, a classic Unix build tool
     mk, developed originally for Version 10 Unix and Plan 9, and ported to Unix as part of plan9port
@@ -74,29 +14,28 @@ Make-based tools
     PVCS-make, basically follows the concept of make but with a noticeable set of unique syntax features[1]
     Rake, a Ruby-based build tool
     ElectricMake, a replacement for make and gmake that implements build parallelization with ElectricAccelerator. Produced by Electric Cloud Inc.
-
 Non-Make-based tools
 
-    Apache Ant, popular for Java platform development and uses an XML file format
-    Apache Buildr, open-source build system, Rake-based, gives full power of scripting in Ruby with integral support for most abilities wanted in a build system
-    Apache Maven, a Java platform tool for project management and automated software build
+    Apache Ant, 
+    Apache Buildr,
+    Apache Maven, 
     A-A-P, a Python based build tool
     Boost.Build V2 from Boost C++ libraries
-    Cabal, common architecture for building applications and libraries in the programming language Haskell
+    Cabal, 
     Flowtracer
-    Gradle, an open-source build and automation system with a Groovy Rake domain specific language (DSL), combining the advantages of Ant and Apache Maven with additional features like a reliable incremental build
-    Leiningen, a tool providing commonly performed tasks in Clojure projects, including build automation lei
-    MSBuild, the Microsoft build engine
-    NAnt, a tool similar to Ant for the .NET Framework
-    Perforce Jam, a generally enhanced, ground-up tool which is similar to Make
-    Psake, domain-specific language and build automation tool written in PowerShell
-    sbt, a build tool built on a Scala-based DSL
+    Gradle,
+    Leiningen,
+    MSBuild, 
+    NAnt,
+    Perforce Jam, similar to Make
+    Psake, 
+    sbt, 
     SCons, Python-based, with integrated functionality similar to autoconf/automake
     Shake, Haskell based, embedded DSL
-    Tup, Lua based, make-like DSL with a pure focus on speed and scalability
-    Tweaker, allowing task definitions to be written in any languages (or intermixed languages) while providing a consistent interface for them all
+    Tup, 
+    Tweaker,
     Visual Build, a graphical user interface software for software builds
-    Waf is a Python-based tool for configuring, compiling and installing applications. It is a replacement for other tools such as Autotools, Scons, CMake or Ant
+    Waf . It is a replacement for other tools such as Autotools, Scons, CMake or Ant
 
 Build script generation tools
 
@@ -109,7 +48,6 @@ Build script generation tools
     qmake
 
 Continuous integration tools
-
     AnthillPro, build automation with pipeline support for deployment automation and testing. Cross-platform, cross-language
     Bamboo, continuous integration software
     Automated BuildStudio, a system for automating and managing software build, test and deploy processes, with build scheduling and continuous integration support
@@ -125,11 +63,3 @@ Continuous integration tools
     Jenkins, an extensible continuous integration engine, forked from Hudson
     Team Foundation Server, an extensible continuous integration engine from Microsoft
     TeamCity
-
-Configuration management tools
-
-    CFEngine
-    Salt (Python-based)
-    Ansible (Python-based)
-    Puppet (Ruby-based)
-    Chef (Ruby-based)

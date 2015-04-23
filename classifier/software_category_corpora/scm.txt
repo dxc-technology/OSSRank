@@ -1,0 +1,49 @@
+software configuration management(SCM)[1] is the task of tracking and controlling changes in the software, part of the larger cross-discipline field of configuration management.[2] SCM practices include revision control and the establishment of baselines. If something goes wrong, SCM can determine what was changed and who changed it. If a configuration is working well, SCM can determine how to replicate it across many hosts.
+The acronym "SCM" is also expanded as source configuration management and software change and configuration management.[3] However, "configuration" is generally understood to cover changes typically made by a system administrator; management of source code undergoing software development is considered separately (see revision 
+The goals of SCM are generally
+Configuration identification - Identifying configurations, configuration items and baselines.
+Configuration control - Implementing a controlled change process. This is usually achieved by setting up a change control board whose primary function is to approve or reject all change requests that are sent against any baseline.
+Configuration status accounting - Recording and reporting all the necessary information on the status of the development process.
+Configuration auditing - Ensuring that configurations contain all their intended parts and are sound with respect to their specifying documents, including requirements, architectural specifications and user manuals.
+Build management - Managing the process and tools used for builds.
+Process management - Ensuring adherence to the organization's development process.
+Environment management - Managing the software and hardware that host the system.
+AccuRev – source configuration management tool with integrated issue tracking based on "Streams" that efficiently manages parallel and global development; replication server is also available
+CA Software Change Manager (originally Harvest/CCC) – change and configuration management tool byComputer Associates
+Autodesk Vault – Version control tool specifically designed for Autodesk applications managing the complex relationships between design files such as AutoCAD and Autodesk Inventor.
+CADES - Designer productivity and version control system by International Computers Limited.
+IBM Rational ClearCase – SCC compliant configuration management system by IBM Rational Software
+IBM Configuration Management Version Control (CMVC) – version control system, no longer available.
+IBM Rational Team Concert – Collaboration and application lifecycle management platform by IBM Rational Software
+IC Manage Global Design Platform (GDP) – design data management for IC design and Perforce infrastructure support.
+MKS Integrity
+Perforce – Free for use in open source projects.
+PVCS – originally Polytron Version Control System, developed by Don Kinzer at Polytron, first released in 1985. Now owned by Serena.
+Quma Version Control System
+Razor (configuration management), integrated suite from Visible Systems
+SolidWorks Enterprise PDM - version and revision control system also including notifications and workflows for managing SolidWorks files as well as any other file types.
+SourceAnywhere – version control tool by Dynamsoft.
+StarTeam – coordinates and manages software delivery process by Micro Focus, formerly Borland; centralized control of digital assets and activities
+Surround SCM – version control tool by Seapine Software.
+Team Foundation Server (TFS) - Development software by Microsoft which includes revision control.
+Telelogic Synergy – SCC compliant integrated change management and task-based configuration management system, proprietary of IBM.
+Vault – version control tool by SourceGear (First installation can be used for free)
+Visual SourceSafe – version control tool by Microsoft; oriented toward small teams
+Distributed model[edit]
+In the distributed approach, each developer works directly with his or her own local repository, and changes are shared between repositories as a separate step.
+Open source[edit]
+Aegis – written by Peter Miller, mature software, filesystem-oriented, limited network support. It has support for distributed revision control. It has built-in support for a disciplined process, including peer review and regression testing.
+ArX – written by Walter Landry, started as a fork of GNU arch, but has been completely rewritten
+Bazaar – written in Python, originally by Martin Pool and sponsored by Canonical; decentralised, and aims to be fast and easy to use; can losslessly import Arch archives
+Codeville – written in Python originally by Ross Cohen; uses an innovative merging algorithm
+Darcs – written in Haskell and originally developed by David Roundy; can keep track of inter-patch dependencies and automatically rearrange and "cherry-pick" them using a "theory of patches"
+DCVS – decentralized and CVS-based
+Fossil – written by D. Richard Hipp for SQLite; distributed revision control, wiki, and bug-tracking
+Git – written in a collection of Perl, C, and various shell scripts, designed by Linus Torvalds based on the needs of the Linux kernel project; decentralized, and aims to be fast, flexible, and robust
+GNU arch
+LibreSource – configuration management
+Mercurial – written in Python as an Open Source replacement to BitKeeper; decentralized and aims to be fast, lightweight, portable, and easy to use
+Monotone – developed by the Monotone Team; decentralized in a peer-to-peer way
+SVK – written in Perl by Kao Chia-liang; built on top of Subversion to allow distributed commits
+Veracity - Is another distributed version control system which includes bug tracking and Agile software development tools integrated with the version control features.
+

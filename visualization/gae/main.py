@@ -44,6 +44,21 @@ def getProject(project_id):
     r = requests.get(url,timeout=200)
     return jsonify(project = r.json())
 
+@app.route('/api/category_map', methods=['GET'])
+def getRankedProjects():
+    category_name = request.args.get('category')
+    query_str="&q={'_category':'"+category_name+"'}"
+    url = config['apiURL'] + config['database'] \
+        +"/collections/projects" \
+        + "?apiKey=" + config['apiKey'] \
+        + query_str \
+        + "&f= {'name':1,'_rank':1}" \
+        + "&s= {'_rank':-1} "
+    headers = {'content-type': 'application/json'}
+    r = requests.get(url,timeout=200)
+    return jsonify(projects = r.json())
+
+
 @app.route('/api/categories', methods=['GET'])
 def getCategories():
     url = config['apiURL'] + config['database'] \
