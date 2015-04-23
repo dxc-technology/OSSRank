@@ -1,9 +1,3 @@
-OSSRankSandbox.R is a first attempt at creating a ranking algorithm using R's RankAggreg package. The code is commented to explain what is going on. The ranking algorithm itself is explained at the bottom of the script.
+OSSRank.R reads the project data from MongoDB and creates scores and ranks based on metrics like GitHub forks and Twitter mentions, which are normalized on a 0-1 scale. The metrics are normalized so that we can give equal weight to metrics with different magnitudes. For example, we would expect that a project would have a large difference in the amount of GitHub forks compared to the amount of Twitter mentions. Normalizing allows us to rectify this difference. 
 
-OSSRank.R is an improvement upon OSSRankSandbox.R. It reads in GitHub and OpenHub data from MongoDB and creates scores and ranks based on metrics which are normalized on a 0-1 scale. In this instance, we use stargazers_count, forks, and watchers. Stargazers_count and watchers are identical, but I just wanted to ensure that the process itself worked. Any metric can be subbed in and out of the process. 
-
-There are several OSS projects with multiple entries in this dataset. For example, bootstrap has 16 entries. This is useful in this instance as it allows us to use these as mock categories since categories are not yet included in the dataset. Scores are created for each of the metrics, these scores are normalized, and then the scores are ranked within each project. Ties are broken by averaging. For example, if 2 bootstrap entries share an identical score, which happens to be the high score for bootstrap, then those projects would share a rank of 1.5. This only happens in the cases of identical entries. In practice, once we have all of the metrics in the dataset, and only one entry for each OSS project, the odds of a tie occurring are astonomical, rendering this a moot point beyond this trial run. 
-
-Figuring out how to write the scored and ranked data back to MongoDB still has to be done.
-
-Unlike its predecessor, this script does not utilize the RankAggreg package.
+Scores are created for each project by summing the normalized metrics. We then rank projects within their respective categories based on these scores and write back to MongoDB.
