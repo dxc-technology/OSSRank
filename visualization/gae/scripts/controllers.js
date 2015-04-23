@@ -12,7 +12,7 @@ app.controller("HomeCtrl", function ($scope, Category, Project) {
     });
 });
 
-app.controller("AbouCtrl", function ($scope) {
+app.controller("AboutCtrl", function ($scope) {
     
 });
 
