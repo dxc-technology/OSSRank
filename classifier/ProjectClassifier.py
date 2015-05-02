@@ -136,7 +136,7 @@ def get_naive_base_classified_result(evalutaing_desc):
     
     #define stopwords to use
     swords=stopwords.words('english')
-    swords.extend(['last', 'first', 'different', 'most', 'and','contain', 'multiple','new', 'include', 'use', 'full' , 'project', 'comparison'])
+    swords.extend(['last','software',  'first', 'different', 'most', 'and','contain', 'multiple','new', 'include', 'use', 'full' , 'project', 'comparison'])
     
     #get corpora and train
     corpora_data_path=os.path.abspath(os.path.join('./../classifier/', OPEN_SOURCE_CORPORA_DIR))
@@ -158,7 +158,7 @@ def get_naive_base_classified_result(evalutaing_desc):
 
     #train db corpora
     db_corpora_path=os.path.join(corpora_data_path, 'database.txt')
-    train_db_txt=get_desc_words(get_corpora(webapp_corpora_path))
+    train_db_txt=get_desc_words(get_corpora(db_corpora_path))
     train_db = features_from_desc(train_db_txt, 'Database', word_indicator, stopwords = swords)
 
     #train httpmodule corpora
@@ -174,7 +174,7 @@ def get_naive_base_classified_result(evalutaing_desc):
     #train mobile api corpora
     javascript_corpora_path=os.path.join(corpora_data_path, 'javascript.txt')
     train_javascript_txt=get_desc_words(get_corpora(javascript_corpora_path))
-    train_javascript = features_from_desc(train_mobile_txt, 'JavaScript Libraries', word_indicator, stopwords = swords)
+    train_javascript = features_from_desc(train_javascript_txt, 'JavaScript Libraries', word_indicator, stopwords = swords)
 
     
     #train ide corpora
@@ -185,7 +185,7 @@ def get_naive_base_classified_result(evalutaing_desc):
     #train scm corpora
     scm_corpora_path=os.path.join(corpora_data_path, 'scm.txt')
     train_scm_txt=get_desc_words(get_corpora(scm_corpora_path))
-    train_scm = features_from_desc(train_webapp_txt, 'SCM', word_indicator, stopwords = swords)
+    train_scm = features_from_desc(train_scm_txt, 'SCM', word_indicator, stopwords = swords)
 
     #train scm corpora
     css_corpora_path=os.path.join(corpora_data_path, 'css.txt')
@@ -200,13 +200,13 @@ def get_naive_base_classified_result(evalutaing_desc):
     
     eval_words=dict([(word, True)for word in evalutaing_desc])
     
-    #print eval_words
+    print eval_words
     
     #get classification
     category_naive_classification= classifier.classify(eval_words)
     print 'category as per naive bayes classification ->'+ category_naive_classification
     
-    #classifier.show_most_informative_features()
+    classifier.show_most_informative_features()
     
     return category_naive_classification
 
@@ -248,12 +248,14 @@ def classify_project(project_name, project_description, **kwargs):
         concatenate project name, description ,language for classification 
         we use all three information together
        '''
-       project_data = project_name + "" + project_description + "" + project_language
+       project_data = project_name + " " + project_description + " " + project_language
        
        '''
         word tokenize using nltk and match against keywords from softwarecategory
        '''
        current_desc_words=get_desc_words(project_data)
+       
+       print current_desc_words
        
        category= get_category_best_keyword_match(current_desc_words)
        
@@ -279,7 +281,7 @@ def classify_project(project_name, project_description, **kwargs):
 def main():
     print 'test in main'
     classify_project('bootstrap', 'The most popular HTML , CSS , and JavaScript framework for developing responsive, mobile first projects on the web.', language='CSS')
-    
+    classify_project('node', 'evented I/O for v8 javascript', language='JavaScript')
     
 if  __name__=='__main__':
     main()
