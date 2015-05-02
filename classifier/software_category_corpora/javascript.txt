@@ -1,0 +1,90 @@
+JvaScript , also known as ECMAScript (the untrademarked name used for the standard), is a dynamic programming language. It is most commonly used as part of web browsers, whose implementations allow client-side scripts to interact with the user, control the browser, communicate asynchronously, and alter the document content that is displayed.
+jQuery is the most popular JavaScript framework on the Internet today.
+DOM (manipulation) oriented
+Dojo Toolkit
+jQuery
+midori
+MooTools
+Prototype JavaScript Framework
+YUI Library
+GUI-related (widget)
+Angular UI
+DHTMLX
+Dojo Widgets
+Sencha's Ext JS
+jQuery UI
+SAP's OpenUI5
+qooxdoo
+Google's Polymer paper elements
+SmartClient
+Telerik's Kendo UI
+Webix
+WinJS
+Bootstrap
+ZURB Foundation
+No longer actively developed[edit]
+Ample SDK
+iX Framework
+Lively Kernel
+Script.aculo.us
+YUI Library
+Glow
+Graphical/visualization (canvas or SVG related)[edit]
+D3.js
+JavaScript InfoVis Toolkit
+Kinetic.js
+Processing.js
+Raphaël
+SWFObject
+Three.js
+EaselJS, part of CreateJS
+Web-application related (MVC, MVVM, or otherwise)[edit]
+AngularJS
+Backbone.js
+Cappuccino
+Chaplin.js
+Echo
+Ember.js
+Enyo
+Google Web Toolkit
+JavaScriptMVC
+Knockout
+Meteor
+MooTools
+Prototype JavaScript Framework
+Rialto Toolkit
+SproutCore
+Wakanda Framework
+Ext JS
+Pure JavaScript/Ajax[edit]
+Google Closure Library
+Joose
+jsPHP
+Microsoft's Ajax library
+MochiKit
+PDF.js
+Rico
+Socket.IO
+Spry framework
+Underscore.js
+Template systems[edit]
+Cascade Framework
+Handlebars
+jQuery Mobile
+Mustache
+Unit testing[edit]
+Jasmine
+Unit.js
+QUnit
+Mocha
+Other[edit]
+Modernizr
+See also[edit]
+Comparison of JavaScript frameworks
+Ajax framework
+External links[edit]
+JSter, a community-driven catalog of the most useful javascript libraries.
+Umut Muhaddisoglu (2 March 2009). "40 Useful JavaScript Libraries". Smashing Magazine. Retrieved 16 April 2013.
+JavaScript
+ECMAScript
+Categories: JavaScript library

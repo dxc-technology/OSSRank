@@ -1,11 +1,9 @@
-Build automation is the act of scripting or automating a wide variety of tasks that software developers do in their day-to-day activities including things like:
+Build automation is the act of scripting or automating
 
     compiling computer source code into binary code
     packaging binary code
-    running automated tests
     deploying to production systems
     creating documentation and/or release notes
-build management tools have provided even more relief when it comes to automating the build process. Both commercial and open source tools are available to perform more automated build and workflow processing. Some tools focus on automating the pre and post steps around the calling of the build scripts, while others go beyond the pre and post build script processing and also streamline the actual compile and linker calls without much manual scripting. These tools are particularly useful for continuous integration builds where frequent calls to the compile process are required and incremental build processing is needed.
     GNU make, a widely used make implementation with a large set of extensions
     make, a classic Unix build tool
     mk, developed originally for Version 10 Unix and Plan 9, and ported to Unix as part of plan9port
@@ -15,7 +13,6 @@ build management tools have provided even more relief when it comes to automatin
     Rake, a Ruby-based build tool
     ElectricMake, a replacement for make and gmake that implements build parallelization with ElectricAccelerator. Produced by Electric Cloud Inc.
 Non-Make-based tools
-
     Apache Ant, 
     Apache Buildr,
     Apache Maven, 

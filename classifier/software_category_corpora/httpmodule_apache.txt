@@ -1,6 +1,5 @@
-Apache HTTP Server
-The Apache HTTP Server, colloquially called Apache (/əˈpætʃiː/ ə-PA-chee), is a Web server application notable for playing a key role in the initial growth of the World Wide Web.[3] Originally based on the NCSA HTTPd server, development of Apache began in early 1995 after work on the NCSA code stalled. Apache quickly overtook NCSA HTTPd as the dominant HTTP server, and has remained the most popular HTTP server in use since April 1996. In 2009, it became the first Web server software to serve more than 100 million Web sites.[4]
-
+ HTTP Server
+ Web server is a program that, using the client/server model and  Hypertext Transfer Protocol ( HTTP ), serves the files that form Web pages to Web users (whose computers contain HTTP clients that forward their requests).
     ApacheBench
     Comparison of web server software
     .htaccess
