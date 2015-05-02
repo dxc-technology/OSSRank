@@ -85,7 +85,7 @@ def queryOpenhubDetails(gitProjectName):
                 #print projectDataDictionary.get('tag')
             if(prj_found): break
     
-    except Error as e:
+    except Exception as e:
         print "Error occured fetching data from openhub", e
     return projectDataDictionary
     
