@@ -1,10 +1,9 @@
  HTTP Server
- Web server is a program that, using the client/server model and  Hypertext Transfer Protocol ( HTTP ), serves the files that form Web pages to Web users (whose computers contain HTTP clients that forward their requests).
+ HTTP server is a program that, using the client/server model and  Hypertext Transfer Protocol ( HTTP ), serves the files that form Webpages to internet users (whose computers contain HTTP clients that forward their requests).
     ApacheBench
-    Comparison of web server software
     .htaccess
     .htpasswd
-    IBM HTTP Server
+    IBMs HTTP Server
     Internet Cache Protocol
     LAMP (software bundle)
     List of Apache modules

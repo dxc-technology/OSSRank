@@ -1,6 +1,4 @@
-ascading Style Sheets (CSS) is a style sheet language used for describing the look and formatting of a document written in a markup language.
-CSS is designed primarily to enable the separation of document content from document presentation, including elements such as the layout, colors, and fonts.
-provide more flexibility and control in the specification of presentation characteristics, enable multiple HTML pages to share formatting by specifying the relevant CSS in a separate .css file.
+cascading Style Sheets (CSS) is a style sheet language used for describing the look and formatting of a document written in a markup language.
 css3-background	CSS Backgrounds and Borders Module Level 3.
 css3-box	CSS basic box model	.
 css-cascade-3	CSS Cascading and Inheritance Level 3 	.
@@ -34,4 +32,3 @@ Semantic UI
 StackLayout
 uikit
 Unsemantic
-
