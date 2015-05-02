@@ -90,7 +90,7 @@ def get_desc_words(software_desc, stopwords=[]):
 '''
 thanks ipython.org for the method
 creates a dictiornary of entries {word:true} for every unique word in desc
-**kargs are options to the word set creator get_desc_words defined above
+**kwargs are options to the word set creator get_desc_words defined above
 '''
 def word_indicator(desc, **kwargs):
     features =defaultdict(list)
@@ -130,13 +130,21 @@ def get_corpora(path):
         
     return desc 
     
+'''
+function doing  supervised naive bayes classification 
+training set is in software_category_corpora
+text to classify is provided as method parameter
+'''
 
-
-def get_naive_base_classified_result(evalutaing_desc):
+def get_naive_base_classified_result(evaluating_desc):
+    
+    
+    naivebayes_logger = logging.getLogger("classifier_logger"); 
+       
     
     #define stopwords to use
     swords=stopwords.words('english')
-    swords.extend(['last','software',  'first', 'different', 'most', 'and','contain', 'multiple','new', 'include', 'use', 'full' , 'project', 'comparison'])
+    swords.extend(['free','whose','using','used','last','software',  'first', 'different', 'most', 'and','contain', 'multiple','new', 'include', 'use', 'full' , 'project', 'comparison'])
     
     #get corpora and train
     corpora_data_path=os.path.abspath(os.path.join('./../classifier/', OPEN_SOURCE_CORPORA_DIR))
@@ -197,18 +205,27 @@ def get_naive_base_classified_result(evalutaing_desc):
     train_set= train_css + train_javascript + train_build_automation + train_webapp + train_cms + train_db + train_http + train_mobile + train_ide+ train_scm
     classifier = NaiveBayesClassifier.train(train_set)
     
+    '''
+    remove the stopwords first from text to be classified
+    '''
+    text_to_classify = [w for w in evaluating_desc if not w in stopwords.words('english')]
     
-    eval_words=dict([(word, True)for word in evalutaing_desc])
+    #print text_to_classify
     
-    print eval_words
+    eval_words=dict([(word, True)for word in text_to_classify])
+    
+    #print eval_words
     
     #get classification
     category_naive_classification= classifier.classify(eval_words)
-    print 'category as per naive bayes classification ->'+ category_naive_classification
     
-    classifier.show_most_informative_features()
+    naivebayes_logger.debug('category as per naive bayes classification ' + category_naive_classification)
+    
+    #below line to uncommented for debug purpose only
+    #classifier.show_most_informative_features()
     
     return category_naive_classification
+    
 
 '''
 The function take project name and arbitrary number of relevant keywords arguments
