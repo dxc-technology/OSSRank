@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+'''
+ purpose is to query openhub ..check tag and description
+ openhub api used from https://github.com/blackducksw/ohloh_api
+ using lxml api for xml parsing doc: lxml.de
 
-#purpose is to query openhub ..check tag and description
-#openhub api used from https://github.com/blackducksw/ohloh_api
-#using lxml api for xml parsing doc: lxml.de
+'''
+
 import json
 import requests
 from urlparse import urljoin
@@ -13,7 +16,8 @@ import time
 from lxml import etree
 from lxml.etree import  Element
 from lxml import etree as ElementTree
-
+import ConfigParser
+import logging
 
 '''
 global logging definition
@@ -31,14 +35,26 @@ this_logger_handler.setFormatter(this_logger_format)
 this_logger.addHandler(this_logger_handler)
 
 
-#todo make the query manipulative by taking an user entry
-OPENHUB_SEARCH_URL = 'https://www.openhub.net/projects.xml'
+'''
+read global configuration
+'''
+config_reader = ConfigParser.ConfigParser()
+config_reader.read('./../data/config.cfg')
+
+
+config = {
+    'search_url' : config_reader.get('openhub', 'OPENHUB_SEARCH_URL' ),
+    'api_key' : config_reader.get('openhub', 'OPENHUB_API_KEY')
+}
+
+
+#OPENHUB_SEARCH_URL = 'https://www.openhub.net/projects.xml'
+#OPENHUB_API_KEY = '40fcNIhGvhr3kPfRpH0IkQ'
+OPENHUB_SEARCH_URL = config['search_url']
+OPENHUB_API_KEY = config['api_key']
 
 
 
-#please use your own api key by registerring yourself at openhub.net
-#OPENHUB_API_KEY = '7u9sgYGrr6nv2snYk8o7w'
-OPENHUB_API_KEY = '40fcNIhGvhr3kPfRpH0IkQ'
 
 
 ######################

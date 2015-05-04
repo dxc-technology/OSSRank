@@ -272,7 +272,7 @@ def classify_project(project_name, project_description, **kwargs):
        '''
        current_desc_words=get_desc_words(project_data)
        
-       print current_desc_words
+       #classifier_logger.debug(current_desc_words)
        
        category= get_category_best_keyword_match(current_desc_words)
        
@@ -297,8 +297,10 @@ def classify_project(project_name, project_description, **kwargs):
        
 def main():
     print 'test in main'
-    classify_project('bootstrap', 'The most popular HTML , CSS , and JavaScript framework for developing responsive, mobile first projects on the web.', language='CSS')
-    classify_project('node', 'evented I/O for v8 javascript', language='JavaScript')
+    #classify_project('bootstrap', 'The most popular HTML , CSS , and JavaScript framework for developing responsive, mobile first projects on the web.', language='CSS')
+    #classify_project('node', 'evented I/O for v8 javascript', language='JavaScript')
+    #classify_project('Almofire', 'Elegant HTTP Networking in Swift', language='Swift')
+    classify_project('Atom', 'The Hackable editor.', language='CofeeScript')
     
 if  __name__=='__main__':
     main()
