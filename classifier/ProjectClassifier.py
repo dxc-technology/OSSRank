@@ -17,6 +17,7 @@ import os
 import re
 import numpy as npy
 from collections import defaultdict
+import logging
 
 
 
@@ -24,6 +25,24 @@ from collections import defaultdict
 SOFTWARE_CATEGORY_FILE_NAME='SoftwareCategory.json'
 
 OPEN_SOURCE_CORPORA_DIR='software_category_corpora'
+
+'''
+global logging definition
+'''
+this_logger=logging.getLogger("classifier_logger")
+
+this_logger.setLevel(logging.DEBUG)
+
+this_logger_handler=logging.StreamHandler()
+
+this_logger_format= logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+this_logger_handler.setFormatter(this_logger_format)
+
+this_logger.addHandler(this_logger_handler)
+
+
+
 
 '''
 Read our category definition json file and 
@@ -71,7 +90,7 @@ def get_desc_words(software_desc, stopwords=[]):
 '''
 thanks ipython.org for the method
 creates a dictiornary of entries {word:true} for every unique word in desc
-**kargs are options to the word set creator get_desc_words defined above
+**kwargs are options to the word set creator get_desc_words defined above
 '''
 def word_indicator(desc, **kwargs):
     features =defaultdict(list)
@@ -111,13 +130,21 @@ def get_corpora(path):
         
     return desc 
     
+'''
+function doing  supervised naive bayes classification 
+training set is in software_category_corpora
+text to classify is provided as method parameter
+'''
 
-
-def get_naive_base_classified_result(evalutaing_desc):
+def get_naive_base_classified_result(evaluating_desc):
+    
+    
+    naivebayes_logger = logging.getLogger("classifier_logger"); 
+       
     
     #define stopwords to use
     swords=stopwords.words('english')
-    swords.extend(['last', 'first', 'different', 'new', 'include', 'use', 'full'])
+    swords.extend(['free','whose','using','used','last','software',  'first', 'different', 'most', 'and','contain', 'multiple','new', 'include', 'use', 'full' , 'project', 'comparison'])
     
     #get corpora and train
     corpora_data_path=os.path.abspath(os.path.join('./../classifier/', OPEN_SOURCE_CORPORA_DIR))
@@ -139,7 +166,7 @@ def get_naive_base_classified_result(evalutaing_desc):
 
     #train db corpora
     db_corpora_path=os.path.join(corpora_data_path, 'database.txt')
-    train_db_txt=get_desc_words(get_corpora(webapp_corpora_path))
+    train_db_txt=get_desc_words(get_corpora(db_corpora_path))
     train_db = features_from_desc(train_db_txt, 'Database', word_indicator, stopwords = swords)
 
     #train httpmodule corpora
@@ -152,61 +179,108 @@ def get_naive_base_classified_result(evalutaing_desc):
     train_mobile_txt=get_desc_words(get_corpora(mobile_corpora_path))
     train_mobile = features_from_desc(train_mobile_txt, 'Mobile API', word_indicator, stopwords = swords)
     
+    #train mobile api corpora
+    javascript_corpora_path=os.path.join(corpora_data_path, 'javascript.txt')
+    train_javascript_txt=get_desc_words(get_corpora(javascript_corpora_path))
+    train_javascript = features_from_desc(train_javascript_txt, 'JavaScript Libraries', word_indicator, stopwords = swords)
+
+    
     #train ide corpora
     ide_corpora_path=os.path.join(corpora_data_path, 'ide.txt')
     train_ide_txt=get_desc_words(get_corpora(ide_corpora_path))
-    train_ide = features_from_desc(train_webapp_txt, 'IDE', word_indicator, stopwords = swords)
+    train_ide = features_from_desc(train_ide_txt, 'IDE', word_indicator, stopwords = swords)
     
     #train scm corpora
     scm_corpora_path=os.path.join(corpora_data_path, 'scm.txt')
     train_scm_txt=get_desc_words(get_corpora(scm_corpora_path))
-    train_scm = features_from_desc(train_webapp_txt, 'SCM', word_indicator, stopwords = swords)
+    train_scm = features_from_desc(train_scm_txt, 'SCM', word_indicator, stopwords = swords)
+
+    #train scm corpora
+    css_corpora_path=os.path.join(corpora_data_path, 'css.txt')
+    train_css_txt=get_desc_words(get_corpora(css_corpora_path))
+    train_css = features_from_desc(train_css_txt, 'CSS', word_indicator, stopwords = swords)
 
     
     ##collect all trained set
-    train_set=  train_build_automation + train_webapp + train_cms + train_db + train_http + train_mobile + train_ide+ train_scm
+    train_set= train_css + train_javascript + train_build_automation + train_webapp + train_cms + train_db + train_http + train_mobile + train_ide+ train_scm
     classifier = NaiveBayesClassifier.train(train_set)
     
+    '''
+    remove the stopwords first from text to be classified
+    '''
+    text_to_classify = [w for w in evaluating_desc if not w in stopwords.words('english')]
     
-    eval_words=dict([(word, True)for word in evalutaing_desc])
+    #print text_to_classify
+    
+    eval_words=dict([(word, True)for word in text_to_classify])
+    
+    #print eval_words
     
     #get classification
     category_naive_classification= classifier.classify(eval_words)
-    print 'category as per naive bayes classification ->'+ category_naive_classification
     
+    naivebayes_logger.debug('category as per naive bayes classification ' + category_naive_classification)
+    
+    #below line to uncommented for debug purpose only
+    #classifier.show_most_informative_features()
+    
+    return category_naive_classification
     
 
 '''
-This method classifies a git project using nltk and categorizes 
-in one of the available categories
-algorithm is described below : to be improved
-algo desc:
-get project desc from github
-tokenize using nltk
-get project desc and tags from openhub
-match against software category keyword
-toadd :first improvement check related project verify categories
+The function take project name and arbitrary number of relevant keywords arguments
 
-the algo is following
-get description from git + openhub
-do word tokenize
-match against our own softwrae category keywords
-if tags available in openhub match against softwrae category keywords
-do a supervsed classification of description against our own corpora out of wikipedia
+This method classifies a git project using nltk and categorizes to one of the 
+available category in SoftwareCategory.json whch is our master taxonomy
+
+algorithm : 
+
+get project desc from github and any other relevant parameters (in key value format)
+tokenize using nltk
+1.get project desc and tags from openhub
+    match against software category keyword
+
+2.get description from git + openhub
+  do word tokenize
+   match against our own softwrae category keywords
+   if tags available in openhub match against softwrae category keywords
+3. do a supervsed classification of description against our own corpora out of wikipedia
+
 ProjectCategory = (finding keywords in desc) + (matching keywords in found tags) + (naive bayes classification using trained defintion out of wikipedia)
 what weight each one carry :: to be decided
 '''
-def classify_project(git_project_name, project_description):
-       print ' classifying '+ git_project_name
+def classify_project(project_name, project_description, **kwargs):
+       classifier_logger = logging.getLogger("classifier_logger"); 
+       
+       classifier_logger.info(' classifying '+ project_name )
+       
        category=''
-       #word tokenize using nltk and match against keywords from softwarecategory
-       current_desc_words=get_desc_words(project_description)
+       
+       project_language = ''
+       for key, value in kwargs.iteritems():
+           if('language' in key):
+               project_language = value
+               
+       '''
+        concatenate project name, description ,language for classification 
+        we use all three information together
+       '''
+       project_data = project_name + " " + project_description + " " + project_language
+       
+       '''
+        word tokenize using nltk and match against keywords from softwarecategory
+       '''
+       current_desc_words=get_desc_words(project_data)
+       
+       #classifier_logger.debug(current_desc_words)
+       
        category= get_category_best_keyword_match(current_desc_words)
-       print ' best category match as per git desc ->' + category
+       
+       classifier_logger.info(' best category match as per git desc ' + category )
     
        #now we get keyword from openhub if exists
        
-       test_project_dict= queryOpenhubDetails(git_project_name)
+       test_project_dict= queryOpenhubDetails(project_name)
        if(len(test_project_dict) != 1 and len(test_project_dict) != 0 ):
            project_tags=test_project_dict.get('tag')
            current_tag_words=get_desc_words(project_tags)
@@ -223,8 +297,10 @@ def classify_project(git_project_name, project_description):
        
 def main():
     print 'test in main'
-    classify_project('bootstrap', 'The most popular front-end framework for developing responsive, mobile first projects on the web.')
-    
+    #classify_project('bootstrap', 'The most popular HTML , CSS , and JavaScript framework for developing responsive, mobile first projects on the web.', language='CSS')
+    #classify_project('node', 'evented I/O for v8 javascript', language='JavaScript')
+    #classify_project('Almofire', 'Elegant HTTP Networking in Swift', language='Swift')
+    classify_project('Atom', 'The Hackable editor.', language='CofeeScript')
     
 if  __name__=='__main__':
     main()

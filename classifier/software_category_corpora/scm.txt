@@ -1,5 +1,4 @@
 software configuration management(SCM)[1] is the task of tracking and controlling changes in the software, part of the larger cross-discipline field of configuration management.[2] SCM practices include revision control and the establishment of baselines. If something goes wrong, SCM can determine what was changed and who changed it. If a configuration is working well, SCM can determine how to replicate it across many hosts.
-The acronym "SCM" is also expanded as source configuration management and software change and configuration management.[3] However, "configuration" is generally understood to cover changes typically made by a system administrator; management of source code undergoing software development is considered separately (see revision 
 The goals of SCM are generally
 Configuration identification - Identifying configurations, configuration items and baselines.
 Configuration control - Implementing a controlled change process. This is usually achieved by setting up a change control board whose primary function is to approve or reject all change requests that are sent against any baseline.
@@ -12,9 +11,7 @@ AccuRev – source configuration management tool with integrated issue tracking
 CA Software Change Manager (originally Harvest/CCC) – change and configuration management tool byComputer Associates
 Autodesk Vault – Version control tool specifically designed for Autodesk applications managing the complex relationships between design files such as AutoCAD and Autodesk Inventor.
 CADES - Designer productivity and version control system by International Computers Limited.
-IBM Rational ClearCase – SCC compliant configuration management system by IBM Rational Software
-IBM Configuration Management Version Control (CMVC) – version control system, no longer available.
-IBM Rational Team Concert – Collaboration and application lifecycle management platform by IBM Rational Software
+IBM Rational ClearCase – SCC compliant configuration management system 
 IC Manage Global Design Platform (GDP) – design data management for IC design and Perforce infrastructure support.
 MKS Integrity
 Perforce – Free for use in open source projects.
