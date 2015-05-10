@@ -43,6 +43,10 @@ handlers:
   script: twitter_load.app
   login: admin
 
+- url: /stackexchange
+  script: stackexchange_load.app
+  login: admin  
+
 - url: .*
   script: main.app
 
