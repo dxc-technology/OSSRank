@@ -79,12 +79,36 @@ app.controller("ProjectCtrl", function ($scope,$http,$routeParams, Project) {
         }else{
            $scope.today_tweets =  "N/A" ;
         }
-        
-        
-        //console.log(Object.keys(tweets).length);
 
+        // get stack exchange api data
+        var stack_exchange_data = $scope.project._stackoverflow;
+      
+        $scope.nbr_of_years = Object.keys(stack_exchange_data).length;
        
-       
+        $scope.questions = 0;
+        $scope.tagged_discussions = 0 ;
+
+        var years = [];
+        var questions_per_year = [];
+        var tagged_discussions_per_year = [];
+           
+        if($scope.nbr_of_years > 0) {
+            angular.forEach(stack_exchange_data, function(value, key){
+                angular.forEach(value , function(value,key){
+                    years.push(key);
+                    questions_per_year.push(value.questions);
+                    tagged_discussions_per_year.push(value.tagged_discussions); 
+                    $scope.questions = $scope.questions + value.questions;
+                    $scope.tagged_discussions = $scope.tagged_discussions + value.tagged_discussions;
+                        })
+                    });
+            }
+
+        $scope.year_labels = years;
+        $scope.questions_series = questions_per_year;
+        $scope.tagged_discussions_series = tagged_discussions_per_year;    
+        
+        //console.log(Object.keys(tweets).length)
         
     });
 
