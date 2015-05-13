@@ -105,9 +105,8 @@ app.controller("ProjectCtrl", function ($scope,$http,$routeParams, Project) {
             }
 
         $scope.year_labels = years;
-        $scope.questions_series = questions_per_year;
-        $scope.tagged_discussions_series = tagged_discussions_per_year;    
-        
+        $scope.stack_exchange_graph_data = [questions_per_year,tagged_discussions_per_year];
+        $scope.series = ['questions','tagged_discussions'];
         //console.log(Object.keys(tweets).length)
         
     });
