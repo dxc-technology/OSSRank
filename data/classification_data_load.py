@@ -7,6 +7,7 @@ import requests
 from urlparse import urljoin
 import ConfigParser
 from common_data_layer import DataLayer
+import logging
 
 
 class ClassificationDataLoad:
@@ -15,8 +16,8 @@ class ClassificationDataLoad:
     
     config_reader = ConfigParser.ConfigParser()
     config = {
-                'noOfProjectsPerLoadingUnit' : '', 
-                'loaderTimeInterval':'', 
+                'noOfProjectsPerLoadingUnit' : 0, 
+                'loaderTimeInterval': 0, 
                 'collectionProjects':''
               }
     
@@ -32,8 +33,8 @@ class ClassificationDataLoad:
          #load configuration
          try:
             self.config_reader.read('config.cfg')
-            self.config['noOfProjectsPerLoadingUnit'] = self.config_reader.get('ClassificationLoader', 'no_per_project_loading_unit' )
-            self.config['loaderTimeInterval'] = self.config_reader.get('ClassificationLoader', 'loader_time_interval' )
+            self.config['noOfProjectsPerLoadingUnit'] = int(self.config_reader.get('ClassificationLoader', 'no_per_project_loading_unit' ))
+            self.config['loaderTimeInterval'] = int(self.config_reader.get('ClassificationLoader', 'loader_time_interval' ))
             self.config['collectionProjects'] = self.config_reader.get('Mongolab', 'collection_project' )
 
          except ConfigParser.Error as e:
@@ -55,7 +56,7 @@ class ClassificationDataLoad:
         
         totalCycles= (totalProjectsToClassify/self.config['noOfProjectsPerLoadingUnit']) if (totalProjectsToClassify%self.config['noOfProjectsPerLoadingUnit'] == 0) else (totalProjectsToClassify/self.config['noOfProjectsPerLoadingUnit'] + 1)
         
-        classificationloader_logger.debug('total iteration count',  totalCycles)
+        classificationloader_logger.debug('total iteration needed %d' ,   totalCycles)
         
         return totalCycles
      
@@ -100,4 +101,5 @@ def get_projects_mongolab():
 
 
 if __name__ == '__main__':
-    get_projects_mongolab()
+    classificationLoad = ClassificationDataLoad()
+    classificationLoad._getIterationCycles()
