@@ -5,6 +5,7 @@ import time
 import simplejson
 import csv
 
+#to do REFACTOR code 
 #read configuration
 config_reader = ConfigParser.ConfigParser()
 config_reader.read('config.cfg')
@@ -57,7 +58,7 @@ def read_github_load_file():
 
 def list_github_load():
     fetch_github_data=True
-    current_start=9800
+    current_start=0
     incr_count=365
     print "Starting Github data dump in paginated format with each page ,365 repositories"
     while fetch_github_data :
