@@ -1,3 +1,14 @@
+#!/usr/bin/env python
+# encoding: utf-8
+'''
+This file is part of OSSRank initiative
+
+ClassificationDataLoad class is responsible for updating projects with classification attribute in OSSRank Repository
+
+
+'''
+
+
 import requests
 import json
 import sys
@@ -43,9 +54,9 @@ class ClassificationDataLoad:
 
 
     '''
-     It is intended to perform classification of project in a number of 
+     Return number of iteration cycles to perform while classifying all the projects in OSSRank Repository
     '''
-    def    _getIterationCycles(self):
+    def    __getIterationCycles(self):
         
         classificationloader_logger = logging.getLogger("classification_loader_logger")
         
@@ -60,46 +71,74 @@ class ClassificationDataLoad:
         
         return totalCycles
      
-        
-    def _get_projects_category(project):
-    
-     print "project language" , project ['language']
-     category = classify_project(project['name'], project ['description'], language=project ['language'])
-        
-     return category
-
-# Get list of projects from Github
-def get_projects_mongolab():
-    
-     headers = {'content-type': 'application/json'}
-     #res = requests.get(query_url,headers=headers)
-     #projects = res.json()
-     count = 800
      
-     classificationData = DataLayer()
-     
-     classificationData.get_collectionlength_ossrank_repo("projects")
-     ''''
-     #print projects
-     for p in projects:
-        count = count +1
-        project = p
-        print 'updating   ' + project['full_name']
-        oid=project ['_id']
-        document_id = oid['$oid']
-        ##get category
-        project_category = get_projects_category(project)
-        ##update json
-        project.update({'_category':project_category})
+    '''
+     Get projects classification using OSSRank classification algorithm 
+    '''
+    def __getProjectCategory(self, project):
+    
+        getcategory_logger = logging.getLogger("classification_loader_logger")
         
-        #update_projects(project, document_id)
-        classificationData.update_jsonobject_in_ossrank_repo( "projects", project , document_id )
-     '''  
+        category = classify_project(project['name'], project ['description'], language=project ['language'])
+        
+        return category
+    
         
         
+    '''
+     updateAllProjectWithClassification is the method to be invoked from external program to classifying all projects
+    '''
+    def updateAllProjectWithClassification(self):
+       
+        projectupdate_logger = logging.getLogger("classification_loader")
         
-
+        projectupdate_logger.info("Staring Process for updating projects with classification")
+        
+        totalLoadCycles = self.__getIterationCycles()
+        
+        if(totalLoadCycles == 0):
+            projectupdate_logger.info("No Projects to classify in OSSRank Repository")
+            sys.exit(0)
+        
+        projectupdate_logger.info("No of cycles to perform to classify all projects in OSSRank Repository %d", totalLoadCycles )
+        
+        
+        classificationData = DataLayer()
+        
+        currentResultLimit = int(self.config['noOfProjectsPerLoadingUnit'])
+        
+        for num in range(1,totalLoadCycles ):
+            
+           projects = classificationData.get_jsonobjects_from_ossrank_repo(self.config['collectionProjects'],str(currentResultLimit), str((num-1)*int(self.config['noOfProjectsPerLoadingUnit'])) )
+           
+           self.__processProjects(projects)
+            
+           currentResultLimit =  currentResultLimit + int(self.config['noOfProjectsPerLoadingUnit'])
+           
+           
+         
+            
+        
+        projectupdate_logger.info("Finishing Process for updating projects with classification")
+        
+        
+    '''
+     process projects and update them with category element & push update to OSSRank repo 
+    '''
+    def __processProjects(self, projects):
+        
+        processProject_logger = logging.getLogger("classification_loader")
+        
+        classificationData = DataLayer()
+        
+        for proj in projects :
+            processProject_logger.info('Current project to process %s ', proj['full_name'])
+            document_Id = proj['_id']
+            object_id_repo= document_Id['$oid']
+            proj.update({'_category':self.__getProjectCategory(proj)})
+            classificationData.update_jsonobject_in_ossrank_repo( self.config['collectionProjects'],proj, object_id_repo )
+            
 
 if __name__ == '__main__':
     classificationLoad = ClassificationDataLoad()
-    classificationLoad._getIterationCycles()
+    classificationLoad.updateAllProjectWithClassification()
