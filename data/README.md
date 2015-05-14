@@ -8,7 +8,9 @@ After preliminary project data collection, each project is classified into one
 or multiple categories and project document is enriched with category information.
 
 Other parts of our current data collection includes 
+
 1.Collection social media data from Twitter about projects
+
 2.Collection of StackOverflow data (e.g. number of questions,tags etc.)
 
 We enrich our collection with all these data along the timeline to use it for
