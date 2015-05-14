@@ -20,15 +20,12 @@ from collections import defaultdict
 import logging
 
 
-
-
-SOFTWARE_CATEGORY_FILE_NAME='SoftwareCategory.json'
-
-OPEN_SOURCE_CORPORA_DIR='software_category_corpora'
+ 
 
 '''
-global logging definition
+ global logging definition
 '''
+
 this_logger=logging.getLogger("classifier_logger")
 
 this_logger.setLevel(logging.DEBUG)
@@ -41,7 +38,11 @@ this_logger_handler.setFormatter(this_logger_format)
 
 this_logger.addHandler(this_logger_handler)
 
+    
+    
 
+SOFTWARE_CATEGORY_FILE_NAME='SoftwareCategory.json'
+OPEN_SOURCE_CORPORA_DIR='software_category_corpora'
 
 
 '''
@@ -259,7 +260,7 @@ def classify_project(project_name, project_description, **kwargs):
        project_language = ''
        for key, value in kwargs.iteritems():
            if('language' in key):
-               project_language = value
+               project_language = value if value is not None else ''
                
        '''
         concatenate project name, description ,language for classification 
