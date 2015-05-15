@@ -1,0 +1,10 @@
+#run the query in google bigquery console
+SELECT repository_url, MAX(repository_forks) as forks ,repository_name as name
+FROM [githubarchive:github.timeline]
+WHERE
+PARSE_UTC_USEC(created_at) <= PARSE_UTC_USEC("2015-05-08 00:00:00") AND
+repository_forks >= 10 AND
+repository_private = "false"
+GROUP EACH BY repository_url,name
+ORDER BY forks DESC
+
