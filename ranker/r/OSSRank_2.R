@@ -3,10 +3,15 @@ library(rmongodb)
 library(plyr)
 library(rjson)
 library(rowr)
-#create credential variables
-host <- "ds039860.mongolab.com:39860"
-username <- ""
-password <- ""
+#for loading yaml configuration
+library(yaml)
+
+config=suppresswarnings(yaml.load_file("config.yml"))
+
+#read credential variables from config
+host <- paste(config$host,config$port,sep=":")
+username <- config$user
+password <- config$password
 db <- "ossrank"
 
 #connect to MongoDB server
