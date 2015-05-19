@@ -78,6 +78,8 @@ ProjectDFnorm$Category <- as.factor(ProjectDFnorm$Category)
 ProjectDFnorm$CategoryRank <- ave(-ProjectDFnorm$ProjectScore, ProjectDFnorm$Category, 
                                   FUN=rank)
 
+rank <- c(2,4,6)
+
 #add timestamp
 ProjectDFnorm$LastUpdated <- Sys.time()
 
@@ -91,9 +93,10 @@ update_db <- function(ProjectList,ProjectDFnorm)
       row <- ProjectDFnorm[i,]
       pos <- grep(ProjectDFnorm[i,"ID"],ProjectList)
       rec <- ProjectList[[pos]]
-      rec$score <- ProjectDFnorm[i,"ProjectScore"]
-      rec$CategoryRank <- ProjectDFnorm[i, "CategoryRank"]
-      rec$LastUpdated <- ProjectDFnorm[i, "LastUpdated"]
+      score <- ProjectDFnorm[i,"ProjectScore"]
+      CategoryRank <- ProjectDFnorm[i, "CategoryRank"]
+      LastUpdated <- ProjectDFnorm[i, "LastUpdated"]
+      rec$Rank <- c(score, CategoryRank, LastUpdated)
       #criteria    <- list("id"=id)
       #fields      <- do.call(c, unlist(ProjectList[1], recursive=FALSE))
       #fields      <- test2
