@@ -15,8 +15,8 @@ library(plyr)
 
 #create credential variables
 host <- "ds039860.mongolab.com:39860"
-username <- "ossrank"
-password <- "cscOSSRank1"
+username <- ""
+password <- ""
 db <- "ossrank"
 
 #connect to MongoDB server

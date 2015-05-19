@@ -1,3 +1,4 @@
+##deprecated code ..used as sample
 import requests
 import json
 

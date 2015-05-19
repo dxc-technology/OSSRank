@@ -3,26 +3,10 @@ While JavaScript, as first developed by Netscape (and later Mozilla), has long h
 
 JavaScript was also combined with CSS to create dynamic web pages, which have also become popular as a more efficient and accessible alternative to Flash-based websites.
 Libraries
-
-With the expanded demands for JavaScript, an easier means for programmers to develop such dynamic interfaces was needed. Thus, JavaScript libraries such as Prototype, script.aculo.us, Ext Core, jsPHP, MooTools and jQuery and JavaScript widget libraries such as Ext JS, DHTMLX, and Dojo Toolkit were developed, allowing for developers to concentrate more upon more distinctive applications of Ajax. This has led to other companies and groups, such as Microsoft and Yahoo! developing their own JavaScript-based user interface libraries, which find their way into the web applications developed by these companies.
-
-Some JavaScript libraries allow for easier integration of JavaScript with other web development technologies, such as CSS, PHP, Ruby, and Java. Many libraries include code to detect differences between runtime environments, and remove the need for applications to allow for such inconsistencies.
-
-Almost all JavaScript libraries are released under either a copycenter or copyleft license to ensure license-free distribution, usage, and modification.
-Some JavaScript libraries, such as YUI, are classified as frameworks since they exhibit full-stack capabilities and properties not found in general JavaScript libraries.
-See also
-
     Ajax framework
     Widget toolkit
     List of JavaScript libraries
     Comparison of JavaScript frameworks
-
-References
-[hide]
-
-    v
-    t
-    e
 
 JavaScript
 Code analysis 	

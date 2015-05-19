@@ -1,18 +1,18 @@
 <div class="container-fluid">
     <div class="row">
-         <div class="col-sm-5 ">
-           <div class="landscape">
-                     <img src="{{project.owner.avatar_url}}" />
-           </div>
-           <h3>{{project.name}}    <small>Score :  {{project._rank}}</small> </h3>
-          <div class="row">
-            <div class="col-xs-8 col-sm-6 "> <p class="bg-primary">Rank Under</p>    </div>
-            <div class="col-xs-4 col-sm-6 ">
-              <mark>{{project._category}} </mark>
+         <div class="col-sm-6 ">
+               <div class="landscape">
+                    <img src="{{project.owner.avatar_url}}" />
+                </div>
+           <h3>{{project.name}}    <p class="text-primary">Rank : {{projectRank}}</p>  </h3>
+           <div class="row">
+            <div class="col-xs-8 col-sm-4 "> <p class="bg-primary">Rank Under</p>    </div>
+            <div class="col-xs-4 col-sm-7 ">
+              <p class="lead">{{project._category}}</p>
             </div>
           </div>
           <div class="row">
-             <div class="col-xs-8 col-sm-8 "> <a data-ng-click="showCategoryMap()"> <mark>Click</mark></a> to view relative position of all projects in same category. </div>
+             <div class="col-xs-8 col-sm-9 "><h5><em> {{after_project}} </em> . <a data-ng-click="showCategoryMap()"> <mark>Click</mark></a> to view relative its position.</h5> </div>
           </div>
         </div>
       </div>
@@ -21,7 +21,7 @@
          <div class="col-sm-9 ">
            <span class="badge">About This Project</span>
           <div class="row">
-            <div class="col-xs-8 col-sm-6 "> <ins> {{project.description}} </ins> </div>
+            <div class="col-xs-8 col-sm-6 "> <ins> {{project.description}} </ins> To know more  , visit <a href="{{project.homepage}}"> project home</a.></div>
           </div>
           
         </div>
@@ -55,7 +55,7 @@
            <strong>Social Media</strong>
           <div class="row">
                <div class="col-xs-8 col-sm-6 "> 
-                     <table class="table table-responsive">
+             <table class="table table-responsive">
               <thead>
               <tr>
                 <th>#</th>
@@ -65,16 +65,20 @@
              <tbody>
                <tr>
                 <td class="active">Questions  </td>
-                <td class="success" >{{project._stackoverflow.questions}}</td>
+                <td class="success" >{{questions}}</td>
                </tr>
                <tr>
                 <td class="active">Tagged  </td>
-                <td class="info" >{{project._stackoverflow.tagged_dicsussion}}</td>
+                <td class="info" >{{tagged_discussions}}</td>
                </tr>
           </tbody>
             </table>
                 </div>
-          </div>
+                <div class="col-xs-8 col-sm-6 ">
+                   <p class="bg-primary">Last {{nbr_of_years}} years in StackExchange</p>
+                   <canvas id="bar" class="chart chart-bar" data="stack_exchange_graph_data" labels="year_labels" series="series"  legend="true"></canvas>
+                </div>
+            </div>
           <!-- -->
           <div class="row">
                <div class="col-xs-8 col-sm-6 "> 

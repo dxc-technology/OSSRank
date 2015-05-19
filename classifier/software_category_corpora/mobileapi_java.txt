@@ -3,92 +3,13 @@ From Wikipedia, the free encyclopedia
 
 The Mobile Media API (MMAPI) is an API specification for the Java ME platform CDC and CLDC devices such as mobile phones. Depending on how it's implemented, the APIs allow applications to play and record sounds and video, and to capture still images. MMAPI was developed under the Java Community Process as JSR 135.
 
-Contents
 
-    1 Programming concepts
-        1.1 Player lifecycle
-    2 Implementations
-    3 Code example
-    4 See also
-    5 Bibliography
-    6 External links
 
-Programming concepts
 
 The Multimedia Java API is based around four main types of classes in the javax.microedition.media package—the Manager, the Player, the PlayerListener and various types of Control.
 
 Java ME programmers wishing to use JSR 135 would first make use of the static methods of the Manager class. Although there are other methods such as playTone, the main method used is createPlayer. This takes either a URI or an InputStream, and a MIME type. In most cases, URIs are used. Common URI protocols used include:
 
-    file:
-    resource: (which may extract a file from within the JAR of the MIDlet, but is implementation-dependent)
-    http:
-    rtsp:
-    capture: (used for recording audio or video)
-
 The MIME type is optional, and is inferred from the data passed in if not supplied.
-
-The createPlayer method returns an implementation of the Player interface (even if you use a capture: protocol URI). This has core methods that are applicable to all players, such as starting and stopping the media, and requesting that it loop. You can also setPlayerListener to an object implementing the PlayerListener interface, which will receive various events related to the clip (starting, stopping, media finishing, etc.)
-
-Player classes also have a getControl method that returns an implementation of a particular Control. A Control handles any optional APIs which are not applicable to all media types. Any given Player may or may not be able to supply an implementation of any given Control.
-
-(Typically, the Control returned is actually the Player itself, but this is not guaranteed to be the case.)
-
-The set of controls implemented by a Player is not limited; however, some standard ones are defined in the javax.microedition.media.control package by the JSR:
-Standard MMAPI Controls Control Interface 	Description
-FramePositioningControl 	A control for video data that allows access to individual frames.
-GUIControl 	A control for data that requires a display, such as video.
-MetaDataControl 	Used to determine the metadata information stored within amedia stream, such as title, copyright, author, and so on.
-MIDIControl 	A fully functional control that enables access to a device’s MIDI player.
-PitchControl 	Used to control the pitch (frequency) of audio data.
-RateControl 	Used to control the playback rate of a Player.
-RecordControl 	Allows you to control the recording of data from a capture device, such as video from a camera or audio from a sound recorder.
-StopTimeControl 	A control that allows you to set a preset time when you want the Player to stop playing.
-TempoControl 	Similar to RateControl, this control allows you to change the tempo (speed) of playback for an audio Player, typically, a MIDI Player.
-ToneControl 	A fully functional control that allows you to play monotonic tone sequences.
-VideoControl 	Extends GUIControl and controls the display of video.
-VolumeControl 	The simplest control that allows you to control the volume of audio in a Player.
-
-(Others may be defined in JSR 234 (Advanced Multimedia Supplements).
-
-A subset of JSR 135 is defined in JSR 118 (MIDP 2.0).
-Player lifecycle
-
-Regardless of the protocol or media type involved, the Player moves through the same discrete states during its lifecycle. These states are listed in table below
-Lifecycle states of a Player instance State 	Description
-Unrealized 	Initial state when a Player is created. In this state the player does not have enough information to acquire the necessary resources to process the media.
-Realized 	The Player moves into the Realized state once it has obtained the necessary information to acquire the resources. In this state it is likely that most of the resources have already been acquired to function. However, some resources may not have been acquired at this point, especially if there are system dependencies involved such as with an audio or video driver where exclusive access must be obtained.
-Prefetched 	The Player moves into the Prefetched state once all resources have been acquired, including scarce and system dependent resources. Once in the Prefetched state, the Player has everything necessary to perform its tasks.
-Started 	A Player in the Started state indicates that the content associated with the Player is being processed.
-Closed 	A Player moves to the Closed state at the end of its lifecycle. A Player in the Closed state must not be used again.
-Implementations
-
-As with most Java ME specifications, implementations differ despite the best efforts of the specification authors to ensure consistency. Two obvious areas for differences are in the controls supported, and in the acceptable URI types in the first place. More obscure areas are whether mixing is supported; many games would like to play a MIDI music track and layer PCM sound effects on top.
-
-Another source of extreme variance is in performance. For example, if an HTTP clip is requested, at what point does the clip get downloaded? The specification recognises this by providing two Player methods that can be called in advance of actually playing: realize and prefetch. Depending on the implementation, these may do some of the work of getting the clip into a playable state, thus making it quicker to actually play the clip when it is needed. Some implementations are sophisticated enough to actually stream a clip on request whilst it is being played.
-
-Symbian OS contains a very complete implementation of JSR 135, but even this is highly dependent on the underlying multimedia capabilities of the device, and some device manufacturers may choose not to expose the more obscure parts of Java ME such as recording.
-
-Implementation consistency is ensured by forcing all implementations to pass the Java Technology Compatibility Kit (TCK). This ensures that each supported URI schema, MIME type and Control is tested, but does not test every permutation of these optional parts.
-Code example
-
-package org.wikipedia;
- 
-import javax.microedition.midlet.*;
-import javax.microedition.media.*;
- 
-public class SimplePlayer extends MIDlet {
-     protected void destroyApp(boolean arg0) throws MIDletStateChangeException {}
- 
-     protected void pauseApp() {}
- 
-     protected void startApp() throws MIDletStateChangeException {
-          try {
-               String url = "http://upload.wikimedia.org/wikipedia/commons/a/a0/Bass_sample.mid";
-               Player player = Manager.createPlayer(url);
-               player.start();
-          } catch (Exception e) {
-               e.printStackTrace();
-          }
-     }
-}
-
+examples of mobile api
+android api, ios api, phonegap, cordova , j2me, ionic.

@@ -9,3 +9,4 @@ Flask-HTTPAuth==1.0.0
 tweepy==3.3.0
 config
 requests==2.1.0
+Py-StackExchange
