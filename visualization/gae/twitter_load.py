@@ -71,7 +71,12 @@ class TwitterHandler(webapp2.RequestHandler):
             
             # Update project entry in mongolab with PUT
             stats = {startDate : projectTweets} # stats for period
-            p['_twitter'].update(stats)
+            # Look for existing _twitter element and add if necessary
+            if '_twitter' in p:
+                p['_twitter'].update(stats)
+            else:
+                p['_twitter'] = stats
+
             url = apiURL + database +"/collections/projects/"+ theID +"?apiKey=" + apiKey 
             #print url
             r = requests.put(url, data=json.dumps(p), headers=headers)
@@ -99,7 +104,7 @@ def getProjects(config):
 
     # Get twitter stats from start date
     url = apiURL + database +"/collections/projects?apiKey=" + apiKey + '&sk=0' + \
-                      '&q={"_twitter.' + startDate + '": {$exists: false}}'
+                      '&q={"_twitter.' + startDate + '": {$exists: false}}&l=100'
     print url
     headers = {'content-type': 'application/json'}
     r = requests.get(url,timeout=200)
