@@ -1,3 +1,0 @@
-OSSRank.R reads the project data from MongoDB and creates scores and ranks based on metrics like GitHub forks and Twitter mentions, which are normalized on a 0-1 scale. The metrics are normalized so that we can give equal weight to metrics with different magnitudes. For example, we would expect that a project would have a large difference in the amount of GitHub forks compared to the amount of Twitter mentions. Normalizing allows us to rectify this difference. 
-
-Scores are created for each project by summing the normalized metrics. We then rank projects within their respective categories based on these scores and write back to MongoDB.
