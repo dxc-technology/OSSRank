@@ -20,8 +20,8 @@ Rename sample_settings.cfg to settings.cfg and fill in API keys and info
 * Create new app
 * Replace application name at top of app.yaml
 
-### Scheduling Bot Execution on GAE
-Update bot execution frequency in cron.yaml
+### Scheduling Periodic Execution on GAE
+Update cron execution frequency in cron.yaml
 
 ### Deployment
 Deploy using App Engine launcher
