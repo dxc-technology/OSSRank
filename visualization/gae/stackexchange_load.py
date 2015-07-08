@@ -57,9 +57,14 @@ class StackExchangeHandler(webapp2.RequestHandler):
 		searchYears = int(config.get('OSSRank', 'SEARCH_YEARS'))
 		
 		# Parse each project , get data from Stack Exchange and update it back to Mongo DB
-		for project in projects:
-
+		for project_id in projects:
+			
 			stack_exchange_data = []
+
+			projectOID = project_id['_id']
+
+			project = getProjectData(config , projectOID['$oid'])
+
 			for eachYear in xrange(0,searchYears):
 
 				# Calculate target year to fetch data for Project from Stack Exchange
@@ -110,16 +115,38 @@ def getProjects(config):
 	apiURL = config.get('Mongolab', 'apiURL')
 	apiKey = config.get('Mongolab', 'apiKey')
 	database = config.get('Mongolab', 'database')
+	filterField = "_id"
+	filterQuery = "{" + filterField + ": 1}"
+
 
 	# Get start date for stats
 	startDate = getStartDate(config)
 
 	# Get project stats from start date
-	url = apiURL + database +"/collections/projects?apiKey=" + apiKey 
+	url = apiURL + database +"/collections/projects?apiKey=" + apiKey + "&f=" + filterQuery
 	
 	headers = {'content-type': 'application/json'}
 	r = requests.get(url,timeout=200)
 	return r.json()
+
+
+def getProjectData(config , projectId):
+
+	#Read Mongo DB Configuration from settings.cfg
+	apiURL = config.get('Mongolab', 'apiURL')
+	apiKey = config.get('Mongolab', 'apiKey')
+	database = config.get('Mongolab', 'database')
+	
+	# Get start date for stats
+	startDate = getStartDate(config)
+
+	# Get project stats from start date
+	url = apiURL + database +"/collections/projects/" + projectId + "?apiKey=" + apiKey 
+	
+	headers = {'content-type': 'application/json'}
+	r = requests.get(url,timeout=200)
+	return r.json()
+
 
 def update_project_data(config,project,project_document_id):
 
