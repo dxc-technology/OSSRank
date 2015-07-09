@@ -23,15 +23,20 @@ config = {
 @app.route('/api/projects', methods=['GET'])
 def getProjects():
     tags = request.args.get('tags')
+    filter = request.args.get('filter')
     query = ""
     if tags:
-        query = "{'_category': {'$regex':'"+ tags +"','$options':'i'}},"
-        query += "{'name': {'$regex':'"+ tags +"','$options':'i'}}"
+        query = "{'_category': {'$regex':'"+ tags +"','$options':'i'}}"
+        query += ",{'name': {'$regex':'^"+ tags +"','$options':'i'}}"
         query = "&q={$or: ["+ query +"]}"
+
+    if filter:
+        filter = "&f={'name': 1, '_id': 1, '_rank': 1, '_category': 1}"
         
     url = config['apiURL'] + config['database'] \
-        +"/collections/projects?apiKey=" + config['apiKey'] + query +'&s={"_category": 1, "_rank": -1}'
+        +"/collections/projects?apiKey=" + config['apiKey'] + query +'&s={"_category": 1, "_rank": -1}' + filter
     headers = {'content-type': 'application/json'}
+    print url
     r = requests.get(url,timeout=200)
     return jsonify(projects = r.json())
 
