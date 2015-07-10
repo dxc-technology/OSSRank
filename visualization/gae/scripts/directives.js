@@ -22,7 +22,7 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
                 tags = scope.selectedTags.join('|');
                 console.log(tags)
                 scope.tags2 = tags;
-                $http.get('/api/projects'+'?tags='+tags).success(function(response){
+                $http.get('/api/projects'+'?filter=1&tags='+tags).success(function(response){
                 scope.projects=response.projects;
                 console.log(scope.projects.length);
                 scope.numPages= Math.ceil(scope.projects.length / scope.numPerPage);
