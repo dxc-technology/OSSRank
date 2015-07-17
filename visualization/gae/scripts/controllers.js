@@ -6,10 +6,6 @@ app.controller("HomeCtrl", function ($scope, Category, Project) {
         $scope.categories = categories.categories;
     }); //query() returns all the categories
 
-    var projects = Project.get(function () {
-        //console.log(projects.projects);
-        $scope.projects = projects.projects;
-    });
 });
 
 app.controller("AboutCtrl", function ($scope) {
