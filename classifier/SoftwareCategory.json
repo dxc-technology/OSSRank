@@ -22,6 +22,17 @@
       ]
     },
     {
+      "name": "BigData",
+      "keyWords": [
+        "bigdata",
+        "mapreduce",
+        "clustercomputing",
+        "distributed_computing",
+        "distributed",
+        "hadoop"
+      ]
+    },
+    {
       "name": "HTTP Modules",
       "keyWords": [
         "proxy",
@@ -87,7 +98,8 @@
         "relational",
         "sql",
         "rdbms",
-        "db"
+        "db",
+        "nosql"
       ]
     },
     {
@@ -151,6 +163,16 @@
         "batch computing",
         "batch-processing"
          ]
+    },
+       {
+      "name": "Analytics",
+      "keyWords": [
+        "mathematics",
+        "visualisation",
+        "statistics",
+        "data_mining",
+        "analytics"         
+        ]
     },
     {
       "name": "DevOps tools",

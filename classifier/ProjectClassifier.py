@@ -255,6 +255,8 @@ def classify_project(project_name, project_description, **kwargs):
        
        classifier_logger.info(' classifying '+ project_name )
        
+       project_desc = project_description if  project_description is not None else ''
+       
        category=''
        
        project_language = ''
@@ -266,7 +268,7 @@ def classify_project(project_name, project_description, **kwargs):
         concatenate project name, description ,language for classification 
         we use all three information together
        '''
-       project_data = project_name + " " + project_description + " " + project_language
+       project_data = project_name + " " + project_desc + " " + project_language
        
        '''
         word tokenize using nltk and match against keywords from softwarecategory
