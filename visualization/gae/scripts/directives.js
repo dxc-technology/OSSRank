@@ -14,18 +14,36 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
 
             scope.selectedIndex=-1;
 
+            scope.tags='';
+
+            scope.itemsPerPage = 10
+
+            scope.currentPage = 1;
+
+            scope.projects = [];
+
+            //max number of pagination 
+            scope.maxSize= 15;
+
+
             scope.removeTag=function(index){
                 scope.selectedTags.splice(index,1);
             }
             
             scope.getProjects=function() {
                 tags = scope.selectedTags.join('|');
-                console.log(tags)
+                console.log(tags);
                 scope.tags2 = tags;
                 $http.get('/api/projects'+'?filter=1&tags='+tags).success(function(response){
                 scope.projects=response.projects;
                 console.log(scope.projects.length);
-                scope.numPages= Math.ceil(scope.projects.length / scope.numPerPage);
+                scope.totalItems= scope.projects.length;
+                scope.filteredProjects = scope.projects.slice(0,10);
+
+                scope.pageCount = function () {
+                 return Math.ceil(scope.projects.length / scope.itemsPerPage);
+                };
+
                     
                 });
             }
@@ -54,6 +72,8 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
                 }
             }
 
+            
+
             scope.checkKeyDown=function(event){
                 if(event.keyCode===40){
                     event.preventDefault();
@@ -72,10 +92,21 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
                 }
             }
 
+             scope.pageChanged = function(page) {
+               scope.currentPage = page ;
+               console.log('Page changed to: ' + scope.currentPage);
+               //console.log('number  of projects' + scope.projects.length);
+             };
+
             scope.$watch('selectedIndex',function(val){
                 if(val!==-1) {
                     scope.searchText = scope.suggestions[scope.selectedIndex];
                 }
+            });
+            scope.$watch('currentPage + itemsPerPage', function() {
+                var begin = ((scope.currentPage - 1) * scope.itemsPerPage),
+                end = begin + scope.itemsPerPage;
+                scope.filteredProjects = scope.projects.slice(begin, end);
             });
         }
     }

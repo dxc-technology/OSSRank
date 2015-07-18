@@ -89,7 +89,6 @@ def get_desc_words(software_desc, stopwords=[]):
     return desc_words
 
 '''
-thanks ipython.org for the method
 creates a dictiornary of entries {word:true} for every unique word in desc
 **kwargs are options to the word set creator get_desc_words defined above
 '''
@@ -137,11 +136,12 @@ training set is in software_category_corpora
 text to classify is provided as method parameter
 '''
 
-def get_naive_base_classified_result(evaluating_desc):
+def get_naive_base_classified_result(evaluating_desc_str):
     
     
     naivebayes_logger = logging.getLogger("classifier_logger"); 
        
+    evaluating_desc=get_desc_words(evaluating_desc_str)
     
     #define stopwords to use
     swords=stopwords.words('english')
@@ -255,6 +255,8 @@ def classify_project(project_name, project_description, **kwargs):
        
        classifier_logger.info(' classifying '+ project_name )
        
+       project_desc = project_description if  project_description is not None else ''
+       
        category=''
        
        project_language = ''
@@ -266,7 +268,7 @@ def classify_project(project_name, project_description, **kwargs):
         concatenate project name, description ,language for classification 
         we use all three information together
        '''
-       project_data = project_name + " " + project_description + " " + project_language
+       project_data = project_name + " " + project_desc + " " + project_language
        
        '''
         word tokenize using nltk and match against keywords from softwarecategory
@@ -286,13 +288,13 @@ def classify_project(project_name, project_description, **kwargs):
            project_tags=test_project_dict.get('tag')
            current_tag_words=get_desc_words(project_tags)
            category_openhub_tag= get_category_best_keyword_match(current_tag_words)
-           print ' best category match as per openhub tag ->' + category_openhub_tag
-           if(category_openhub_tag != category):
+           classifier_logger.info(' best category match as per openhub tag ' + category_openhub_tag )
+           if(category_openhub_tag != category and category_openhub_tag != 'unknown category'):
             category=category+ ','+ category_openhub_tag 
            
        
        #naive base classifier to be improved further
-       get_naive_base_classified_result(current_desc_words)
+       get_naive_base_classified_result(project_data)
          
        return category
        
@@ -301,7 +303,7 @@ def main():
     #classify_project('bootstrap', 'The most popular HTML , CSS , and JavaScript framework for developing responsive, mobile first projects on the web.', language='CSS')
     #classify_project('node', 'evented I/O for v8 javascript', language='JavaScript')
     #classify_project('Almofire', 'Elegant HTTP Networking in Swift', language='Swift')
-    classify_project('Atom', 'The Hackable editor.', language='CofeeScript')
+    #classify_project('Atom', 'The Hackable editor.', language='CofeeScript')
     
 if  __name__=='__main__':
     main()

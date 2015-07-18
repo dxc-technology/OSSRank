@@ -15,9 +15,9 @@
         //-- start prepare query url---
         //todo ::below values to be loaded from config
          var apiURL = "https://api.mongolab.com/api/1/databases/";
-         var databaseName="";
+         var databaseName=" ";
          var collectionName="projects";
-         var apiKeyVal="";
+         var apiKeyVal=" ";
          //to be loaded from config
 
          query_str="&q={'_category':'"+fetchType+"'}";
@@ -74,7 +74,9 @@
          obj = json;
          var newDataSet = [];
          p = JSON.parse(json);
+         var projCount=0;
          for (var key in p) {
+         if(projCount>40) break;         
         if (p.hasOwnProperty(key)) {
            // this is the visble text in the bubble
            var name = p[key]['name'] + "/" + p[key]['_rank'] ;
@@ -86,6 +88,8 @@
                 size: rank
             });
         }
+        projCount = projCount + 1;
+
        }
        return { children: newDataSet };
     }

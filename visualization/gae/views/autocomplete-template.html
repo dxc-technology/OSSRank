@@ -19,36 +19,33 @@
     </div>
 </div>
 
-<div class=".col-xs-offset-4 top-buffer" style="clear:both;">
-</div>
-<div class="row" style="margin-top: 20px">
-
-    <div class="col-lg-12">
-
-        <div class="panel panel-default">
-            <div class="panel-heading">Projects {{tags2}}
-                <span ng-if="projects.length > 0" class="">Matching Projects</span>
-                <span ng-if="projects.length < 1" class="">No Matching Projects</span>
-            </div>
+<div class="col-lg-12">
+        <span ng-if="projects.length > 0" class="">
+          <div class="panel panel-info">
+            <div class="panel-heading"><h5><i class="glyphicon glyphicon-eye-open"></i> Projects </h5>  
+             </div>
             <div class="panel-body">
-                <div class="list-group">
-                    <a href="/#/project/{{project._id.$oid}}" class="list-group-item" ng-repeat="project in projects"><span class="badge">{{project._rank}}</span><h4 class="list-group-item-heading">{{project.name}}</h4><p class="list-group-item-text">{{project._category}}</p></a>
-                </div>
-
+                <div ng-repeat="project in filteredProjects">
+          <div class="row">
+          <div class="col-xs-2 col-sm-2 col-lg-2 "><a href="/#/project/{{project._id.$oid}}"><strong>{{project.name}}</strong></a></div>
+            <div class="col-xs-2 col-sm-7 col-lg-2 ">
+              <p class="info"><i class="glyphicon glyphicon-tags"></i> <mark>{{project._category}}</mark></p>
+            </div>
+           </div>
+           <div class="row">
+                <div class="col-xs-8 col-sm-8  "><small> {{project.description}}</small></div>
+           </div>
+         
+       </div>
+               <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" class="pagination-sm" boundary-links="true" previous-text="&lsaquo;" next-text="&rsaquo;" max-size="maxSize" first-text="&laquo;" last-text="&raquo;" ng-change="pageChanged(currentPage)"></pagination>
             </div>
         </div>
+        </span>
 
-    </div>
+  </div>
+ <br>
+ <br>
 
-
-</div>
-
-<div class=".col-xs-offset-4 top-buffer" style="clear:both;">
-    <!--div data-pagination="" data-num-pages="numPages()" 
-      data-current-page="currentPage" data-max-size="maxSize"  
-      data-boundary-links="true"></div-->
-     
-</div>
 
 
 
