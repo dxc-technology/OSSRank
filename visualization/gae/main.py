@@ -31,7 +31,7 @@ def getProjects():
         query = "&q={$or: ["+ query +"]}"
 
     if filter:
-        filter = "&f={'name': 1, '_id': 1, '_rank': 1, '_category': 1 , 'description' : 1 }"
+        filter = "&f={'name': 1, '_id': 1, '_rank': 1, '_category': 1 }"
         
     url = config['apiURL'] + config['database'] \
         +"/collections/projects?apiKey=" + config['apiKey'] + query +'&s={"_category": 1, "_rank": -1}' + filter
