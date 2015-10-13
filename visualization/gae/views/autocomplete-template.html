@@ -1,3 +1,5 @@
+
+<div class="row">
 <div class="col-xs-4 top-buffer">
     <h4>Search</h4>
     <input type="text" placeholder="Enter keywords" id="searchInput" ng-keydown="checkKeyDown($event)" class="form-control" ng-model="searchText" ng-change="search()"/>
@@ -18,31 +20,66 @@
         </div>
     </div>
 </div>
+</div>
 
-<div class="col-lg-12">
+<div class="row">
+<div class="col-lg-8">
         <span ng-if="projects.length > 0" class="">
           <div class="panel panel-info">
-            <div class="panel-heading"><h5><i class="glyphicon glyphicon-eye-open"></i> Projects </h5>  
-             </div>
+            <!--div class="panel-heading"><h5> Projects </h5>  
+             </div-->
             <div class="panel-body">
+                <h2><b>Projects </b></h2>
                 <div ng-repeat="project in filteredProjects">
-          <div class="row">
-          <div class="col-xs-2 col-sm-2 col-lg-2 "><a href="/#/project/{{project._id.$oid}}"><strong>{{project.name}}</strong></a></div>
-            <div class="col-xs-2 col-sm-7 col-lg-2 ">
-              <p class="info"><i class="glyphicon glyphicon-tags"></i> <mark>{{project._category}}</mark></p>
-            </div>
+                <div class="row">
+                  <!--div class="col-xs-2 col-sm-7 col-lg-5 ">
+                    <a href="/#/project/{{project._id.$oid}}"><strong>{{project.name}}</strong></a>
+                    <small> {{project.description}}</small>
+                   </div-->
+               <!--/div-->
+               <div class="col-xs-2 col-sm-7 col-lg-7 ">
+                       <table>
+                        <tr>
+                           <td><a href="/#/project/{{project._id.$oid}}"><strong>{{project.name}}</strong></a></td>
+                           <td><small> {{project.description}}</small></td>   
+                        </tr>
+                        <tr>
+                          <td ng-repeat="prCategory in project._category|string2array "><span class="label label-info">{{prCategory}}</span> &nbsp;</td>
+                       </tr>
+                      </table>
+              </div>
            </div>
-           <div class="row">
-                <div class="col-xs-8 col-sm-8  "><small> {{project.description}}</small></div>
-           </div>
-         
-       </div>
+          </div>
                <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" class="pagination-sm" boundary-links="true" previous-text="&lsaquo;" next-text="&rsaquo;" max-size="maxSize" first-text="&laquo;" last-text="&raquo;" ng-change="pageChanged(currentPage)"></pagination>
-            </div>
+            
         </div>
         </span>
 
   </div>
+</div>
+<div class="col-lg-4">
+  
+
+<div class="panel panel-default">
+	<div class="panel-body">
+   <div class="row">
+    <h3>&nbsp; <span class="label label-primary">Discover</span> &nbsp;<span class="label label-primary">Classify</span> &nbsp; & <span class="label label-primary">Rank</span></h3>
+    <h3>&nbsp; Open Source</h3>
+   </div>
+		<h5><p class="text-success"><b> OSSRank</b> is a site for ranking FOSS software automatically</p></h5>
+    <div class="row">
+       <p><strong>&nbsp; How it works</strong></p>
+       <p><code>&nbsp;&nbsp;Automatically </code>collects Open Source Software metadata</p>
+       <p><code>&nbsp;&nbsp;Classifying </code> them into a growing list of categories</p>
+       <p><code>&nbsp;&nbsp;Collecting </code> data  about projects from StackOverflow<img src="images/stack-exchange-icon.png" class="img-responsive"></p>
+       <p><code>&nbsp;&nbsp;Checking </code>  their social footprint on twitter<img src="images/twitter.png" class="img-responsive"> </p>
+       <p><code>&nbsp;&nbsp;Evaluating </code>  them over timeline</p>
+       <p><code>&nbsp;&nbsp;Ranking </code>  them</p>
+    </div>
+	</div>
+</div>
+</div>
+</div>
  <br>
  <br>
 

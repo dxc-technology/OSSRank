@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('ossrank', ['ngRoute', 'ngResource', 'ossrank.directives','chart.js'])
+var app = angular.module('ossrank', ['ngRoute', 'ngResource', 'ossrank.directives','chart.js','ui.bootstrap','ossrank.filters'])
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {
