@@ -20,6 +20,19 @@ config = {
     'database' : configF.get('Mongolab', 'database')
 }
 
+@app.after_request
+def addHeaders(response):
+    response.headers.add('Access-Control-Allow-Origin', request.headers.get('Origin','*') )
+    response.headers.add('Access-Control-Allow-Headers', 'Access-Control-Request-Headers')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    if app.debug:
+        response.header.add('Access-Control-Max-Age', '1')
+    return response
+
+@app.route('/api/foo', methods=['GET'])
+def doFoo():
+    return 'Mr. Foo, here\'s your Bar'
+
 @app.route('/api/projects', methods=['GET'])
 def getProjects():
     tags = request.args.get('tags')
