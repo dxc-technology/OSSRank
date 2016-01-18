@@ -3,7 +3,6 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
         restrict:'AE',
         scope:{
             selectedTags:'=model',
-            tags2: '='
         },
         templateUrl:'views/autocomplete-template.html',
         link:function(scope,elem,attrs){
@@ -33,7 +32,6 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
             scope.getProjects=function() {
                 tags = scope.selectedTags.join('|');
                 console.log(tags);
-                scope.tags2 = tags;
                 $http.get('/api/projects'+'?filter=1&tags='+tags).success(function(response){
                 scope.projects=response.projects;
                 console.log(scope.projects.length);
