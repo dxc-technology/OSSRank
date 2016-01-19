@@ -44,7 +44,7 @@
                            <td><small> {{project.description}}</small></td>   
                         </tr>
                         <tr>
-                          <td ng-repeat="prCategory in project._category|string2array "><span class="label label-info">{{prCategory}}</span> &nbsp;</td>
+                          <td ng-repeat="prCategory in project._category.split(',')"><span class="label label-info">{{prCategory}}</span> &nbsp;</td>
                        </tr>
                       </table>
               </div>
