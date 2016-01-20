@@ -27,6 +27,8 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
 
             scope.removeTag=function(index){
                 scope.selectedTags.splice(index,1);
+                // Send tags to find matching projects
+                scope.getProjects();
             }
             
             scope.getProjects=function() {
