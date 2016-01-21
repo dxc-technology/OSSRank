@@ -42,6 +42,8 @@ def getProjects():
         query = "{'_category': {'$regex':'"+ tags +"','$options':'i'}}"
         query += ",{'name': {'$regex':'^"+ tags +"','$options':'i'}}"
         query = "&q={$or: ["+ query +"]}"
+    else:
+        return "{}"
 
     if filter:
         filter = "&f={'name': 1, '_id': 1, '_rank': 1, '_category': 1,'description': 1 }"

@@ -32,14 +32,21 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
             }
             
             scope.getProjects=function() {
+                // first, empty results list just in case
+                scope.projects={}; 
+                scope.filteredProjects={};
                 tags = scope.selectedTags.join('|');
+                if (tags.length < 1) 
+                    return;
                 console.log(tags);
                 $http.get('/api/projects'+'?filter=1&tags='+tags).success(function(response){
+                if (typeof response.projects === 'undefined' 
+                    || typeof response.projects.length === 'undefined')
+                    return;
                 scope.projects=response.projects;
                 console.log(scope.projects.length);
                 scope.totalItems= scope.projects.length;
                 scope.filteredProjects = scope.projects.slice(0,10);
-
                 scope.pageCount = function () {
                  return Math.ceil(scope.projects.length / scope.itemsPerPage);
                 };
