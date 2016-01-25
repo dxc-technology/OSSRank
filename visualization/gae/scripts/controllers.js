@@ -117,7 +117,7 @@ app.controller("ProjectCtrl", function ($scope,$http,$routeParams, Project) {
 
     $scope.showCategoryMap= function() {
          var appCategory= $scope.project._category ;
-         var popupURL= window.location.protocol + "//" + window.location.host + "/category_map?type=" + appCategory;
+         var popupURL= window.location.protocol + "//" + window.location.host + "/category_map?category=" + appCategory;
          window.open(popupURL,"menubar=no, toolbar=no,location=no, width=700,height=600");  
     };
 

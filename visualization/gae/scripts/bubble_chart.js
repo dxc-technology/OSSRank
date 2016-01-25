@@ -10,25 +10,9 @@
      function httpGet()
       {
         var xmlHttp = null;
-        var fetchType= get('type');
+        var fetchCategory= get('category');
         
-        //-- start prepare query url---
-        //todo ::below values to be loaded from config
-         var apiURL = "https://api.mongolab.com/api/1/databases/";
-         var databaseName=" ";
-         var collectionName="projects";
-         var apiKeyVal=" ";
-         //to be loaded from config
-
-         query_str="&q={'_category':'"+fetchType+"'}";
-         query_url=apiURL+databaseName+"/collections/"+collectionName
-        + "?apiKey="+apiKeyVal  
-        +  query_str  
-        + '&f= {"name":1,"_rank":1}' 
-        +  '&s= {"_rank":-1} ';
-
-        //--  end prepare query url
-
+        query_url='/api/category_map?category='+fetchCategory
         
         xmlHttp = new XMLHttpRequest();
         xmlHttp.open( "GET", query_url, false );
@@ -71,9 +55,8 @@
     //process json data     
     function processData() {
          json = httpGet();
-         obj = json;
          var newDataSet = [];
-         p = JSON.parse(json);
+         p = JSON.parse(json).projects;
          var projCount=0;
          for (var key in p) {
          if(projCount>40) break;         
