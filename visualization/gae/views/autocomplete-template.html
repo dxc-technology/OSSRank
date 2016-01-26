@@ -2,7 +2,8 @@
 <div class="row">
 <div class="col-xs-4 top-buffer">
     <h4>Search</h4>
-    <input type="text" placeholder="Enter keywords" id="searchInput" ng-keydown="checkKeyDown($event)" class="form-control" ng-model="searchText" ng-change="search()"/>
+    <input type="text" placeholder="Enter keywords" id="searchInput" ng-keydown="checkKeyDown($event)" 
+        class="form-control" ng-model="searchText" ng-change="search()" ng-model-options="{debounce: 500}"/>
     <ul id="suggestions" class="suggestions-list">
        <li ng-repeat="suggestion in suggestions" class="blockSpan" 
            ng-click="addToSelectedTags($index)" ng-mouseover="$parent.selectedIndex=$index" 
