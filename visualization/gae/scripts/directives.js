@@ -56,10 +56,6 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
             }
 
             scope.search=function() {
-                // search only for 3 or more characters
-                if (scope.searchText.length < 3)
-                    return;
-                
                 $http.get(attrs.url+'?term='+scope.searchText).success(function(data){
                     if(data.indexOf(scope.searchText)===-1){
                         data.unshift(scope.searchText);
