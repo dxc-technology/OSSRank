@@ -39,8 +39,18 @@ def getProjects():
     filter = request.args.get('filter')
     query = ""
     if tags:
-        query = "{'_category': {'$regex':'"+ tags +"','$options':'i'}}"
-        query += ",{'name': {'$regex':'^"+ tags +"','$options':'i'}}"
+        # split tags list on | delimiter
+        tagsList = tags.split("|")
+        regex = ""
+        # Lookahead regular expression matching *all* tags - this is effectively an AND operation on tags
+        for tag in tagsList:
+            regex += "(?=.*"+ tag +"*)";
+
+        # Use same regex expression to search in categories and project names
+        query = '{"_category": {"$regex":"'+ regex +'","$options":"i"}}'
+        query += ',{"name": {"$regex":"'+ regex +'","$options":"i"}}'
+
+        # OR operation in query to match category OR name
         query = "&q={$or: ["+ query +"]}"
     else:
         return "{}"
