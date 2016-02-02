@@ -1,6 +1,11 @@
 ---
-#mongodb
-  host : ds039860.mongolab.com
-  port : 39860
+#mongodb 
+  host : 
+  port : 
   user : 
   password : 
+  apiURL : https://api.mongolab.com/api/1/databases/
+  apiKey : 
+  database : 
+  collection : projects
+
