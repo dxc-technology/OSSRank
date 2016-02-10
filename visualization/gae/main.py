@@ -44,7 +44,7 @@ def getProjects():
         regex = ""
         # Lookahead regular expression matching *all* tags - this is effectively an AND operation on tags
         for tag in tagsList:
-            regex += "(?=.*"+ tag +"*)";
+            regex += "(?="+ tag +"*)";
 
         # Use same regex expression to search in categories and project names
         query = '{"_category": {"$regex":"'+ regex +'","$options":"i"}}'
