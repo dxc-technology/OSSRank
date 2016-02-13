@@ -37,8 +37,8 @@
         <tr ng-repeat="project in filteredProjects">
                <td><a href="/#/project/{{project._id.$oid}}"><strong>{{project.name}}</strong></a></td>
                <td><small> {{project.description}}</small></td>
-              <td ng-repeat="prCategory in project._category.split(',')">
-                  <span class="label label-info">{{prCategory}}</span> &nbsp;
+              <td>
+                  <span  ng-repeat="prCategory in project._category.split(',')" class="label label-info">{{prCategory}}</span> &nbsp;
             </td>
         </tr><!-- REPEAT PROJECTS-->
         </table>
