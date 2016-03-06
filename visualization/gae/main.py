@@ -44,7 +44,7 @@ def getProjects():
         regex = ""
         # Lookahead regular expression matching *all* tags - this is effectively an AND operation on tags
         for tag in tagsList:
-            regex += "(?="+ tag +"*)";
+            regex += "(?=.*"+ tag +".*)";
 
         # Use same regex expression to search in categories and project names
         query = '{"_category": {"$regex":"'+ regex +'","$options":"i"}}'
@@ -56,10 +56,10 @@ def getProjects():
         return "{}"
 
     if filter:
-        filter = "&f={'name': 1, '_id': 1, '_rank': 1, '_category': 1,'description': 1 }"
+        filter = "&f={'name': 1, '_id': 1, '_rank': 1, '_category': 1,'description': 1 }&l=40"
         
     url = config['apiURL'] + config['database'] \
-        +"/collections/projects?apiKey=" + config['apiKey'] + query +'&s={"_category": 1, "_rank": -1}' + filter
+        +"/collections/projects?apiKey=" + config['apiKey'] + query +'&s={"_rank": -1, "_category": 1}' + filter
     headers = {'content-type': 'application/json'}
     print url.encode("ascii", "ignore")
     r = requests.get(url,timeout=200)

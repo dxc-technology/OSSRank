@@ -9,7 +9,13 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
 
             scope.suggestions=[];
 
-            scope.selectedTags=[];
+            // Try loading selectedTags from sessionstorage
+            savedTags = angular.fromJson(window.sessionStorage.getItem("selectedTags"));
+            scope.selectedTags = savedTags ? savedTags : [];
+
+            // Now try loading saved projects
+            matchingProjects = angular.fromJson(window.sessionStorage.getItem("matchingProjects"));
+            scope.projects = matchingProjects ? matchingProjects : [];
 
             scope.selectedIndex=-1;
 
@@ -19,7 +25,6 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
 
             scope.currentPage = 1;
 
-            scope.projects = [];
 
             //max number of pagination 
             scope.maxSize= 15;
@@ -36,21 +41,26 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
                 scope.projects={}; 
                 scope.filteredProjects={};
                 tags = scope.selectedTags.join('|');
-                if (tags.length < 1) 
+                // Persist selected tags
+                window.sessionStorage.setItem("selectedTags", angular.toJson(scope.selectedTags));
+                if (tags.length < 1) {
                     return;
+                }
                 console.log(tags);
-                $http.get('/api/projects'+'?filter=1&tags='+tags).success(function(response){
-                if (typeof response.projects === 'undefined' 
-                    || typeof response.projects.length === 'undefined')
-                    return;
-                scope.projects=response.projects;
-                console.log(scope.projects.length);
-                scope.totalItems= scope.projects.length;
-                scope.filteredProjects = scope.projects.slice(0,10);
-                scope.pageCount = function () {
-                 return Math.ceil(scope.projects.length / scope.itemsPerPage);
-                };
-
+                $http.get('/api/projects'+'?filter=1&tags='+tags).success(function(response) {
+                    // Persist matching projects
+                    window.sessionStorage.setItem("matchingProjects", angular.toJson(response.projects));
+                    if (typeof response.projects === 'undefined'
+                        || typeof response.projects.length === 'undefined') {
+                        return;
+                    }
+                    scope.projects=response.projects;
+                    console.log(scope.projects.length);
+                    scope.totalItems= scope.projects.length;
+                    scope.filteredProjects = scope.projects.slice(0,10);
+                    scope.pageCount = function () {
+                        return Math.ceil(scope.projects.length / scope.itemsPerPage);
+                    };
                     
                 });
             }
@@ -90,7 +100,9 @@ angular.module('ossrank.directives',[]).directive('autoComplete',['$http',functi
                         scope.selectedIndex--;
                     }
                 }
-                else if(event.keyCode===13){
+                else if(event.keyCode===13) {
+                    scope.selectedIndex = scope.selectedIndex >= 0 ? scope.selectedIndex : 0;
+                    console.log("selected::" + scope.selectedIndex);
                     scope.addToSelectedTags(scope.selectedIndex);
                 }
             }
