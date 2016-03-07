@@ -7,7 +7,7 @@ var app = angular.module('ossrank', ['ngRoute', 'ngResource', 'ossrank.directive
                 templateUrl: 'views/main.html',
                 controller: 'HomeCtrl'
             })
-            .when('/about', {
+            .when('/aboutaaa', {
                 templateUrl: 'views/about.html',
                 controller: 'AboutCtrl'
             })

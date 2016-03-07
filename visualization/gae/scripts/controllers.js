@@ -6,8 +6,6 @@ app.controller("HomeCtrl", function ($scope, Category, Project) {
         $scope.categories = categories.categories;
     }); //query() returns all the categories
 
-    
-
 });
 
 
@@ -21,6 +19,15 @@ app.controller("AboutCtrl", function ($scope) {
 
 app.controller("ProjectCtrl", function ($scope,$http,$routeParams, Project) {
     $scope.proj = "Project";
+
+    // Load selectedTags from sessionstorage
+    savedTags = angular.fromJson(window.sessionStorage.getItem("selectedTags"));
+    $scope.selectedTags = savedTags ? savedTags : [];
+    console.log($scope.selectedTags);
+
+    $scope.goBack = function() {
+        window.history.back();
+    };
 
     $scope.projectId = $routeParams.projectId;
     console.log($scope.projectId);
@@ -60,7 +67,7 @@ app.controller("ProjectCtrl", function ($scope,$http,$routeParams, Project) {
         var tweets = $scope.project._twitter ;
         tweets_length = Object.keys(tweets).length;
         if(tweets_length > 0){
-         $scope.today_tweets =  " on " + Object.keys(tweets)[tweets_length-1] + " , "  + tweets[Object.keys(tweets)[tweets_length-1]]   ;
+         $scope.today_tweets =  tweets[Object.keys(tweets)[tweets_length-1]];
          //todo optimize following part - bad coding
          var tweet_mention_dates = [];
          var tweet_mention_numbers = [];

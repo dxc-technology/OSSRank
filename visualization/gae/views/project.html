@@ -1,112 +1,86 @@
-<div class="container-fluid">
-    <div class="row">
-         <div class="col-sm-6 ">
-               <div class="landscape">
-                    <img ng-src="{{project.owner.avatar_url}}" alt="Project avatar"/>
-                </div>
-           <h3>{{project.name}}    <p class="text-primary">Rank : {{projectRank}}</p>  </h3>
-           <div class="row">
-            <div class="col-xs-8 col-sm-4 "> <p class="bg-primary">Rank Under</p>    </div>
-            <div class="col-xs-4 col-sm-7 ">
-              <p class="lead">{{project._category}}</p>
-            </div>
-          </div>
-          <div class="row">
-             <div class="col-xs-8 col-sm-9 "><h5><em> {{after_project}} </em> . <a data-ng-click="showCategoryMap()"> <mark>Click</mark></a> to view relative its position.</h5> </div>
-          </div>
-        </div>
-      </div>
-      <br> 
-      <div class="row">
-         <div class="col-sm-9 ">
-           <span class="badge">About This Project</span>
-          <div class="row">
-            <div class="col-xs-8 col-sm-6 "> <ins> {{project.description}} </ins> To know more  , visit <a href="{{project.homepage}}"> project home</a></div>
-          </div>
-          
-        </div>
-      </div>
-      <!-- about rating methodology-->
-      <div class="row">
-         <div class="col-sm-9 ">
-            <table class="table table-responsive">
-              <thead>
-              <tr>
-                <th>How was it Rated</th>
-              </tr>
-            </thead>
-             <tbody>
-            <tr class="success">
-                <td>
-                   As part of our data collection lot of datas like number of forks,stargazers count, watchers count, stackoverflow data,social media data is collected.
-                   All metrics being used to rank and score OSS projects are normalized on a 0-1 scale. This is done because different metrics have different magnitudes. 
-                   Then, projects are scored by adding all of the normalized metrics together.Finally, projects are ranked within OSS categories using the scores generated in the previous step.
-                </td>
-            </tr>
-          </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-         <!-- social media  -->
-      <br> 
-      <div class="row">
-         <div class="col-sm-5 ">
-           <strong>Social Media</strong>
-          <div class="row">
-               <div class="col-xs-8 col-sm-6 "> 
-             <table class="table table-responsive">
-              <thead>
-              <tr>
-                <th>#</th>
-                <th>StackOverflow</th>
-              </tr>
-            </thead>
-             <tbody>
-               <tr>
-                <td class="active">Questions  </td>
-                <td class="success" >{{questions}}</td>
-               </tr>
-               <tr>
-                <td class="active">Tagged  </td>
-                <td class="info" >{{tagged_discussions}}</td>
-               </tr>
-          </tbody>
-            </table>
-                </div>
-                <div class="col-xs-8 col-sm-6 ">
-                   <p class="bg-primary">Last {{nbr_of_years}} years in StackExchange</p>
-                   <canvas id="bar" class="chart chart-bar" data="stack_exchange_graph_data" labels="year_labels" series="series"  legend="true"></canvas>
-                </div>
-            </div>
-          <!-- -->
-          <div class="row">
-               <div class="col-xs-8 col-sm-6 "> 
-                     <table class="table table-responsive">
-              <thead>
-              <tr>
-                <th>#</th>
-                <th>Twitter</th>
-              </tr>
-            </thead>
-             <tbody>
-               <tr>
-                <td class="active">Mentions </td>
-                <td class="success" >{{today_tweets}}</td>
-               </tr>
-               
-          </tbody>
-            </table>
-                
-                </div>
-                <div class="col-xs-8 col-sm-6 ">
-                   <p class="bg-primary">Last 7 days in Twitter</p>
-                   <canvas id="bar" class="chart chart-bar" data="data" labels="labels"></canvas>
-                </div>
-          </div>
-        </div>
+<div class="container">
 
-      </div>
-       
+    <div class="row project">
+        <div class="col-md-2">
+            <button type="button" ng-click="goBack()" class="btn btn-primary btn-sm active">
+                <i class="fa fa-angle-double-left"></i> Back to Search</button>
+        </div>
+        <div class="col-md-2">
+            <img src="{{project.owner.avatar_url}}" class="img-responsive img-thumbnail">
+        </div>
+        <div class="col-md-4">
+            <h3>{{project.name}}</h3>
+        </div>
+        <div class="col-md-4">
+            <h4>Your search criteria</h4>
+            <ul class="nav nav-pills" role="tablist">
+                <li role="presentation" class="active" ng-repeat="selectedTag in selectedTags">
+                    <a>{{selectedTag}}</a>
+                </li>
+            </ul>
+        </div>
     </div>
 
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">About This Project</h3>
+        </div>
+        <div class="panel-body">
+            {{project.description}}
+            <h4 class="white"><i class="fa fa-external-link"></i>
+                <a target="external" href="{{project.homepage}}">Project home</a>
+            </h4>
+        </div>
+    </div>
+
+    <div class="row media">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">StackOverflow</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-responsive table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Questions </td>
+                                <td>{{questions}}</td>
+                            </tr>
+                            <tr>
+                                <td>Tagged </td>
+                                <td>{{tagged_discussions}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="turqbg">Last {{nbr_of_years}} years in StackExchange</p>
+                    <canvas id="bar" class="chart chart-bar" data="stack_exchange_graph_data" labels="year_labels" series="series"  legend="true"></canvas>
+
+                </div>
+            </div>
+            <!-- Panel -->
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Twitter</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-responsive table-striped">
+                        <tbody>
+                            <tr>
+                            <td>Today</td>
+                            <td>{{today_tweets}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="coralbg">Last 7 days in Twitter</p>
+                    <canvas id="bar" class="chart chart-bar" data="data" labels="labels"></canvas>
+
+                </div>
+            </div>
+            <!-- Panel -->
+        </div>
+    </div>
+
+</div>
+<!-- /container -->
