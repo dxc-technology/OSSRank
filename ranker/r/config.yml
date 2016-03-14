@@ -4,8 +4,8 @@
   port : 
   user : 
   password : 
-  apiURL : https://api.mongolab.com/api/1/databases/
+  apiURL : https://api.mlab.com/api/1/databases/
   apiKey : 
   database : 
   collection : projects
-
+  processing_chunk : 500
