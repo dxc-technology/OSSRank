@@ -27,7 +27,7 @@ class TwitterHandler(webapp2.RequestHandler):
 
         # If the authentication was successful, you should
         # see the name of the account print out
-        #Iam = api.me().name
+        Iam = api.me().name
         #print Iam
         
         # get Projects
@@ -48,13 +48,16 @@ class TwitterHandler(webapp2.RequestHandler):
         
         # Set start date for stats
         startDate = getStartDate(config)
+        print "START DATE :: " + startDate
 
         # Set number of projects per run
         projectsPerRun = config.get('OSSRank', 'PROJECTS_PER_RUN')
+        #projectsPerRun = 2
         i = 0
         for p in projects:
             theID = p["_id"]["$oid"]    # Project ID in mongoDB
             term = "#" + p['name']      # Create hashtag from project name
+            #term = "#nodejs"
             self.response.write(term + " : ")
             j = 0
             projectTweets = 0;
@@ -78,7 +81,7 @@ class TwitterHandler(webapp2.RequestHandler):
                 p['_twitter'] = stats
 
             url = apiURL + database +"/collections/projects/"+ theID +"?apiKey=" + apiKey 
-            #print url
+            print url
             r = requests.put(url, data=json.dumps(p), headers=headers)
             ret = r.json()
             print ret
@@ -102,9 +105,12 @@ def getProjects(config):
     # Get start date for stats
     startDate = getStartDate(config)
 
+    # Set number of projects per run
+    projectsPerRun = config.get('OSSRank', 'PROJECTS_PER_RUN')
+
     # Get twitter stats from start date
     url = apiURL + database +"/collections/projects?apiKey=" + apiKey + '&sk=0' + \
-                      '&q={"_twitter.' + startDate + '": {$exists: false}}&l=100'
+                      '&q={"_twitter.' + startDate + '": {$exists: false}}&l=' + projectsPerRun
     print url
     headers = {'content-type': 'application/json'}
     r = requests.get(url,timeout=200)

@@ -7,8 +7,8 @@ var app = angular.module('ossrank', ['ngRoute', 'ngResource', 'ossrank.directive
                 templateUrl: 'views/main.html',
                 controller: 'HomeCtrl'
             })
-            .when('/aboutaaa', {
-                templateUrl: 'views/about.html',
+            .when('/s/:sid', {
+                templateUrl: function(params){ return 'views/'+ params.sid +'.html'; },
                 controller: 'AboutCtrl'
             })
             .when('/project/:projectId', {
