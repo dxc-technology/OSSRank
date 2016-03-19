@@ -24,9 +24,14 @@ config = {
 def addHeaders(response):
     response.headers.add('Access-Control-Allow-Origin', request.headers.get('Origin','*') )
     response.headers.add('Access-Control-Allow-Headers', 'Access-Control-Request-Headers')
-    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    response.headers.add('Access-Control-Allow-Methods', 'GET')
     if app.debug:
         response.header.add('Access-Control-Max-Age', '1')
+    response.headers.add('X-Frame-Options', 'SAMEORIGIN')
+    response.headers.add('X-XSS-Protection', '1; mode=block')
+    response.headers.add('X-Content-Type-Options', 'nosniff')
+    # TODO decide whether all local or what comes from where 
+    # response.headers.add('Content-Security-Policy', 'nosniff')
     return response
 
 @app.route('/api/foo', methods=['GET'])
