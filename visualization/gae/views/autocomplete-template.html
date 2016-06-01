@@ -3,15 +3,15 @@
         <h2>Search</h2>
     </div>
     <div class="col-xs-8 top-buffer searchform">
-    	<div class="input-group">
-			<input type="text" placeholder="Enter keywords" id="searchInput" ng-keydown="checkKeyDown($event)" class="form-control" ng-model="searchText" ng-change="search()" ng-model-options="{debounce: 500}" />
-			<div class="input-group-btn">
-				<button class="btn btn-default" type="submit">
+        <div class="input-group">
+            <input type="text" placeholder="Enter keywords" id="searchInput" ng-keydown="checkKeyDown($event)" class="form-control" ng-model="searchText" ng-change="search()" ng-model-options="{debounce: 500}" />
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit">
                     <i class="fa fa-search"></i>
                     <i class="fa fa-refresh fa-spin" loading></i>
                 </button>
-			</div>
-		</div>
+            </div>
+        </div>
 
 
         <ul id="suggestions" class="suggestions-list">
@@ -34,28 +34,28 @@
     <div ng-if="projects.length > 0" class="col-lg-12">
         <h2>Projects</h2>
         <table class="table table-striped table-bordered">
-        <tr>
-            <th>Rank (Score)</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Category</th>
-        </tr>
-        <tr ng-repeat="project in filteredProjects">
-            <td><span class="badge">{{$index+1}}</span> <small>({{project._rank}})</small></td>
-            <td><a href="/#/project/{{project._id.$oid}}"><strong>{{project.name}}</strong></a></td>
-            <td><small> {{project.description}}</small></td>
-            <td>
-              <span  ng-repeat="prCategory in project._category.split(',')" class="label label-info">{{prCategory}}</span> &nbsp;
-            </td>
-        </tr><!-- REPEAT PROJECTS-->
+            <tr>
+                <th>Rank (Score)</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Category</th>
+            </tr>
+            <tr ng-repeat="project in filteredProjects">
+                <td><span class="badge">{{project.filteredRank}}</span> <small>({{project._rank}})</small></td>
+                <td><a href="/#/project/{{project._id.$oid}}/{{project.filteredRank}}"><strong>{{project.name}}</strong></a></td>
+                <td><small> {{project.description}}</small></td>
+                <td>
+                    <span ng-repeat="prCategory in project._category.split(',')" class="label label-info">{{prCategory}}</span> &nbsp;
+                </td>
+            </tr>
+            <!-- REPEAT PROJECTS-->
         </table>
-        <pagination total-items="totalItems" items-per-page="itemsPerPage"
-                ng-model="currentPage" class="pagination-sm" boundary-links="true"
-                previous-text="&lsaquo;" next-text="&rsaquo;" max-size="maxSize"
-                first-text="&laquo;" last-text="&raquo;" ng-change="pageChanged(currentPage)"></pagination>
-    </div>  <!-- /IF -->
+        <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" class="pagination-sm" boundary-links="true" previous-text="&lsaquo;" next-text="&rsaquo;" max-size="maxSize" first-text="&laquo;" last-text="&raquo;" ng-change="pageChanged(currentPage)"></pagination>
+    </div>
+    <!-- /IF -->
     <span ng-if="projects.length < 1" class=""><small>Enter a type of technology (e.g. Javascript framework) or the name of an open source project</small></span>
-</div>  <!-- ROW -->
+</div>
+<!-- ROW -->
 <div class="col-lg-4">
 
     <!--
