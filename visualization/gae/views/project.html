@@ -12,7 +12,7 @@
             <h3>{{project.name}}</h3>
         </div>
         <div class="col-md-4">
-            <h4>Your search criteria</h4>
+            <h5>#{{filteredRank}} in your search criteria</h5>
             <ul class="nav nav-pills" role="tablist">
                 <li role="presentation" class="active" ng-repeat="selectedTag in selectedTags">
                     <a>{{selectedTag}}</a>
@@ -53,7 +53,7 @@
                         </tbody>
                     </table>
                     <p class="turqbg">Last {{nbr_of_years}} years in StackExchange</p>
-                    <canvas id="bar" class="chart chart-bar" data="stack_exchange_graph_data" labels="year_labels" series="series"  legend="true"></canvas>
+                    <canvas id="bar" class="chart chart-bar" data="stack_exchange_graph_data" labels="year_labels" series="series" legend="true"></canvas>
 
                 </div>
             </div>
@@ -68,8 +68,8 @@
                     <table class="table table-responsive table-striped">
                         <tbody>
                             <tr>
-                            <td>Today</td>
-                            <td>{{today_tweets}}</td>
+                                <td>Today</td>
+                                <td>{{today_tweets}}</td>
                             </tr>
                         </tbody>
                     </table>

@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('ossrank', ['ngRoute', 'ngResource', 'ossrank.directives','chart.js','ui.bootstrap'])
+var app = angular.module('ossrank', ['ngRoute', 'ngResource', 'ossrank.directives', 'chart.js', 'ui.bootstrap'])
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {
@@ -8,10 +8,12 @@ var app = angular.module('ossrank', ['ngRoute', 'ngResource', 'ossrank.directive
                 controller: 'HomeCtrl'
             })
             .when('/s/:sid', {
-                templateUrl: function(params){ return 'views/'+ params.sid +'.html'; },
+                templateUrl: function (params) {
+                    return 'views/' + params.sid + '.html';
+                },
                 controller: 'AboutCtrl'
             })
-            .when('/project/:projectId', {
+            .when('/project/:projectId/:filteredRank', {
                 templateUrl: 'views/project.html',
                 controller: 'ProjectCtrl'
             })
