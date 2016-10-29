@@ -1,6 +1,6 @@
-langugae : python
+language : python
 python :
-	- "2.7"
+- "2.7"
 
 # command to install dependencies
 
