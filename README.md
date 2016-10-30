@@ -1,3 +1,6 @@
+
+![OSSRank](OSSRank_logo.png)
+
 OSSRank is a project for ranking and categorizing open source projects - very meta.
 
 ## Introduction
@@ -47,3 +50,7 @@ If you find any issues, feel free to report them in the [issues][issues] section
 [contrib]:      CONTRIBUTING.md
 [license]:      LICENSE
 [issues]:       https://github.com/csc/OSSRank/issues
+
+
+## Build Status
+![Build Status](https://travis-ci.org/theroys/OSSRank.svg?branch=master)

@@ -12,12 +12,14 @@ from nltk.tokenize  import wordpunct_tokenize
 from nltk.tokenize import sent_tokenize
 from nltk.corpus  import stopwords
 from nltk import NaiveBayesClassifier
-from QueryOpenHub import queryOpenhubDetails
+from classifier.QueryOpenHub import queryOpenhubDetails
 import os
 import re
 import numpy as npy
 from collections import defaultdict
 import logging
+from sys import path
+from os import getcwd
 
 
  
@@ -53,8 +55,9 @@ if none return category others
 def get_category_best_keyword_match(desc_key_set):
     data =''
     current_match=''
-    
-    with open('./../classifier/'+SOFTWARE_CATEGORY_FILE_NAME) as f:
+
+    print getcwd()
+    with open(getcwd() +'/classifier/'+SOFTWARE_CATEGORY_FILE_NAME) as f:
         json_data= json.load(f)
         best_feature_match=0
         
@@ -148,7 +151,8 @@ def get_naive_base_classified_result(evaluating_desc_str):
     swords.extend(['free','whose','using','used','last','software',  'first', 'different', 'most', 'and','contain', 'multiple','new', 'include', 'use', 'full' , 'project', 'comparison'])
     
     #get corpora and train
-    corpora_data_path=os.path.abspath(os.path.join('./../classifier/', OPEN_SOURCE_CORPORA_DIR))
+    corpora_data_path=os.path.abspath(os.path.join(getcwd()+'/classifier/',
+                                                   OPEN_SOURCE_CORPORA_DIR))
     
     #build automation
     build_automation_corpora_path=os.path.join(corpora_data_path, 'buildautomation.txt')

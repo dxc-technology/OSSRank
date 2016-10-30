@@ -1,8 +1,11 @@
 import unittest
 import sys
+from sys import path
+from os import getcwd
 sys.path.insert(0, './')
-from ProjectClassifier import classify_project
-from ProjectClassifier import get_naive_base_classified_result
+path.append(getcwd()+"./../")
+from classifier.ProjectClassifier import classify_project
+from classifier.ProjectClassifier import get_naive_base_classified_result
 
 class ClassifierTestCase(unittest.TestCase):
     '''

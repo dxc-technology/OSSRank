@@ -18,6 +18,10 @@ from lxml.etree import  Element
 from lxml import etree as ElementTree
 import ConfigParser
 import logging
+from os import getcwd
+from sys import path
+path.append(getcwd()+"/data/")
+
 
 '''
 global logging definition
@@ -39,7 +43,7 @@ this_logger.addHandler(this_logger_handler)
 read global configuration
 '''
 config_reader = ConfigParser.ConfigParser()
-config_reader.read('./../data/config.cfg')
+config_reader.read('data/config.cfg')
 
 
 config = {

@@ -1,0 +1,15 @@
+language : python
+python :
+- "2.7"
+
+# command to install dependencies
+
+install : "pip install -r requirements.txt"
+
+
+before_script:
+- "wget https://s3-eu-west-1.amazonaws.com/ossrank/nltk_data.tar.gz"
+- "tar -zxvf nltk_data.tar.gz -C ~"
+
+# command to run tests
+script: "python classifier/test/TestProjectClassifier.py"
