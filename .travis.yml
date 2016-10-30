@@ -8,8 +8,8 @@ install : "pip install -r requirements.txt"
 
 
 before_script:
-- "wget https://s3.amazonaws.com/textblob/nltk_data.tar.gz"
-- "tar -zxvf nltk_data.tar.gz "
+- "wget https://s3-eu-west-1.amazonaws.com/ossrank/nltk_data.tar.gz"
+- "tar -zxvf nltk_data.tar.gz -C ~"
 
 # command to run tests
 script: nosetests
