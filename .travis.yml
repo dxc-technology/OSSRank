@@ -8,7 +8,7 @@ install : "pip install -r requirements.txt"
 
 
 before_script:
-- "wget nltk_data.tar.gz  https://s3.amazonaws.com/textblob/nltk_data.tar.gz"
+- "wget https://s3.amazonaws.com/textblob/nltk_data.tar.gz"
 - "tar -zxvf nltk_data.tar.gz "
 
 # command to run tests

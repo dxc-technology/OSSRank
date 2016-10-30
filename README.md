@@ -1,5 +1,6 @@
 
 ![OSSRank](OSSRank_logo.png)
+
 OSSRank is a project for ranking and categorizing open source projects - very meta.
 
 ## Introduction
