@@ -12,4 +12,4 @@ before_script:
 - "tar -zxvf nltk_data.tar.gz -C ~"
 
 # command to run tests
-script: nosetests
+script: "python classifier/test/TestProjectClassifier.py"
