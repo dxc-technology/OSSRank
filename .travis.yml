@@ -8,7 +8,9 @@ install : "pip install -r requirements.txt"
 
 
 before_script:
-- python -m nltk.downloader -d /usr/local/share/nltk_data
+- wget -O /usr/local/share/nltk_data.tar.gz  https://s3.amazonws
+.com/textblob/nltk_data.tar.gz
+- tar zxf /usr/local/share/nltk_data.tar.gz
 
 # command to run tests
 script: nosetests
