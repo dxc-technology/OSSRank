@@ -10,8 +10,11 @@ app.controller("HomeCtrl", function ($scope, Category, Project) {
 
 
 
-app.controller("AboutCtrl", function ($scope) {
-
+app.controller("TaxonomyCtrl", function ($scope,Category) {
+    var categories = Category.get(function () {
+        //console.log(categories.categories);
+        $scope.categories = categories.categories;
+    });
 });
 
 
