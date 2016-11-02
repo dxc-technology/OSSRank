@@ -1,13 +1,19 @@
-<section class="success" id="taxonomy">
+<section id="taxonomy">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2>Taxonomy</h2>
-                <hr class="star-light">
+                <h3 class="text-info">Taxonomy</h3>
             </div>
         </div>
         <div class="row">
-            Taxonomy Info
+            <p>OSS Taxonomy helps to classify FOSS toolset. It is important because classification of these toolset shows the relationships between them and its contemporaries.It also helps user to compare between similar toolset and choose one that best suits user's need. Classification of toolset is one of the prerequisite before they can be compared and ranked in a meaningful way.</p>
+            <p><small>To achieve this goal , OSSRank have defined an initial set of categories and associated a set of keywords with them. thse categories are contineously updated and keywords being extended or modified as new generation technology or toolset appears.</small></p>
+            <p><small>Currently following categories are analyzed and supported by <em>OSSRank</em></small></p>
+            <ul>
+                <li ng-repeat="x in categories">
+                    <em>{{ x.name }}</em>
+                </li>
+            </ul>
         </div>
     </div>
 </section>

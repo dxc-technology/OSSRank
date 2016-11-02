@@ -11,7 +11,7 @@ var app = angular.module('ossrank', ['ngRoute', 'ngResource', 'ossrank.directive
                 templateUrl: function (params) {
                     return 'views/' + params.sid + '.html';
                 },
-                controller: 'AboutCtrl'
+                controller: 'TaxonomyCtrl'
             })
             .when('/project/:projectId/:filteredRank', {
                 templateUrl: 'views/project.html',
