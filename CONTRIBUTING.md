@@ -10,7 +10,7 @@ of things.
 * Make sure you have a [GitHub account](https://github.com/signup/free).
 * Submit a ticket for your issue, assuming one does not already exist.
   * OSSRank tickets are filed on the GitHub project:
-    https://github.com/csc/OSSRank/issues
+    https://github.com/dxc-technology/OSSRank/issues
   * Please try to clearly describe the issue, including the steps to reproduce
     any bug.
   * Please include the story of "why" you want to do something.
