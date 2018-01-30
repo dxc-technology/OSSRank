@@ -19,4 +19,4 @@ projects we have defined a taxonomy which is being continuously improved. In the
 
 The other interesting thing about the classification module is creation of a *Software Corpus* which allows supervised classification using machine learning. Our intention is to continuously improve and mature this corpus, so any software can be classified using this corpus.
 
-To improve this classification, we welcome you to review the base categories in [SoftwareCategory.json](SoftwareCategory.json) and [contribute](../CONTRIBUTING.MD) updates to the project.
+To improve this classification, we welcome you to review the base categories in [SoftwareCategory.json](SoftwareCategory.json) and [contribute](../CONTRIBUTING.md) updates to the project.
