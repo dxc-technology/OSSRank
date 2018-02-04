@@ -9,7 +9,8 @@
         "ios",
         "windows mobile",
         "mobile app framework",
-        "phone api"
+        "phone api",
+        "react"
       ]
     },
     {
@@ -29,7 +30,8 @@
         "clustercomputing",
         "distributed_computing",
         "distributed",
-        "hadoop"
+        "hadoop",
+        "hive"
       ]
     },
     {
@@ -85,7 +87,7 @@
         "mvc",
         "web development",
         "web framework",
-        "web application fraemwork",
+        "web application framework",
         "web",
         "web-apps",
         "html"
@@ -99,7 +101,8 @@
         "sql",
         "rdbms",
         "db",
-        "nosql"
+        "nosql",
+        "mongodb"
       ]
     },
     {
@@ -112,8 +115,10 @@
         "jaas",
         "security framework",
         "cryptography",
+        "encryption",
         "SSO",
-        "single sign on"
+        "single sign on",
+        "saml"
       ]
     },
     {
@@ -131,7 +136,8 @@
         "javascript",
         "client side scripting",
         "java_script",
-        "javascript api"
+        "javascript api",
+        "nodejs"
       ]
     },
     {
@@ -169,9 +175,11 @@
       "keyWords": [
         "mathematics",
         "visualisation",
+        "visualization",
         "statistics",
         "data_mining",
-        "analytics"         
+        "data mining",
+        "analytics"
         ]
     },
     {

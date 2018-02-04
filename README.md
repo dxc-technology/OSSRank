@@ -1,7 +1,8 @@
-
 ![OSSRank](OSSRank_logo.png)
 
 OSSRank is a project for ranking and categorizing open source projects - very meta.
+
+http://ossrank.appspot.com
 
 ## Introduction
 
@@ -10,17 +11,17 @@ As a prospective user of open source software, you probably find yourself going 
 * Search for candidate projects you could use to solve a particular problem
 * Evaluate various projects that meet your search criteria
 * Visit each of their project sites and source code repositories to try to determine things like maturity of the project, size and activity level of the community, responsiveness to issues
-* Look around on StackOverflow, Twitter and various discussion forums to see what people are saying about it
+* Look around on Stack Overflow, Twitter and various discussion forums to see what people are saying about it
 
 OSSRank attempts to automate this whole process by:
 * Discovering open-source projects by collecting their metadata from GitHub
 * Classifying them into a growing list of specified categories
-* Collecting data about them from stackexchange & finding their social footprint on twitter
+* Collecting data about them from Stack Exchange & finding their social footprint on Twitter
 * Continuously evaluating them and tracking their growth over a timeline
 * Ultimately ranking each project within its categories
 
 ### Data Collection
-Project metadata is collected from Github and stored in a NoSQL database currently MongoDB.  Each project's metadata is periodically augmented with related data from Twitter and StackOverflow.
+Project metadata is collected from GitHub and stored in a NoSQL database currently MongoDB.  Each project's metadata is periodically augmented with related data from Twitter and Stack Overflow.
 
 ### Classification
 Project descriptions are analyzed and compared against a text corpus to automatically place projects into one or more categories   
