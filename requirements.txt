@@ -10,4 +10,4 @@ Py-StackExchange
 requests==2.2.1
 simplejson==3.8.1
 nltk==3.2
-lxml==3.3.3
+lxml==4.6.2
