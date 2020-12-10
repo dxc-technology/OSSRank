@@ -2,7 +2,7 @@
 #
 # Run 'pip install -r requirements.txt' to install these dependencies
 #
-flask==0.10
+flask==1.0
 Flask-HTTPAuth==1.0.0
 tweepy==3.3.0
 config
