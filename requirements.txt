@@ -7,7 +7,7 @@ Flask-HTTPAuth==1.0.0
 tweepy==3.3.0
 config
 Py-StackExchange
-requests==2.2.1
+requests==2.20.0
 simplejson==3.8.1
 nltk==3.4.5
 lxml==4.6.3
